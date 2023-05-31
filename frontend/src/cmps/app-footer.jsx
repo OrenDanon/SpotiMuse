@@ -23,6 +23,25 @@ export function AppFooter() {
 
     return (
         <footer className="app-footer">
+
+            <div className="mini-song controls-left">details</div>
+
+            <div className="player-controls">
+            <div className="player-controls-top">
+                <button className='btn-song'>🔀</button>
+                <button className='btn-song'>⏪</button>
+                <button className='btn-song'>⏸</button>
+                <button className='btn-song'>⏩</button>
+                <button className='btn-song'>🔁</button>
+                </div>
+            <div className="playback-bar">
+                <span>0:00</span>
+                <input type="range" name="song-range" className="song-range" />
+                <span>3:28</span>
+            </div>
+            </div>
+
+            <div className="controls-right">details</div>
         </footer>
     )
 }

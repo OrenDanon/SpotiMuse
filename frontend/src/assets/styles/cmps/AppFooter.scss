@@ -1,7 +1,50 @@
-// .app-footer{
-//     background-color: #111;
-//     color: $clr4;
-//     padding: 20px;
-//     margin: 10px;
-//     text-align: center;
-// }
+.app-footer {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #3b3b3b;
+    color: $clr4;
+    padding: 20px;
+    text-align: center;
+    
+    input[type=range] {
+        // This is for webkit browsers like Chrome and Safari
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background-color: red;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+        }
+      
+        // This is for Firefox
+        &::-moz-range-thumb {
+          background-color: red;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+        }
+      
+        // This is for IE
+        &::-ms-thumb {
+          background-color: red;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+        }
+      }
+
+    .controls-left {
+        display: flex;
+        align-self: center;
+        margin-inline-end: auto;
+    }
+    .controls-right {
+        display: flex;
+        align-self: center;
+        margin-inline-start: auto;
+    }
+    .btn-song {
+        background-color: #3b3b3b;
+        
+    }
+}
