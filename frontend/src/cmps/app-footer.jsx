@@ -23,37 +23,6 @@ export function AppFooter() {
 
     return (
         <footer className="app-footer">
-            <p>
-                coffeerights - count: {count}
-            </p>
-            {cart.length > 0 &&
-                <h5>
-                    <span>{cart.length}</span> Products in your Cart
-                    <button className="btn-link" onClick={(ev) => {
-                        ev.preventDefault();
-                        setIsCartShown(!isCartShown)
-                    }}>
-                        ({(isCartShown) ? 'hide' : 'show'})
-                    </button>
-                </h5>
-            }
-
-            {isCartShown && cart.length > 0 && <section className="cart" >
-                <h5>Your Cart</h5>
-                <ul>
-                    {
-                        cart.map((car, idx) => <li key={idx}>
-                            <button onClick={() => {
-                                removeFromCart(car._id)
-                            }}>x</button>
-                            {car.vendor}
-                        </li>)
-                    }
-                </ul>
-                <p>Total: ${cartTotal.toLocaleString()} </p>
-                <button onClick={onCheckout}>Checkout</button>
-            </section>}
-            <UserMsg />
         </footer>
     )
 }

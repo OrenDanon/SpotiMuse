@@ -14,16 +14,7 @@ export function HomePage() {
 
     return (
         <section>
-            <img src={logo} alt="Logo" style={{ maxWidth: '300px' }} />
-            <h2>
-                Count {count}
-                <button onClick={() => {
-                    changeCount(1)
-                }}>+</button>
-                <button onClick={() => {
-                    changeCount(10)
-                }}>+10</button>
-            </h2 >
+    
         </section >
     )
 }
