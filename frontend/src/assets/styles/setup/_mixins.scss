@@ -29,30 +29,63 @@
     position: relative;
     overflow: hidden;
     &::before {
-      display: block;
-      content: "";
-      width: 100%;
-      padding-top: calc(($height / $width) * 100%);
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc(($height / $width) * 100%);
     }
     > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
-  
+
     > img {
-      height: 100%;
-      object-fit: cover;
+        height: 100%;
+        object-fit: cover;
     }
-  }
-  
-  // Mixin for removing hover efects on iphone screen
-  @mixin hover-supported {    
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
     @media not all and (pointer: coarse) {
         &:hover {
             @content;
         }
     }
-  }
+}
+
+@mixin icon($clr: $clr3) {
+    fill: $clr;
+    background-color: inherit;
+    height: 16px;
+    width: 16px;
+    &:hover {
+        cursor: pointer;
+        fill: #fff;
+    }
+
+    // @if $type == regular {
+    //   background-color: $bg;
+    //   color: $clr;
+    //   &:hover {
+    //     background-color: $hover;
+    //   }
+    // } @else if $type == dark {
+    //   background-color: $clr2;
+    //   color: $clr3;
+    //   &:hover {
+    //     background-color: $clr1;
+    //     color: $clr3;
+    //   }
+    // } @else if $type == light {
+    //   background-color: $clr3;
+    //   color: $clr2;
+    //   &:hover {
+    //     background-color: $clr1;
+    //     color: $clr3;
+    //   }
+    // }
+}
