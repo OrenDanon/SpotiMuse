@@ -55,32 +55,23 @@ export function CarIndex() {
     }
 
     return (
-        <div>
-            <main>
-                {/* <button onClick={onAddCar}>Add Car ⛐</button> */}
-                <ul className="car-list">
-                    {cars.map(car =>
-                        <li className="car-preview" key={car._id}>
-                            <div className='station-preview flex column'>
-                                <div className='station-img'>
-                                    <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" srcset="" />
-                                </div>
-                                <div className='station-details'>
-                                    <h4>{car.name}</h4>
-                                    <p>
-                                        Lorem ipsum dotur adipis iusto nihil.
-                                        {/* <button onClick={() => { onRemoveCar(car._id) }}>x</button>
-                                        <button onClick={() => { onUpdateCar(car) }}>Edit</button> */}
-                                    </p>
-
-                                    {/* <button onClick={() => { onAddCarMsg(car) }}>Add car msg</button>
-                                    <button className="buy" onClick={() => { onAddToCart(car) }}>Add to cart</button> */}
-                                </div>
-                            </div>
-                        </li>)
-                    }
-                </ul>
-            </main>
+        <div className="stations">
+            <h2>Spotify Playlists</h2>
+            <div className="station-list">
+                {cars.map(car =>
+                    <div className="station-preview" key={car._id}>
+                        <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" srcset="" />
+                        <div className='play'>
+                            <span className='fa fa-play'></span>
+                        </div>
+                        <h4>{car.name}</h4>
+                        <p>
+                            Lorem ipsum dotur adipis iusto nihil.
+                        </p>
+                    </div>
+                )
+                }
+            </div >
         </div>
     )
 }
