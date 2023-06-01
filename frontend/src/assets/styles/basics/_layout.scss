@@ -38,35 +38,39 @@
 .main-layout {
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr auto;
     min-height: 100vh;
     position: relative;
     width: 100%;
+    gap: 8px;
+    padding: 8px;
     grid-template-areas:
-        "left-sidebar header"
         "left-sidebar main-view"
         "footer footer";
 
     .app-header {
         grid-area: header;
         height: 64px;
-        background-color: blue;
+        background-color: #121212;
+        border-radius: 8px;
     }
 
     .side-navbar {
         grid-area: left-sidebar;
         position: relative;
         width: 232px;
-        background-color: red;
+        background-color: #121212;
+        border-radius: 8px;
     }
 
     .app-footer {
         grid-area: footer;
         width: 100%;
-        background-color: purple;
+        border-radius: 8px;
     }
     .main-view{
         grid-area: main-view;
-        background-color: yellow;
+        background-color: #121212;
+        border-radius: 8px;
     }
 }

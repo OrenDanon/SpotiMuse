@@ -34,7 +34,7 @@ export function AppHeader() {
     }
 
     return (
-        <header className="app-header">
+        <header className="main-view">
         </header>
     )
 }
