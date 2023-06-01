@@ -1,0 +1,53 @@
+.side-navbar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 196px;
+    background-color: #000000;
+    padding: 24px;
+
+    .navigation{
+        ul{
+            list-style: none;
+            margin-top: 20px;
+            padding: 0;
+            li{
+                padding: 10px 0px;
+                a{
+                    color: #b3b3b3;
+                    text-decoration: none;
+                    font-weight: bold;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+    .navigation ul li a:hover,
+    .navigation ul li a:active,
+    .navigation ul li a:focus{
+        color: #ffffff;
+    }
+     .policies{
+        position: absolute;
+        flex-wrap: wrap;
+        margin-right: 20px;
+        bottom: 0;
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-right: 44px;
+            li{
+                padding-bottom: 5px;
+                a{
+                    color: #b3b3b3;
+                    font-weight: 500;
+                    text-decoration: none;
+                    font-size: 10px;
+                }
+            }
+        }
+     }
+}

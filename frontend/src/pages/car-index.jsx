@@ -16,7 +16,7 @@ export function CarIndex() {
     async function onRemoveCar(carId) {
         try {
             await removeCar(carId)
-            showSuccessMsg('Car removed')            
+            showSuccessMsg('Car removed')
         } catch (err) {
             showErrorMsg('Cannot remove car')
         }
@@ -30,7 +30,7 @@ export function CarIndex() {
             showSuccessMsg(`Car added (id: ${savedCar._id})`)
         } catch (err) {
             showErrorMsg('Cannot add car')
-        }        
+        }
     }
 
     async function onUpdateCar(car) {
@@ -41,10 +41,10 @@ export function CarIndex() {
             showSuccessMsg(`Car updated, new price: ${savedCar.price}`)
         } catch (err) {
             showErrorMsg('Cannot update car')
-        }        
+        }
     }
 
-    function onAddToCart(car){
+    function onAddToCart(car) {
         console.log(`Adding ${car.vendor} to Cart`)
         addToCart(car)
         showSuccessMsg('Added to Cart')
@@ -55,28 +55,23 @@ export function CarIndex() {
     }
 
     return (
-        <div>
-            <h3>Cars App</h3>
-            <main>
-                <button onClick={onAddCar}>Add Car ⛐</button>
-                <ul className="car-list">
-                    {cars.map(car =>
-                        <li className="car-preview" key={car._id}>
-                            <h4>{car.vendor}</h4>
-                            <h1>⛐</h1>
-                            <p>Price: <span>${car.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{car.owner && car.owner.fullname}</span></p>
-                            <div>
-                                <button onClick={() => { onRemoveCar(car._id) }}>x</button>
-                                <button onClick={() => { onUpdateCar(car) }}>Edit</button>
-                            </div>
-
-                            <button onClick={() => { onAddCarMsg(car) }}>Add car msg</button>
-                            <button className="buy" onClick={() => { onAddToCart(car) }}>Add to cart</button>
-                        </li>)
-                    }
-                </ul>
-            </main>
+        <div className="stations">
+            <h2>Spotify Playlists</h2>
+            <div className="station-list">
+                {cars.map(car =>
+                    <div className="station-preview" key={car._id}>
+                        <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" srcset="" />
+                        <div className='play'>
+                            <span className='fa fa-play'></span>
+                        </div>
+                        <h4>{car.name}</h4>
+                        <p>
+                            Lorem ipsum dotur adipis iusto nihil.
+                        </p>
+                    </div>
+                )
+                }
+            </div >
         </div>
     )
 }

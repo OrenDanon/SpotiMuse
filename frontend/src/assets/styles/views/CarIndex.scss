@@ -1,23 +1,109 @@
-.car-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    li {
-        background-color: $clr2;
-        color: $clr6;
-        padding: 5px;
-        margin: 5px;
+.stations {
+    padding: 20px 40px;
+
+    h2 {
+        color: #ffffff;
+        font-size: 22px;
+        margin-bottom: 20px;
     }
-    a {
-        color: $clr1;
-        padding: 10px;
-    }    
-    h3 {
-        background-color: #ddd;
-        padding: 10px 5px;
-        margin: 5px;
-    }    
+
+    .station-list {
+        display: flex;
+        gap: 20px;
+        overflow: hidden;
+        .station-preview {
+            // min-width: 140px;
+            // width: 160px;
+            padding: 15px;
+            background-color: #181818;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all ease 0.4s;
+            img{
+                width: 100%;
+                border-radius: 6px;
+                margin-bottom: 10px;
+
+            }
+            .play{
+                position: relative;
+                .fa{
+                    position: absolute;
+                    right: 10px;
+                    top: -40px;
+                    padding: 18px;
+                    background-color: #1db954;
+                    border-radius: 100%;
+                    opacity: 0;
+                    transition: all ease 0.4s;
+                }
+            }
+            h4{
+                color: #ffffff;
+                font-size: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            p{
+                color: #989898;
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+    }
+    .station-preview:hover {
+        background-color: #252525;
+    }
+    .station-list .station-preview:hover .play .fa {
+        opacity: 1;
+        transform: translateY(-20px);
+    }
 }
 
 
 
+
+// .car-list {
+//     list-style: none;
+//     display: flex;
+//     li {
+//         background-color: #181818;
+//         color: $clr6;
+//         padding: 16px;
+//         margin: 5px;
+//         border-radius: 6px;
+//     }
+//     a {
+//         color: rgb(255 255 255);
+//         padding: 10px;
+//     }  
+//     p{
+//         color: #a7a7a7;
+//         font-size: 0.875rem;
+//         font-weight: 400;
+//         font-family: sans-serif;
+//     }
+//     h4{
+//         font-family: sans-serif;
+//         font-size: 1rem;
+//         font-weight: 700;
+//         color: rgb(255 255 255);
+//     }  
+//     img{
+//         margin-bottom: 16px;
+//         position: relative;
+//         border-radius: 6px;
+//     }
+//     h3 {
+//         background-color: #ddd;
+//         padding: 10px 5px;
+//         margin: 5px;
+//     }   
+//     .station-img{
+//     } 
+//     .station-details{
+//     }
+
+// }
