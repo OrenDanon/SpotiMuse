@@ -1,0 +1,92 @@
+.main-view-footer {
+    margin-block-start: 40px;
+    font-size: 14px;
+
+    a {
+        color: rgb(167, 167, 167);
+        font-weight: 400;
+    }
+
+    nav {
+        padding: 8px 16px 40px;
+
+        .footer-top-section {
+            display: flex;
+            margin-block-start: 32px;
+            justify-content: space-between;
+
+            .top-link {
+                display: flex;
+                flex: 1 1 50%;
+
+                .link-container {
+                    margin-inline-end: 24px;
+                    width: auto;
+
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        margin-block: 0;
+
+                        p {
+                            color: white;
+                            font-weight: 700;
+                            margin-block-end: 0px;
+                        }
+                    }
+                }
+            }
+
+            .social-links {
+                display: flex;
+
+                div {
+                    padding-right: 16px;
+
+                    a {
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        display: inline-flex;
+                        -webkit-box-pack: center;
+                        justify-content: center;
+                        -webkit-box-align: center;
+                        align-items: center;
+                        background-color: rgb(41, 41, 41);
+
+                        &:hover {
+                            background-color: rgb(114, 114, 114);
+                        }
+
+                        svg {
+                            fill: white;
+                        }
+                    }
+                }
+            }
+        }
+
+        hr {
+            border-block-start: 1px solid #292929;
+            border-color: rgba(255, 255, 255, 0.1);
+            margin-block-end: 24px;
+            margin-block-start: 24px;
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            flex-flow: row nowrap;
+            align-items: start;
+
+            .bottom-links {
+                display: flex;
+                flex-flow: row wrap;
+                gap: 16px;
+            }
+            p{
+                color: rgb(167, 167, 167);
+            }
+        }
+    }
+}

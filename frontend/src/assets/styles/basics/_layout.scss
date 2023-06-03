@@ -58,7 +58,7 @@
     .side-navbar {
         grid-area: left-sidebar;
         position: relative;
-        width: 232px;
+        // width: 420px;
         background-color: #121212;
         border-radius: 8px;
     }
@@ -66,10 +66,7 @@
     .app-footer {
         grid-area: footer;
         width: 100%;
-<<<<<<< HEAD
         border-radius: 8px;
-=======
->>>>>>> 05c358da6ab1489bd416869cc6503a7f24c42596
     }
     .main-view{
         grid-area: main-view;
