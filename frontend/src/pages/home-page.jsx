@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import logo from '../assets/img/logo.png'
 import { CHANGE_COUNT } from '../store/user.reducer'
-import { CarIndex } from './car-index'
+import { StationIndex } from './station-index'
 
 export function HomePage() {
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ export function HomePage() {
 
     return (
         <section>
-         <CarIndex/>
+         <StationIndex/>
         </section >
     )
 }
