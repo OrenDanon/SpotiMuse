@@ -5,14 +5,14 @@
 
     .user-info {
         // background-color: $clr2;
-        // padding: 2px 8px;
+        // padding: 2px $layout-padding;
         padding-left: 100px;
         color: $clr1;
 
         .score {
             background-color: $clr2;
             color: $clr6;
-            padding: 8px;
+            padding: $layout-padding;
             margin: 10px;
             border-radius: 50%;
         }

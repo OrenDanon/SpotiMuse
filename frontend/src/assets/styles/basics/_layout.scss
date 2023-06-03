@@ -1,49 +1,12 @@
-// .main-container {
-//     display: grid;
-//     grid-template-columns: 20px 1fr 20px;
 
-//     > * {
-//         grid-column: 2;
-
-//         &.full {
-//             grid-column: 1 /-1;
-//         }
-//     }
-
-//     @include for-narrow-layout {
-//         grid-template-columns: 
-//             minmax(20px, 1fr)
-//             minmax(auto, $mobile-breakpoint)
-//             minmax(20px, 1fr);
-//     }
-//     @include for-normal-layout {
-//         grid-template-columns: 
-//             minmax(20px, 1fr)
-//             minmax(auto, $narrow-breakpoint)
-//             minmax(20px, 1fr);
-//     }
-//     @include for-wide-layout {
-//         grid-template-columns: 
-//             minmax(20px, 1fr)
-//             minmax(auto, $normal-breakpoint)
-//             minmax(20px, 1fr);
-//     }
-// }
-
-// .card-grid {
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-//     grid-gap: 20px;
-// }
 .main-layout {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
     min-height: 100vh;
-    position: relative;
     width: 100%;
-    gap: 8px;
-    padding: 8px;
+    gap: $layout-padding;
+    padding: $layout-padding;
     grid-template-areas:
         "left-sidebar main-view"
         "footer footer";
@@ -51,26 +14,26 @@
     .app-header {
         grid-area: header;
         height: 64px;
-        background-color: #121212;
-        border-radius: 8px;
+        background-color: $clr8;
+        border-radius: $layout-padding;
     }
 
     .side-navbar {
         grid-area: left-sidebar;
         position: relative;
         width: 280px;
-        border-radius: 8px;
+        border-radius: $layout-padding;
     }
 
     .app-footer {
         grid-area: footer;
         width: 100%;
-        border-radius: 8px;
+        border-radius: $layout-padding;
 
     }
     .main-view{
         grid-area: main-view;
-        background-color: #121212;
-        border-radius: 8px;
+        background-color: $clr8;
+        border-radius: $layout-padding;
     }
 }

@@ -46,18 +46,18 @@
 // }
 
 .side-navbar-main {
-    gap: 8px;
+    gap: $layout-padding;
     height: 100%;
     padding: 0px;
 
     .navigation {
-        border-radius: 8px;
+        border-radius: $layout-padding;
         cursor: default;
-        background-color: #121212;
+        background-color: $clr8;
     }
 
     ul {
-        padding: 8px 12px;
+        padding: $layout-padding 12px;
         border: 0;
         margin: 0;
         list-style: none;
