@@ -4,8 +4,10 @@
     background-color: #101010;
     padding: 14px 25px;
     height: 64px;
-    border-radius: 8px;
+    border-radius: $layout-padding;
     margin: 0px -24px;
+    position: sticky;
+    top: 0;
 
     .header-butoons {
         align-items: center;
@@ -20,7 +22,7 @@
         }
 
         .back {
-            margin-right: 8px;
+            margin-right: $layout-padding;
             align-items: center;
             justify-content: center;
         }
