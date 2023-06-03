@@ -15,15 +15,15 @@ export function RootCmp() {
 
     return (
         <div className='main-layout'>
-            <AppHeader />
             <SideNavbar />
             <main className='main-view'>
-            {/* <MainView/> */}
+                <AppHeader />
+                {/* <MainView/> */}
                 <Routes>
                     {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
                     <Route path="station/:id" element={<StationDetails />} />
                 </Routes>
-                <FooterNav/>
+                <FooterNav />
             </main>
             <AppFooter />
         </div>
