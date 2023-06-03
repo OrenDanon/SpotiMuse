@@ -8,6 +8,8 @@ import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 import { SideNavbar } from './cmps/side-navbar'
 import { MainView } from './cmps/main-view'
+import { FooterNav } from './cmps/footer-nav'
+import { StationDetails } from './cmps/station-details'
 
 export function RootCmp() {
 
@@ -19,8 +21,9 @@ export function RootCmp() {
             {/* <MainView/> */}
                 <Routes>
                     {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
-                    {/* <Route path="user/:id" element={<UserDetails />} /> */}
+                    <Route path="station/:id" element={<StationDetails />} />
                 </Routes>
+                <FooterNav/>
             </main>
             <AppFooter />
         </div>

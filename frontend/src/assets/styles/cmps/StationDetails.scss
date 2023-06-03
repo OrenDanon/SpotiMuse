@@ -1,0 +1,68 @@
+.station-details {
+
+
+
+
+    .top-section {
+        height: 30vh;
+        max-height: 400px;
+        min-height: 340px;
+        display: inline-flex;
+
+        img {
+            height: 232px;
+            min-width: 232px;
+            width: 232px;
+            align-self: end;
+            margin-inline-end: 24px;
+            box-shadow: 0 4px 60px rgba(0, 0, 0, .5)
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            h1 {
+                font-size: 6rem;
+                margin-block-end: 12px
+            }
+
+            p {
+                margin: 0;
+                font-size: rem(14px);
+                margin-block-start: 8px;
+            }
+        }
+    }
+
+    .mid-section {
+        display: flex;
+        padding: 24px;
+
+        .play-btn {
+            background-color: #1ed760;
+            inline-size: 56px;
+            block-size: 56px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-inline-end: 32px;
+            
+            &:hover{
+                transform: scale(1.04);
+                cursor: pointer;
+            }
+        }
+        button:not(.play-btn){
+            background-color: inherit;
+            fill: rgba(255, 255, 255, 0.698);
+            margin-inline-end: 24px;
+
+            &:hover{
+                fill: white;
+            }
+        }
+    }
+}

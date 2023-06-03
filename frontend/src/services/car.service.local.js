@@ -82,7 +82,7 @@ var cars =[ {
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
-      "imgUrl": "http://some-photo/"
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
@@ -144,7 +144,7 @@ var cars =[ {
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
-      "imgUrl": "http://some-photo/"
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
@@ -206,7 +206,7 @@ var cars =[ {
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
-      "imgUrl": "http://some-photo/"
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
@@ -268,7 +268,7 @@ var cars =[ {
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
-      "imgUrl": "http://some-photo/"
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
@@ -330,7 +330,7 @@ var cars =[ {
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
-      "imgUrl": "http://some-photo/"
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [

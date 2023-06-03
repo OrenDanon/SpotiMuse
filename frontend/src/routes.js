@@ -12,11 +12,7 @@ const routes = [
         component: <HomePage />,
         label: 'Home 🏠',
     },
-    {
-        path: 'car',
-        component: <CarIndex />,
-        label: 'Cars'
-    },
+   
     {
         path: 'review',
         component: <ReviewIndex />,

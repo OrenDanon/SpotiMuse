@@ -4,6 +4,7 @@ import { loadCars, addCar, updateCar, removeCar, addToCart } from '../store/car.
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { carService } from '../services/car.service.js'
+import { StationPreview } from '../cmps/station-preview.jsx'
 
 export function CarIndex() {
 
@@ -59,16 +60,8 @@ export function CarIndex() {
             <h2>Spotify Playlists</h2>
             <div className="station-list">
                 {cars.map(car =>
-                    <div className="station-preview" key={car._id}>
-                        <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" srcset="" />
-                        <div className='play'>
-                            <span className='fa fa-play'></span>
-                        </div>
-                        <h4>{car.name}</h4>
-                        <p>
-                            Lorem ipsum dotur adipis iusto nihil.
-                        </p>
-                    </div>
+                    <StationPreview 
+                    station ={car}/>
                 )
                 }
             </div >
