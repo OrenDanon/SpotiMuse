@@ -68,16 +68,24 @@
             table {
                 width: 100%;
                 border-collapse: collapse;
-                
+                font-family: CircularStd-Book;
                 .icon {
                     fill: #b3b3b3;
-                    padding-top: 5px;
                 }
                 tr {
                     padding: 0px 16px;
                     border-radius: 6px;
                     &:hover{
                         background-color:hsla(0,0%,100%,.1);
+                        .hidden{
+                            opacity: 1;
+                        }
+                        .song-idx{
+                            display: none;
+                        }
+                        .play{
+                            display: flex;
+                        }
                     }
                 }
                 .like{
@@ -85,7 +93,10 @@
                     padding: 7px 0px 0px 5px;
                 }
                 .time{
-                    margin-right: 14px;
+                    margin-right: 21px;
+                }
+                .right-section{
+                    padding-top: 5px;
                 }
             }
 
@@ -93,9 +104,10 @@
                 height: 36px;
                 border-bottom: solid #4f4d4d 1px;
                 border-radius: 0px;
+                font-size: 14px;
 
                 td:last-child {
-                    margin-right: 26px;
+                    margin-right: 36px;
                     justify-self: end;
                 }
 

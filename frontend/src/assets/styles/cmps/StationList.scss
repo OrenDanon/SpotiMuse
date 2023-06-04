@@ -1,5 +1,6 @@
 .station-list {
-    display: flex;
+    display: grid;
     gap: 20px;
     overflow: hidden;
+    grid-template-columns: repeat(auto-fill,minmax(170px,1fr));
 }

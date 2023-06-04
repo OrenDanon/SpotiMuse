@@ -83,6 +83,7 @@ var stations =[ {
       "Funk",
       "Happy"
     ],
+    "imgUrl":"https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
@@ -145,6 +146,7 @@ var stations =[ {
       "Funk",
       "Happy"
     ],
+    "imgUrl":"https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
@@ -207,6 +209,7 @@ var stations =[ {
       "Funk",
       "Happy"
     ],
+    "imgUrl":"https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/6a/24/87/6a24871e-87b8-815d-cc15-0a1b341917c0/mzl.gfsvgwov.jpg/375x375bb.jpg",
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
@@ -269,6 +272,7 @@ var stations =[ {
       "Funk",
       "Happy"
     ],
+    "imgUrl":"https://www.rap-up.com/wp-content/uploads/2011/01/wiz-smoke1.jpg",
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",
@@ -331,6 +335,7 @@ var stations =[ {
       "Funk",
       "Happy"
     ],
+    "imgUrl":"https://images.sk-static.com/images/media/profile_images/artists/941964/huge_avatar",
     "createdBy": {
       "_id": "u101",
       "fullname": "Puki Ben David",

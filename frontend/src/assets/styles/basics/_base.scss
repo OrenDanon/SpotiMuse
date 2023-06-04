@@ -8,7 +8,7 @@
 }
 
 html {
-    font-family: CircularSpTitle;
+    font-family: CircularStd-Black;
     line-height: 1.6;
     color: white;
     background-color: black;
@@ -36,15 +36,13 @@ img {
 }
 
 p {
-    margin: 0 0 1em;
+    margin: 0 0 0;
 }
 
 a {
     text-decoration: none;
 }
-a:hover {
-    text-decoration: underline;
-}
+
 ul{
     list-style: none;
 }
