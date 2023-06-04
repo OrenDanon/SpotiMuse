@@ -12,6 +12,7 @@ export function StationDetails() {
     const isPlaying =  useSelector(storeState => storeState.stationModule.isPlaying)
 
     function handlePlayClick() {
+        if (!song.id) return
         store.dispatch(updateIsPlaying(!isPlaying))
     }
     async function onAddSong(){
