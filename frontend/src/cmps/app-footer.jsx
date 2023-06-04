@@ -13,19 +13,18 @@ import { ReactComponent as VolumeLowIcon } from "../assets/icons/volume-low.svg"
 import { ReactComponent as VolumeOffIcon } from "../assets/icons/volume-off.svg"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import ReactPlayer from "react-player/youtube"
+import { styled } from "@mui/system"
+import Slider from "@mui/material/Slider"
 
 import { removeFromCart, checkout } from "../store/car.actions"
 import { UserMsg } from "./user-msg.jsx"
 
 export function AppFooter() {
-    const [isCartShown, setIsCartShown] = useState(false)
-    const cart = useSelector((storeState) => storeState.carModule.cart)
-    const count = useSelector((storeState) => storeState.userModule.count)
-    const cartTotal = cart.reduce((acc, car) => acc + car.price, 0)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [progress, setProgress] = useState(0)
-    const [duration, setDuration] = useState(0)
+    const [played, setPlayed] = useState(0)
     const [playedSeconds, setPlayedSeconds] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const playerRef = useRef(null)
     const [volume, setVolume] = useState(1)
     const previousVolume = useRef(1)
     const [muted, setMute] = useState(false)
@@ -43,39 +42,47 @@ export function AppFooter() {
         }
     }, [isPlaying])
 
-    // async function onCheckout() {
-    //     try {
-    //         const score = await checkout(cartTotal)
-    //         showSuccessMsg(`Charged, your new score: ${score.toLocaleString()}`)
-    //     } catch (err) {
-    //         showErrorMsg("Cannot checkout")
-    //     }
-    // }
-
     function formatTime(seconds) {
         const mins = Math.floor(seconds / 60)
         const secs = Math.floor(seconds % 60)
         return `${mins}:${secs < 10 ? "0" : ""}${secs}`
     }
 
-    const handlePlayClick = () => {
+    const StyledSlider = styled(Slider)({
+        color: "lightgreen",
+        "& .MuiSlider-rail": {
+            backgroundColor: "grey",
+        },
+    })
+
+    function handlePlayClick() {
         setIsPlaying(!isPlaying)
     }
 
-    const handleProgress = ({ played }) => {
+    function handleProgress({ playedSeconds }) {
         setPlayedSeconds(playedSeconds)
-        setProgress(played)
     }
 
-    const handleDuration = (duration) => {
+    function handleDuration(duration) {
         setDuration(duration)
     }
 
-    const handleShuffleClick = () => {
+    function handleSeekChange(e) {
+        console.log(e)
+        const newPlayed = +e.target.value
+        const newPlayedSeconds = newPlayed * duration
+        console.log(newPlayed)
+        setPlayed(newPlayed)
+        playerRef.current.seekTo(newPlayedSeconds, "seconds")
+        console.log(newPlayedSeconds)
+        setPlayedSeconds(newPlayedSeconds)
+    }
+
+    function handleShuffleClick() {
         setIsShuffled((prevState) => !prevState)
     }
 
-    const toggleMute = () => {
+    function toggleMute() {
         if (volume === 0) {
             setMute(false)
             setVolume(previousVolume.current)
@@ -86,7 +93,7 @@ export function AppFooter() {
         }
     }
 
-    const handleVolumeChange = (e) => {
+    function handleVolumeChange(e) {
         const newVolume = +e.target.value
         setVolume(newVolume)
         if (newVolume === 0) {
@@ -100,6 +107,7 @@ export function AppFooter() {
     return (
         <footer className="app-footer">
             <ReactPlayer
+                ref={playerRef}
                 url="https://www.youtube.com/watch?v=SkTt9k4Y-a8"
                 width="0px"
                 height="0px"
@@ -160,11 +168,29 @@ export function AppFooter() {
                 </div>
                 <div className="progress-container">
                     <span>{formatTime(playedSeconds)}</span>
+
+                    {/* <StyledSlider
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={played}
+                        onChange={handleSeekChange}
+                    /> */}
+
+                    <input
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={played}
+                        onChange={handleSeekChange}
+                    />
+
                     <div className="progress-bar">
                         <div
                             className="progress"
                             style={{
-                                width: `${progress * 100}%`,
+                                width: `${played * 100}%`,
                             }}></div>
                     </div>
                     <span>{formatTime(duration)}</span>
@@ -201,55 +227,9 @@ export function AppFooter() {
                         value={volume}
                         onChange={handleVolumeChange}
                     />
-                    <div className="progress-bar">
-                        {/* <div className="progress"></div> */}
-                    </div>
+                    <div className="progress-bar"></div>
                 </div>
             </div>
-
-            {/* <div className="playback-bar">
-                    <div>{formatTime(playedSeconds)}</div>
-                    <div
-                        style={{
-                            background: "darkgrey",
-                            width: "100%",
-                            height: "5px",
-                            borderRadius: "30px",
-                        }}>
-                        <div
-                            className="playback-progress"
-                            style={{
-                                background: "white",
-                                borderRadius: "30px",
-                                width: `${progress * 100}%`,
-                                height: "100%",
-                            }}></div>
-                    </div>
-                    <div>{formatTime(duration)}</div>
-                </div> */}
-            {/* <button
-    style={{
-        backgroundColor: "white",
-        borderRadius: "32px",
-        width: "32px",
-        height: "32px",
-    }}
-    onClick={handlePlayClick}
-    className="icon">
-    <svg
-        role="img"
-        height="16"
-        width="16"
-        aria-hidden="true"
-        viewBox="0 0 16 16"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 ldgdZj">
-        <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
-    </svg>
-</button> */}
-
-            {/* <div className="player-controls-top">
-</div> */}
         </footer>
     )
 }

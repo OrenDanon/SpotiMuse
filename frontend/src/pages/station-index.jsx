@@ -23,7 +23,7 @@ export function StationIndex() {
   }
 
   return (
-    <div className="stations">
+    <div className="station-index">
       <h2>Spotify Playlists</h2>
       <StationList stations={stations} />
     </div>

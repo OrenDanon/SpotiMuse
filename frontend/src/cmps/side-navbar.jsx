@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export function SideNavbar() {
     var station = [{
         "_id": "5cksxjas89xjsa8xjsa8jxs09",
@@ -17,10 +19,10 @@ export function SideNavbar() {
                 <div className="navigation">
                     <ul>
                         <li>
-                            <a href="#">
+                            <Link to="/">
                                 <span className="icon"><svg role="img" height="24" width="24" aria-hidden="true" class="Svg-sc-ytk21e-0 ldgdZj home-active-icon" viewBox="0 0 24 24" data-encore-id="icon"><path d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"></path></svg></span>
                                 <span className="home">Home</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#">
