@@ -26,7 +26,7 @@ export function StationDetails() {
         <div className="station-details">
             {station._id ? (
                 <><section className="top-section">
-                    <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" />
+                    <img src={`${station.imgUrl}`} alt="" />
                     <div className="details">
                         <h1>{station.name}</h1>
                         <p>Artists</p>
