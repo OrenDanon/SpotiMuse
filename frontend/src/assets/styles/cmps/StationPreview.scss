@@ -15,7 +15,7 @@
     .play {
         position: relative;
 
-        .fa {
+        .icon-play {
             position: absolute;
             right: 10px;
             top: -40px;
@@ -46,7 +46,7 @@
     }
     &:hover {
         .play {
-            .fa {
+            .icon-play{
                 opacity: 1;
                 transform: translateY(-20px);
             }

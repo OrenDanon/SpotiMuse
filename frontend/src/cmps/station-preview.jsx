@@ -13,7 +13,7 @@ export function StationPreview({ station }) {
     <div className="station-preview" key={station._id} onClick={()=>navigateToStation(station._id)}>
       <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" />
       <div className="play">
-        <span className="fa fa-play flex align-center justify-center"><PlayIcon title="Play" />
+        <span className="icon-play flex align-center justify-center"><PlayIcon title="Play" />
 </span>
       </div>
       <h4>{station.name}</h4>
