@@ -14,7 +14,6 @@ import { ReactComponent as VolumeOffIcon } from "../assets/icons/volume-off.svg"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import ReactPlayer from "react-player/youtube"
 import Slider from "rc-slider"
-import { removeFromCart, checkout } from "../store/car.actions"
 import { UserMsg } from "./user-msg.jsx"
 import { updateIsPlaying } from "../store/station.actions"
 import { store } from "../store/store"
@@ -31,7 +30,10 @@ export function AppFooter() {
     const [volume, setVolume] = useState(1)
     const [muted, setMute] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
-    console.log(isPlaying);
+    const playerRef = useRef(null)
+    const previousVolume = useRef(1)
+
+
     useEffect(() => {
 
         if (!isPlaying) return
