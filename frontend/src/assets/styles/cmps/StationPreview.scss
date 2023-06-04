@@ -4,10 +4,13 @@
     border-radius: 6px;
     cursor: pointer;
     transition: all ease 0.4s;
+    height: 24vw;
 
     img {
         width: 100%;
         border-radius: 6px;
+        margin-bottom: 10px;
+        flex: 1;
         margin-bottom: 10px;
     }
 
@@ -40,12 +43,14 @@
         font-size: 14px;
         line-height: 20px;
     }
+
     &:hover {
         background-color: #252525;
     }
+
     &:hover {
         .play {
-            .icon-play{
+            .icon-play {
                 opacity: 1;
                 transform: translateY(-20px);
             }

@@ -13,8 +13,8 @@ export function StationPreview({ station }) {
 
     return (
             <Link to={`/station/${station._id}`}>
-        <div onClick={()=>onStation(station)}  className="station-preview" key={station._id}>
-            <img src="https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg" alt="" />
+        <div onClick={()=>onStation(station)}  className="station-preview flex column" key={station._id}>
+            <img src={`${station.imgUrl}`} alt="" />
             <div className="play">
                 <span className="icon-play flex align-center justify-center"><PlayIcon title="Play" />
                 </span>

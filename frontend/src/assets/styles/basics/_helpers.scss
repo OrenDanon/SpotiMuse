@@ -44,4 +44,13 @@
 
 .grid-colums{
     display: grid;
-    grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr)}
+    grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr)
+}
+
+
+.hidden{
+    opacity: 0;
+}
+.display-none{
+    display: none;
+}
