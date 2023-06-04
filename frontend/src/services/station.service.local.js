@@ -11,7 +11,8 @@ export const stationService = {
     save,
     remove,
     getEmptyStation,
-    addStationMsg
+    addStationMsg,
+    getSongById
 }
 window.cs = stationService
 
@@ -30,6 +31,9 @@ async function query(filterBy = { txt: '', price: 0 }) {
 
 function getById(stationId) {
     return storageService.get(STORAGE_KEY, stationId)
+}
+function getSongById(station,songId){
+  return station.songs.filter(song => song.id === songId)
 }
 
 async function remove(stationId) {
@@ -87,40 +91,40 @@ var stations =[ {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "eXvBjCO19QY",
+        "id": "aBcDEf0",
         "title": "2Pac - Changes ft. Talent",
-        "url": "youtube/song.mp4",
+        "url": "eXvBjCO19QY",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 162521765262
       },
       {
-        "id": "H1HdZFgR-aA",
+        "id": "aBcDEf1",
         "title": "2Pac - All Eyez On Me",
-        "url": "youtube/song.mp4",
+        "url": "H1HdZFgR-aA",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162769765262
 
       },
       {
-        "id": "Do5MMmEygsY",
+        "id": "aBcDEf2",
         "title": "2Pac - Ghetto Gospel",
-        "url": "youtube/song.mp4",
+        "url": "Do5MMmEygsY",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162854765262
 
       },
       {
-        "id": "mwgZalAFNhM",
+        "id": "aBcDEf3",
         "title": "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
-        "url": "youtube/song.mp4",
+        "url": "mwgZalAFNhM",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162926765262
 
       },
       {
-        "id": "Mb1ZvUDvLDY",
+        "id": "aBcDEf4",
         "title": "2Pac - Dear Mama",
-        "url": "youtube/song.mp4",
+        "url": "Mb1ZvUDvLDY",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162845765262
 
@@ -149,40 +153,40 @@ var stations =[ {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "_CL6n0FJZpk",
+        "id": "aBcDEf5",
         "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
-        "url": "youtube/song.mp4",
+        "url": "_CL6n0FJZpk",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 162792765262
       },
       {
-        "id": "_Rks2oCRS88",
+        "id": "aBcDEf6",
         "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
-        "url": "youtube/song.mp4",
+        "url": "_Rks2oCRS88",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162841765262
 
       },
       {
-        "id": "2soGJXQAQec",
+        "id": "aBcDEf6",
         "title": "Snoop Dogg - Who Am I (What's My Name)?",
-        "url": "youtube/song.mp4",
+        "url": "2soGJXQAQec",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162981265262
 
       },
       {
-        "id": "Wa5B22KAkEk",
+        "id": "aBcDEf7",
         "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
-        "url": "youtube/song.mp4",
+        "url": "Wa5B22KAkEk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162324565262
 
       },
       {
-        "id": "GtUVQei3nX4",
+        "id": "aBcDEf7",
         "title": "Snoop Dogg - Drop It Like It's Hot (Official Music Video) ft. Pharrell Williams",
-        "url": "youtube/song.mp4",
+        "url": "GtUVQei3nX4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162841765262
 
@@ -211,40 +215,40 @@ var stations =[ {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "Ob7vObnFUJc",
+        "id": "aBcDEf8",
         "title": "Beyoncé - Love On Top (Official Video)",
-        "url": "youtube/song.mp4",
+        "url": "Ob7vObnFUJc",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 162888765262
       },
       {
-        "id": "Q0E4wVF2a4k",
+        "id": "aBcDEf9",
         "title": "Beyoncé - AMERICA HAS A PROBLEM (Feat. Kendrick Lamar) - (Official Lyric Video)",
-        "url": "youtube/song.mp4",
+        "url": "Q0E4wVF2a4k",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162439765262
 
       },
       {
-        "id": "AWpsOqh8q0M",
+        "id": "aBcDEf10",
         "title": "Beyoncé - If I Were A Boy",
-        "url": "youtube/song.mp4",
+        "url": "AWpsOqh8q0M",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162441765262
 
       },
       {
-        "id": "VBmMU_iwe6U",
+        "id": "aBcDEf11",
         "title": "Beyoncé - Run the World (Girls) (Official Video)",
-        "url": "youtube/song.mp4",
+        "url": "VBmMU_iwe6U",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162238765262
 
       },
       {
-        "id": "2EwViQxSJJQ",
+        "id": "aBcDEf12",
         "title": "Beyoncé - Irreplaceable",
-        "url": "youtube/song.mp4",
+        "url": "2EwViQxSJJQ",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162521765262
 
@@ -273,40 +277,40 @@ var stations =[ {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "RgKAFK5djSk",
-        "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack",
-        "url": "youtube/song.mp4",
+        "id": "aBcDEf13",
+        "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundsong",
+        "url": "RgKAFK5djSk",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 162249765262
       },
       {
-        "id": "C4yYiXuUqyM",
+        "id": "aBcDEf14",
         "title": "Wiz Khalifa - What Would I Do [Official Music Video]",
-        "url": "youtube/song.mp4",
+        "url": "C4yYiXuUqyM",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162972365262
 
       },
       {
-        "id": "MOk-_wCJbcM",
+        "id": "aBcDEf15",
         "title": "Wiz Khalifa - Why Not Not Why [Official Music Video]",
-        "url": "youtube/song.mp4",
+        "url": "MOk-_wCJbcM",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162521765262
 
       },
       {
-        "id": "Wa5B22KAkEk",
+        "id": "aBcDEf16",
         "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
-        "url": "youtube/song.mp4",
+        "url": "Wa5B22KAkEk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162621765262
 
       },
       {
-        "id": "KuVAeTHqijk",
+        "id": "aBcDEf17",
         "title": "Wiz Khalifa - No Sleep [Music Video]",
-        "url": "youtube/song.mp4",
+        "url": "KuVAeTHqijk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162521765262
 
@@ -335,40 +339,40 @@ var stations =[ {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "fLexgOxsZu0",
+        "id": "aBcDEf18",
         "title": "Bruno Mars - The Lazy Song (Official Music Video)",
-        "url": "youtube/song.mp4",
+        "url": "fLexgOxsZu0",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 162437865262
       },
       {
-        "id": "SR6iYWJxHqs",
+        "id": "aBcDEf19",
         "title": "Bruno Mars - Grenade (Official Music Video)",
-        "url": "youtube/song.mp4",
+        "url": "SR6iYWJxHqs",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162887765262
 
       },
       {
-        "id": "OPf0YbXqDm0",
+        "id": "aBcDEf20",
         "title": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
-        "url": "youtube/song.mp4",
+        "url": "OPf0YbXqDm0",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162221765262
 
       },
       {
-        "id": "LjhCEhWiKXk",
+        "id": "aBcDEf21",
         "title": "Bruno Mars - Just The Way You Are (Official Music Video)",
-        "url": "youtube/song.mp4",
+        "url": "LjhCEhWiKXk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162675465262
 
       },
       {
-        "id": "8aRor905cCw",
+        "id": "aBcDEf22",
         "title": "Travie McCoy: Billionaire ft. Bruno Mars [OFFICIAL VIDEO]",
-        "url": "youtube/song.mp4",
+        "url": "8aRor905cCw",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
         "addedAt": 162554765262
 

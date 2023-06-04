@@ -16,11 +16,15 @@ import ReactPlayer from "react-player/youtube"
 import { styled } from "@mui/system"
 import Slider from "@mui/material/Slider"
 
-import { removeFromCart, checkout } from "../store/car.actions"
 import { UserMsg } from "./user-msg.jsx"
+import { updateIsPlaying } from "../store/station.actions"
+import { store } from "../store/store"
 
 export function AppFooter() {
-    const [isPlaying, setIsPlaying] = useState(false)
+    const station =  useSelector(storeState => storeState.stationModule.station)
+    const song =  useSelector(storeState => storeState.stationModule.song)
+    const isPlaying =  useSelector(storeState => storeState.stationModule.isPlaying)
+    // const [isPlaying, setIsPlaying] = useState(false)
     const [played, setPlayed] = useState(0)
     const [playedSeconds, setPlayedSeconds] = useState(0)
     const [duration, setDuration] = useState(0)
@@ -29,16 +33,17 @@ export function AppFooter() {
     const previousVolume = useRef(1)
     const [muted, setMute] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
-
+    console.log(isPlaying);
     useEffect(() => {
-        if (isPlaying) {
-            const timerId = setInterval(() => {
-                setPlayedSeconds((prevSeconds) => prevSeconds + 1)
-            }, 1000)
 
-            return () => {
-                clearInterval(timerId)
-            }
+        if (!isPlaying) return
+
+        const timerId = setInterval(() => {
+            setPlayedSeconds((prevSeconds) => prevSeconds + 1)
+        }, 1000)
+
+        return () => {
+            clearInterval(timerId)
         }
     }, [isPlaying])
 
@@ -56,7 +61,8 @@ export function AppFooter() {
     })
 
     function handlePlayClick() {
-        setIsPlaying(!isPlaying)
+        if (!song.url) return
+        store.dispatch(updateIsPlaying(!isPlaying))
     }
 
     function handleProgress({ playedSeconds }) {
@@ -108,7 +114,7 @@ export function AppFooter() {
         <footer className="app-footer">
             <ReactPlayer
                 ref={playerRef}
-                url="https://www.youtube.com/watch?v=SkTt9k4Y-a8"
+                url={`https://www.youtube.com/watch?v=${song.url}`}
                 width="0px"
                 height="0px"
                 playing={isPlaying}
@@ -116,19 +122,19 @@ export function AppFooter() {
                 muted={muted}
                 onProgress={handleProgress}
                 onDuration={handleDuration}
-                style={{ position: "absolute", top: "-1000px" }}
+                style={{ position: 'absolute', top: '-1000px' }}
             />
 
             <div className="song-info">
                 <div className="image-container">
                     <img
-                        src="https://d2y6mqrpjbqoe6.cloudfront.net/image/upload/f_auto,q_auto/media/library-400/216_636967437355378335Your_Lie_Small_hq.jpg"
+                        src={`${song.imgUrl}`}
                         alt=""
                     />
                 </div>
                 <div className="song-description">
                     <p className="title">
-                        Watashitachi wa Sou Yatte Ikite Iku Jinshu na no
+                        {`${song.title}`}
                     </p>
                     <p className="artist">Masaru Yokoyama</p>
                 </div>
@@ -138,9 +144,8 @@ export function AppFooter() {
                     <button className="icon">
                         <ShuffleIcon
                             title="Enable shuffle"
-                            className={`icon shuffle-icon ${
-                                isShuffled ? "icon-green" : "icon-gray"
-                            }`}
+                            className={`icon shuffle-icon ${isShuffled ? "icon-green" : "icon-gray"
+                                }`}
                         />
                     </button>
                     <button className="icon">
@@ -189,9 +194,8 @@ export function AppFooter() {
                     <div className="progress-bar">
                         <div
                             className="progress"
-                            style={{
-                                width: `${played * 100}%`,
-                            }}></div>
+                            style={{ width: `${played * 100}%` }}>
+                        </div>
                     </div>
                     <span>{formatTime(duration)}</span>
                 </div>

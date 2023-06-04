@@ -67,7 +67,7 @@
     }
     
     .bottom-section {
-        .track-list {
+        .song-list {
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -79,7 +79,7 @@
                     padding-left: 21px;
                     padding-top: 5px;
                 }
-                .track-title{
+                .song-title{
                     padding: 0px 0px 0px 5px;
                 }
                 
@@ -89,17 +89,17 @@
                 td{
                     padding: 30px 13px 4px 20px;
                 }
-                .track-title{
+                .song-title{
                     padding: 30px 0px 0px 5px;
                 }
             }
-            .track-preview {
+            .song-preview {
                 img {
                     width: 40px;
                     height: 40px;
                 }
 
-                .track-title{
+                .song-title{
                     padding: 17px 0px 0px 5px;
                 }
                 td {
