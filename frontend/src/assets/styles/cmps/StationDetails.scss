@@ -4,15 +4,13 @@
 
 
     .top-section {
-        height: 30vh;
-        max-height: 400px;
-        min-height: 340px;
+        height: 276px;
         display: inline-flex;
+        padding-bottom: 24px;
 
         img {
-            height: 232px;
-            min-width: 232px;
-            width: 232px;
+            height: 192px;
+            width: 192px;
             align-self: end;
             margin-inline-end: 24px;
             box-shadow: 0 4px 60px rgba(0, 0, 0, .5)
@@ -38,7 +36,7 @@
 
     .mid-section {
         display: flex;
-        padding: 24px;
+        padding: 24px 0px;
 
         .play-btn {
             background-color: #1ed760;
@@ -49,20 +47,74 @@
             justify-content: center;
             align-items: center;
             margin-inline-end: 32px;
-            
-            &:hover{
+
+            &:hover {
                 transform: scale(1.04);
                 cursor: pointer;
             }
         }
-        button:not(.play-btn){
+
+        button:not(.play-btn) {
             background-color: inherit;
             fill: rgba(255, 255, 255, 0.698);
             margin-inline-end: 24px;
+            padding: 0px;
 
-            &:hover{
+            &:hover {
                 fill: white;
             }
         }
     }
+    
+    .bottom-section {
+        .track-list {
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            
+            tr:first-child {
+                td {
+                    border-bottom: solid #4f4d4d 1px;
+                    padding-left: 21px;
+                    padding-top: 5px;
+                }
+                .track-title{
+                    padding: 0px 0px 0px 5px;
+                }
+                
+            }
+        
+            tr:nth-child(2){
+                td{
+                    padding: 30px 13px 4px 20px;
+                }
+                .track-title{
+                    padding: 30px 0px 0px 5px;
+                }
+            }
+            .track-preview {
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .track-title{
+                    padding: 17px 0px 0px 5px;
+                }
+                td {
+                    height: 54.4px;
+                    align-items: center;
+                    padding: 20px 13px 6px 20px;                }
+                
+                p {
+                    margin: 0px;
+                    margin-left: 19px;
+                }
+            }
+
+        }
+    }
+
+    
 }

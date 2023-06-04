@@ -3,9 +3,9 @@ export function TrackPreview({track,idx}){
         <tr className="track-preview">
             <td>{idx+1}
             </td>
-            <td className="flex">
+            <td className="track-title">
+                <div className="flex">
                 <img src={`${track.imgUrl}`} alt="" />
-                <div>
                     <p>{track.title}</p>
                     <p>Artist</p>
                 </div>

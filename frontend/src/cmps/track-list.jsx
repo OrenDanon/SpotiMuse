@@ -4,11 +4,11 @@ export function TrackList({station}){
     return(
         <div className="track-list">
             <table>
-                    <tr>
+                    <tr className="">
                         <td>
                            # 
                         </td>
-                        <td>
+                        <td className="track-title">
                             Title
                         </td>
                         <td>
