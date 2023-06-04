@@ -1,0 +1,55 @@
+.station-preview {
+    padding: 15px;
+    background-color: #181818;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+
+    img {
+        width: 100%;
+        border-radius: 6px;
+        margin-bottom: 10px;
+
+    }
+
+    .play {
+        position: relative;
+
+        .fa {
+            position: absolute;
+            right: 10px;
+            top: -40px;
+            width: 36px;
+            height: 36px;
+            background-color: #1db954;
+            border-radius: 100%;
+            opacity: 0;
+            transition: all ease 0.4s;
+        }
+    }
+
+    h4 {
+        color: #ffffff;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    p {
+        color: #989898;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    &:hover {
+        background-color: #252525;
+    }
+    &:hover {
+        .play {
+            .fa {
+                opacity: 1;
+                transform: translateY(-20px);
+            }
+        }
+    }
+}
