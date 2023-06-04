@@ -20,9 +20,13 @@ import { store } from "../store/store"
 import "rc-slider/assets/index.css"
 
 export function AppFooter() {
-    const station =  useSelector(storeState => storeState.stationModule.station)
-    const song =  useSelector(storeState => storeState.stationModule.song)
-    const isPlaying =  useSelector(storeState => storeState.stationModule.isPlaying)
+    const station = useSelector(
+        (storeState) => storeState.stationModule.station
+    )
+    const song = useSelector((storeState) => storeState.stationModule.song)
+    const isPlaying = useSelector(
+        (storeState) => storeState.stationModule.isPlaying
+    )
     // const [isPlaying, setIsPlaying] = useState(false)
     const [played, setPlayed] = useState(0)
     const [playedSeconds, setPlayedSeconds] = useState(0)
@@ -33,9 +37,7 @@ export function AppFooter() {
     const playerRef = useRef(null)
     const previousVolume = useRef(1)
 
-
     useEffect(() => {
-
         if (!isPlaying) return
 
         const timerId = setInterval(() => {
@@ -68,6 +70,7 @@ export function AppFooter() {
     }
 
     function handleSeekChange(value) {
+        console.log(value)
         const newPlayedSeconds = value * duration
         setPlayed(value)
         playerRef.current.seekTo(newPlayedSeconds, "seconds")
@@ -89,8 +92,9 @@ export function AppFooter() {
         }
     }
 
-    function handleVolumeChange(e) {
-        const newVolume = +e.target.value
+    function handleVolumeChange(volume) {
+        console.log(volume)
+        const newVolume = volume
         setVolume(newVolume)
         if (newVolume === 0) {
             setMute(true)
@@ -112,20 +116,15 @@ export function AppFooter() {
                 muted={muted}
                 onProgress={handleProgress}
                 onDuration={handleDuration}
-                style={{ position: 'absolute', top: '-1000px' }}
+                style={{ position: "absolute", top: "-1000px" }}
             />
 
             <div className="song-info">
                 <div className="image-container">
-                    <img
-                        src={`${song.imgUrl}`}
-                        alt=""
-                    />
+                    <img src={`${song.imgUrl}`} alt="" />
                 </div>
                 <div className="song-description">
-                    <p className="title">
-                        {`${song.title}`}
-                    </p>
+                    <p className="title">{`${song.title}`}</p>
                     <p className="artist">Masaru Yokoyama</p>
                 </div>
             </div>
@@ -134,8 +133,9 @@ export function AppFooter() {
                     <button className="icon">
                         <ShuffleIcon
                             title="Enable shuffle"
-                            className={`icon shuffle-icon ${isShuffled ? "icon-green" : "icon-gray"
-                                }`}
+                            className={`icon shuffle-icon ${
+                                isShuffled ? "icon-green" : "icon-gray"
+                            }`}
                         />
                     </button>
                     <button className="icon">
@@ -187,12 +187,11 @@ export function AppFooter() {
                     <span>{formatTime(duration)}</span>
                 </div>
             </div>
-            <div className="controls-right">
-                <div className="volume-bar">
+            <div className="volume-container">
+                <div className="buttons-right">
                     <button className="icon">
                         <QueueIcon title="Queue" className="icon queue-icon" />
                     </button>
-
                     <button onClick={toggleMute} className="icon">
                         {(muted && (
                             <VolumeOffIcon className="icon volume-icon" />
@@ -207,18 +206,22 @@ export function AppFooter() {
                                 <VolumeHighIcon className="icon volume-icon" />
                             ))}
                     </button>
-
-                    <input
-                        type="range"
-                        name=""
-                        className=""
+                </div>
+                <div className="volume-indicator-container">
+                    <Slider
                         min={0}
                         max={1}
                         step={0.01}
                         value={volume}
                         onChange={handleVolumeChange}
                     />
-                    <div className="progress-bar"></div>
+                    <div className="volume-bar">
+                    <div
+                        className="volume-bar-progress"
+                        style={{
+                            width: `${volume * 100}%`,
+                        }}></div>
+                        </div>
                 </div>
             </div>
         </footer>

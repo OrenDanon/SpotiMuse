@@ -1,12 +1,14 @@
 .app-footer {
+    position: sticky;
+    bottom: 0;
     display: flex;
     justify-content: center;
     background-color: #000000;
     align-items: center;
     color: #ddd;
     padding: 5px;
-    height: 4rem;
-    // height: 72px;
+    // height: 4rem;
+    height: 88px;
 
     .song-info {
         display: flex;
@@ -56,10 +58,12 @@
     }
 
     .progress-controller {
-        width: 100%;
+        width: 50%;
         display: flex;
         justify-content: center;
         flex-direction: column;
+        margin-inline-start: 25em;
+        margin-inline-end: 25em;
         align-items: center;
         color: #999;
 
@@ -88,7 +92,6 @@
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 1em;
 
             .progress-indicator-container {
@@ -105,8 +108,17 @@
                     top: -5px;
                     z-index: -1;
 
+                    &:hover {
+                        .rc-slider-track {
+                            background-color: #2d5;
+                        }
+                        .rc-slider-handle {
+                            opacity: 1;
+                        }
+                    }
+
                     .rc-slider-track {
-                        background-color: #2d5;
+                        background-color: rgb(248, 248, 248);
                     }
 
                     .rc-slider-rail {
@@ -116,7 +128,11 @@
                     .rc-slider-handle {
                         background-color: #fff;
                         border: none;
-                        opacity: 1;
+                        opacity: 0;
+
+                        &:hover {
+                            opacity: 1;
+                        }
 
                         &:active {
                             box-shadow: none;
@@ -142,40 +158,76 @@
                     position: relative;
                     height: 100%;
                     border-radius: 10px;
-                    background-color: #999;
-                    &:hover {
-                        background-color: #2d5;
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            width: 1em;
-                            height: 1em;
-                            right: 0;
-                            border-radius: 50%;
-                            background-color: #fff;
-                            transform: translate(50%, calc(2px - 50%));
-                        }
-                    }
+                    background-color: #ffffff;
                 }
             }
         }
     }
 
-    .controls-right {
+    .volume-container {
         display: flex;
-        margin-inline-end: 1em;
+        align-items: center;
         gap: 1em;
-        .volume-bar {
+        justify-content: space-between;
+        width: 20%;
+
+        .buttons-right {
             display: flex;
-            align-items: center;
-            gap: 0.7em;
-            .progress-bar {
-                width: 6em;
+            gap: 1em;
+        }
+
+        .volume-indicator-container {
+            flex-grow: 1;
+            position: relative;
+
+            &:hover .rc-slider,
+            &:focus-within .rc-slider {
+                z-index: 3;
+            }
+
+            .rc-slider {
+                position: absolute;
+                top: -5px;
+                z-index: -1;
+
                 &:hover {
-                    &::after {
-                        width: 0.8em;
-                        height: 0.8em;
+                    .rc-slider-track {
+                        background-color: #2d5;
                     }
+                    .rc-slider-handle {
+                        opacity: 1;
+                    }
+                }
+
+                .rc-slider-track {
+                    background-color: rgb(255, 255, 255);
+                }
+
+                .rc-slider-rail {
+                    background-color: #ccc4;
+                }
+
+                .rc-slider-handle {
+                    background-color: #fff;
+                    border: none;
+                    opacity: 0;
+                    &:active {
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            .volume-bar {
+                height: 4px;
+                border-radius: 10px;
+                width: 100%;
+                background-color: #ccc4;
+
+                .volume-bar-progress {
+                    position: relative;
+                    height: 100%;
+                    border-radius: 10px;
+                    background-color: #ffffff;
                 }
             }
         }
