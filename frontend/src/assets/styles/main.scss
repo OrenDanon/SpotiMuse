@@ -15,9 +15,9 @@
 // Views
 @import "views/AboutUs";
 @import "views/HomePage";
-@import "views/CarIndex";
 @import "views/ReviewIndex";
 @import "views/UserDetails";
+@import "views/StationIndex";
 
 // Components
 @import "cmps/AppHeader";
@@ -27,6 +27,8 @@
 @import "cmps/UserMsg";
 @import "cmps/ShoppingCart";
 @import "cmps/StationDetails";
+@import "cmps/StationPreview";
+@import "cmps/StationList";
 
 
 
