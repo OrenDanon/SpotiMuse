@@ -4,3 +4,13 @@
     overflow: hidden;
     grid-template-columns: repeat(auto-fill,minmax(170px,1fr));
 }
+
+.station-index{
+   
+    h2:not(:first-of-type){
+        margin-top: 50px;
+    }
+    h2{
+        margin-bottom: 28px;
+    }
+}
