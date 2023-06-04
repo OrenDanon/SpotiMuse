@@ -13,22 +13,21 @@ import { ReactComponent as VolumeLowIcon } from "../assets/icons/volume-low.svg"
 import { ReactComponent as VolumeOffIcon } from "../assets/icons/volume-off.svg"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import ReactPlayer from "react-player/youtube"
-import { styled } from "@mui/system"
-import Slider from "@mui/material/Slider"
-
+import Slider from "rc-slider"
 import { removeFromCart, checkout } from "../store/car.actions"
 import { UserMsg } from "./user-msg.jsx"
+import "rc-slider/assets/index.css"
 
 export function AppFooter() {
     const [isPlaying, setIsPlaying] = useState(false)
     const [played, setPlayed] = useState(0)
     const [playedSeconds, setPlayedSeconds] = useState(0)
     const [duration, setDuration] = useState(0)
-    const playerRef = useRef(null)
     const [volume, setVolume] = useState(1)
-    const previousVolume = useRef(1)
     const [muted, setMute] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
+    const playerRef = useRef(null)
+    const previousVolume = useRef(1)
 
     useEffect(() => {
         if (isPlaying) {
@@ -48,18 +47,12 @@ export function AppFooter() {
         return `${mins}:${secs < 10 ? "0" : ""}${secs}`
     }
 
-    const StyledSlider = styled(Slider)({
-        color: "lightgreen",
-        "& .MuiSlider-rail": {
-            backgroundColor: "grey",
-        },
-    })
-
     function handlePlayClick() {
         setIsPlaying(!isPlaying)
     }
 
-    function handleProgress({ playedSeconds }) {
+    function handleProgress({ playedSeconds, played }) {
+        setPlayed(played)
         setPlayedSeconds(playedSeconds)
     }
 
@@ -67,14 +60,10 @@ export function AppFooter() {
         setDuration(duration)
     }
 
-    function handleSeekChange(e) {
-        console.log(e)
-        const newPlayed = +e.target.value
-        const newPlayedSeconds = newPlayed * duration
-        console.log(newPlayed)
-        setPlayed(newPlayed)
+    function handleSeekChange(value) {
+        const newPlayedSeconds = value * duration
+        setPlayed(value)
         playerRef.current.seekTo(newPlayedSeconds, "seconds")
-        console.log(newPlayedSeconds)
         setPlayedSeconds(newPlayedSeconds)
     }
 
@@ -152,7 +141,10 @@ export function AppFooter() {
                         {isPlaying ? (
                             <PauseIcon title="Pause" className="pause-icon" />
                         ) : (
-                            <PlayIcon title="Play" className="play-icon" />
+                            <PlayIcon
+                                title="Play"
+                                className="play-icon svg-icon"
+                            />
                         )}
                     </button>
 
@@ -169,29 +161,22 @@ export function AppFooter() {
                 <div className="progress-container">
                     <span>{formatTime(playedSeconds)}</span>
 
-                    {/* <StyledSlider
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        value={played}
-                        onChange={handleSeekChange}
-                    /> */}
+                    <div className="progress-indicator-container">
+                        <Slider
+                            min={0}
+                            max={1}
+                            step={0.01}
+                            value={played}
+                            onChange={handleSeekChange}
+                        />
 
-                    <input
-                        type="range"
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        value={played}
-                        onChange={handleSeekChange}
-                    />
-
-                    <div className="progress-bar">
-                        <div
-                            className="progress"
-                            style={{
-                                width: `${played * 100}%`,
-                            }}></div>
+                        <div className="progress-bar">
+                            <div
+                                className="progress"
+                                style={{
+                                    width: `${played * 100}%`,
+                                }}></div>
+                        </div>
                     </div>
                     <span>{formatTime(duration)}</span>
                 </div>

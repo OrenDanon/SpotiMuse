@@ -8,7 +8,6 @@
     height: 4rem;
     // height: 72px;
 
-    
     .song-info {
         display: flex;
         align-items: center;
@@ -16,7 +15,7 @@
         margin-inline-start: 0.5em;
         // gap: 0.2rem;
         width: 20%;
-        
+
         .image-container {
             flex-shrink: 0;
             // width: 4.5em;
@@ -26,7 +25,7 @@
             justify-content: flex-start;
             width: 4em;
             height: 4em;
-            
+
             img {
                 width: 80%;
                 height: 80%;
@@ -39,7 +38,7 @@
                 margin: 0.2em;
             }
         }
-        
+
         .title,
         .artist {
             display: -webkit-box;
@@ -55,7 +54,7 @@
             color: #999;
         }
     }
-    
+
     .progress-controller {
         width: 100%;
         display: flex;
@@ -63,57 +62,100 @@
         flex-direction: column;
         align-items: center;
         color: #999;
-        
+
         .control-buttons {
             display: flex;
             align-items: center;
-            
+
             gap: 2em;
             .play-pause-icon {
+                width: 32px;
+                height: 32px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 1em;
                 background-color: #ddd;
                 color: #111;
                 border-radius: 50%;
-                transition: none 33ms cubic-bezier(.3,0,0,1);
+                transition: none 33ms cubic-bezier(0.3, 0, 0, 1);
                 &:hover {
                     transform: scale(1.06);
                 }
             }
         }
+
         .progress-container {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1em;
-        }
-    }
-      
-    
-    .progress-bar {
-        height: 4px;
-        border-radius: 10px;
-        width: 50%;
-        background-color: #ccc4;
-        .progress {
-            position: relative;
-            height: 100%;
-            border-radius: 10px;
-            background-color: #999;
-            &:hover {
-                background-color: #2d5;
-                &::after {
-                    content: "";
+
+            .progress-indicator-container {
+                flex-grow: 1;
+                position: relative;
+
+                &:hover .rc-slider,
+                &:focus-within .rc-slider {
+                    z-index: 3;
+                }
+
+                .rc-slider {
                     position: absolute;
-                    width: 1em;
-                    height: 1em;
-                    right: 0;
-                    border-radius: 50%;
-                    background-color: #fff;
-                    transform: translate(50%, calc(2px - 50%));
+                    top: -5px;
+                    z-index: -1;
+
+                    .rc-slider-track {
+                        background-color: #2d5;
+                    }
+
+                    .rc-slider-rail {
+                        background-color: #ccc4;
+                    }
+
+                    .rc-slider-handle {
+                        background-color: #fff;
+                        border: none;
+                        opacity: 1;
+
+                        &:active {
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                //     .progress-input {
+                //         position: absolute;
+                //         width: calc(100% + 5px);
+                //         left: -5px;
+                //         z-index: -1;
+                //         height: 4px;
+                //     }
+            }
+
+            .progress-bar {
+                height: 4px;
+                border-radius: 10px;
+                width: 100%;
+                background-color: #ccc4;
+                .progress {
+                    position: relative;
+                    height: 100%;
+                    border-radius: 10px;
+                    background-color: #999;
+                    &:hover {
+                        background-color: #2d5;
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            width: 1em;
+                            height: 1em;
+                            right: 0;
+                            border-radius: 50%;
+                            background-color: #fff;
+                            transform: translate(50%, calc(2px - 50%));
+                        }
+                    }
                 }
             }
         }
@@ -130,10 +172,10 @@
             .progress-bar {
                 width: 6em;
                 &:hover {
-                   &::after {
-                    width: 0.8em;
-                    height: 0.8em;
-                   } 
+                    &::after {
+                        width: 0.8em;
+                        height: 0.8em;
+                    }
                 }
             }
         }
