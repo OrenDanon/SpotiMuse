@@ -1,8 +1,5 @@
 .station-details {
 
-
-
-
     .top-section {
         height: 276px;
         display: inline-flex;
@@ -71,50 +68,75 @@
             table {
                 width: 100%;
                 border-collapse: collapse;
-            }
-            
-            tr:first-child {
-                td {
-                    border-bottom: solid #4f4d4d 1px;
-                    padding-left: 21px;
+                
+                .icon {
+                    fill: #b3b3b3;
                     padding-top: 5px;
                 }
-                .song-title{
-                    padding: 0px 0px 0px 5px;
+                tr {
+                    padding: 0px 16px;
+                    border-radius: 6px;
+                    &:hover{
+                        background-color:hsla(0,0%,100%,.1);
+                    }
                 }
-                
+                .like{
+                    width: 100%;
+                    padding: 7px 0px 0px 5px;
+                }
+                .time{
+                    margin-right: 14px;
+                }
             }
-        
-            tr:nth-child(2){
-                td{
-                    padding: 30px 13px 4px 20px;
+
+            tr:first-child {
+                height: 36px;
+                border-bottom: solid #4f4d4d 1px;
+                border-radius: 0px;
+
+                td:last-child {
+                    margin-right: 26px;
+                    justify-self: end;
                 }
-                .song-title{
-                    padding: 30px 0px 0px 5px;
-                }
+
             }
+
+            tr:nth-child(2) {
+                margin-top: 18px;
+            }
+
+            tr {
+                align-items: center;
+                justify-content: start;
+                gap: 16px;
+
+                td {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;                }
+            }
+
             .song-preview {
                 img {
                     width: 40px;
                     height: 40px;
+                    margin-right: 14.4px;
                 }
 
-                .song-title{
-                    padding: 17px 0px 0px 5px;
-                }
                 td {
                     height: 54.4px;
                     align-items: center;
-                    padding: 20px 13px 6px 20px;                }
-                
-                p {
-                    margin: 0px;
-                    margin-left: 19px;
+
+                    p {
+                        margin: 0px;
+                        color: white;
+                    }
+
+                    span {
+                        font-size: 14px;
+                    }
                 }
             }
-
         }
     }
-
-    
 }
