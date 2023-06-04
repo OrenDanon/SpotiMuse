@@ -14,6 +14,7 @@ export const stationService = {
   addStationMsg,
   getSong,
   addSong,
+  removeSong,
   getSongById
 }
 window.cs = stationService
@@ -59,6 +60,10 @@ async function addSong(station){
   station.songs.push(newSong)
   return await save(station)
 }
+async function removeSong(station,songId){
+  station.songs.splice(songId,1)
+  return await save(station)
+}
 
 async function addStationMsg(stationId, txt) {
   // Later, this is all done by the backend
@@ -77,7 +82,7 @@ async function addStationMsg(stationId, txt) {
 }
 function getSong() {
   return {
-    id: 'aBcDEf3',
+    id: utilService.makeId(),
     title: '2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD',
     url: 'mwgZalAFNhM',
     imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
