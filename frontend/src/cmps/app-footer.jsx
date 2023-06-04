@@ -13,6 +13,8 @@ import { ReactComponent as VolumeLowIcon } from "../assets/icons/volume-low.svg"
 import { ReactComponent as VolumeOffIcon } from "../assets/icons/volume-off.svg"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import ReactPlayer from "react-player/youtube"
+import { styled } from "@mui/system"
+import Slider from "@mui/material/Slider"
 
 import { removeFromCart, checkout } from "../store/car.actions"
 import { UserMsg } from "./user-msg.jsx"
@@ -46,30 +48,41 @@ export function AppFooter() {
         return `${mins}:${secs < 10 ? "0" : ""}${secs}`
     }
 
-    const handlePlayClick = () => {
+    const StyledSlider = styled(Slider)({
+        color: "lightgreen",
+        "& .MuiSlider-rail": {
+            backgroundColor: "grey",
+        },
+    })
+
+    function handlePlayClick() {
         setIsPlaying(!isPlaying)
     }
 
-    const handleProgress = ({ playedSeconds }) => {
+    function handleProgress({ playedSeconds }) {
         setPlayedSeconds(playedSeconds)
     }
 
-    const handleDuration = (duration) => {
+    function handleDuration(duration) {
         setDuration(duration)
     }
 
-    const handleSeekChange = (e) => {
-        setPlayed(+e.target.value)
-        playerRef.current.seekTo(+e.target.value)
-        console.log(playedSeconds)
-        setPlayedSeconds(playedSeconds)
+    function handleSeekChange(e) {
+        console.log(e)
+        const newPlayed = +e.target.value
+        const newPlayedSeconds = newPlayed * duration
+        console.log(newPlayed)
+        setPlayed(newPlayed)
+        playerRef.current.seekTo(newPlayedSeconds, "seconds")
+        console.log(newPlayedSeconds)
+        setPlayedSeconds(newPlayedSeconds)
     }
 
-    const handleShuffleClick = () => {
+    function handleShuffleClick() {
         setIsShuffled((prevState) => !prevState)
     }
 
-    const toggleMute = () => {
+    function toggleMute() {
         if (volume === 0) {
             setMute(false)
             setVolume(previousVolume.current)
@@ -80,7 +93,7 @@ export function AppFooter() {
         }
     }
 
-    const handleVolumeChange = (e) => {
+    function handleVolumeChange(e) {
         const newVolume = +e.target.value
         setVolume(newVolume)
         if (newVolume === 0) {
@@ -155,6 +168,15 @@ export function AppFooter() {
                 </div>
                 <div className="progress-container">
                     <span>{formatTime(playedSeconds)}</span>
+
+                    {/* <StyledSlider
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={played}
+                        onChange={handleSeekChange}
+                    /> */}
+
                     <input
                         type="range"
                         min={0}
@@ -163,6 +185,7 @@ export function AppFooter() {
                         value={played}
                         onChange={handleSeekChange}
                     />
+
                     <div className="progress-bar">
                         <div
                             className="progress"
