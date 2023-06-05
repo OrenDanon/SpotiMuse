@@ -15,9 +15,10 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import ReactPlayer from "react-player/youtube"
 import Slider from "rc-slider"
 import { UserMsg } from "./user-msg.jsx"
-import { updateIsPlaying } from "../store/station.actions"
+import { updateCurrentSong, updateIsPlaying } from "../store/station.actions"
 import { store } from "../store/store"
 import "rc-slider/assets/index.css"
+import { stationService } from "../services/station.service.local"
 
 export function AppFooter() {
     const station = useSelector(
@@ -27,7 +28,6 @@ export function AppFooter() {
     const isPlaying = useSelector(
         (storeState) => storeState.stationModule.isPlaying
     )
-    // const [isPlaying, setIsPlaying] = useState(false)
     const [played, setPlayed] = useState(0)
     const [playedSeconds, setPlayedSeconds] = useState(0)
     const [duration, setDuration] = useState(0)
@@ -103,6 +103,16 @@ export function AppFooter() {
             previousVolume.current = newVolume
         }
     }
+    function onNextSong() {
+        const nextSong = stationService.getNextSong(station,song)
+        if (!nextSong) return
+        store.dispatch(updateCurrentSong(nextSong))
+    }
+    function onPrevSong() {
+        const prevSong = stationService.getPrevSong(station,song)
+        if (!prevSong) return
+        store.dispatch(updateCurrentSong(prevSong))
+    }
 
     return (
         <footer className="app-footer">
@@ -133,12 +143,11 @@ export function AppFooter() {
                     <button className="icon">
                         <ShuffleIcon
                             title="Enable shuffle"
-                            className={`icon shuffle-icon ${
-                                isShuffled ? "icon-green" : "icon-gray"
-                            }`}
+                            className={`icon shuffle-icon ${isShuffled ? "icon-green" : "icon-gray"
+                                }`}
                         />
                     </button>
-                    <button className="icon">
+                    <button onClick={onPrevSong} className="icon">
                         <PrevIcon title="Previous" className="icon prev-icon" />
                     </button>
                     <button
@@ -154,7 +163,7 @@ export function AppFooter() {
                         )}
                     </button>
 
-                    <button className="icon">
+                    <button onClick={onNextSong} className="icon">
                         <NextIcon title="Next" className="icon next-icon" />
                     </button>
                     <button className="icon">
@@ -216,12 +225,12 @@ export function AppFooter() {
                         onChange={handleVolumeChange}
                     />
                     <div className="volume-bar">
-                    <div
-                        className="volume-bar-progress"
-                        style={{
-                            width: `${volume * 100}%`,
-                        }}></div>
-                        </div>
+                        <div
+                            className="volume-bar-progress"
+                            style={{
+                                width: `${volume * 100}%`,
+                            }}></div>
+                    </div>
                 </div>
             </div>
         </footer>

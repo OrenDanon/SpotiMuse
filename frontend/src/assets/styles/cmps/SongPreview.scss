@@ -1,0 +1,21 @@
+.song-preview {
+    img {
+        width: 40px;
+        height: 40px;
+        margin-right: 14.4px;
+    }
+
+    td {
+        height: 54.4px;
+        align-items: center;
+
+        p {
+            margin: 0px;
+            color: white;
+        }
+
+        span {
+            font-size: 14px;
+        }
+    }
+}

@@ -10,6 +10,7 @@ import { SideNavbar } from './cmps/side-navbar'
 import { MainView } from './cmps/main-view'
 import { FooterNav } from './cmps/footer-nav'
 import { StationDetails } from './pages/station-details'
+import { SearchPage } from './pages/search-page'
 
 export function RootCmp() {
 
@@ -17,9 +18,11 @@ export function RootCmp() {
         <div className='main-layout'>
             <SideNavbar />
             <main className='main-view'>
+                <AppHeader />
                 {/* <MainView/> */}
                 <Routes>
                     {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
+                    <Route path="search" element={<SearchPage />} />
                     <Route path="station/:id" element={<StationDetails />} />
                 </Routes>
                 <FooterNav />

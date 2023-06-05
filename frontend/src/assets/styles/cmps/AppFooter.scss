@@ -2,6 +2,7 @@
     position: sticky;
     bottom: 0;
     display: flex;
+    margin: auto;
     justify-content: center;
     background-color: #000000;
     align-items: center;
@@ -15,7 +16,7 @@
         align-items: center;
         justify-content: flex-start;
         padding: 0.5em;
-        width: 30%;
+        
 
         .image-container {
             flex-shrink: 0;
@@ -24,7 +25,7 @@
             justify-content: flex-start;
             width: 4em;
             height: 4em;
-            margin-inline-end: 5%;
+            margin-inline-end: 10%;
 
             img {
                 width: 100%;
@@ -34,53 +35,24 @@
             }
         }
         .song-description {
-            display: flex;
-            flex-direction: column;
-            max-width: calc(100% - 4em - 5%);
             p {
                 margin: 0.2em;
             }
         }
 
-        // .artist
-        .title {
+        .title,
+        .artist {
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
-            position: relative;
             overflow: hidden;
-            animation: marquee 20s linear infinite;
             &:hover {
                 text-decoration: underline;
                 cursor: pointer;
-                animation: none;
             }
         }
         .artist {
             color: #999;
-        }
-    }
-
-    .title {
-        position: relative;
-        width: 200%;
-        &:before {
-            content: attr(title);
-            position: absolute;
-            width: 100%;
-            white-space: nowrap;
-        }
-    }
-
-    @keyframes marquee {
-        0% {
-            text-indent: -100%;
-        }
-        // 50% {
-        //     text-indent: -100%;
-        // }
-        100% {
-            text-indent: 100%;
         }
     }
 
@@ -90,8 +62,8 @@
         font-size: 0.9em;
         justify-content: center;
         flex-direction: column;
-        margin-inline-start: 256px;
-        margin-inline-end: 303px;
+        margin-inline-start: 25em;
+        margin-inline-end: 25em;
         align-items: center;
         color: #999;
 
@@ -99,10 +71,8 @@
             display: flex;
             align-items: center;
             margin-block-end: 1.2em;
-            margin-inline-end: 2em;
             gap: 2.2em;
             .play-pause-icon {
-                margin-inline-start: 1em;
                 width: 32px;
                 height: 32px;
                 display: flex;
