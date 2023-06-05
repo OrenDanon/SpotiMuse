@@ -17,7 +17,6 @@ export function RootCmp() {
         <div className='main-layout'>
             <SideNavbar />
             <main className='main-view'>
-                <AppHeader />
                 {/* <MainView/> */}
                 <Routes>
                     {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
