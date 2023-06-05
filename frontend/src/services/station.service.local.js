@@ -86,14 +86,14 @@ function getSong() {
     title: '2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD',
     url: 'mwgZalAFNhM',
     imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
-    addedAt: 162926765262
+    addedAt: Date.now()
   }
 }
 
 function getEmptyStation() {
   return {
     name: 'My Playlist',
-    imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+    imgUrl: 'https://i.ytimg.com/vi/LjxulQ1bEWg/maxresdefault.jpg',
     tags: [
       'Funk',
       'Happy'
@@ -129,14 +129,14 @@ var stations =[ {
         "title": "2Pac - Changes ft. Talent",
         "url": "eXvBjCO19QY",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-        "addedAt": 162521765262
+        "addedAt": 1559755062000
       },
       {
         "id": "aBcDEf1",
         "title": "2Pac - All Eyez On Me",
         "url": "H1HdZFgR-aA",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-        "addedAt": 162769765262
+        "addedAt": 1591377462000
 
     },
     {
@@ -144,7 +144,7 @@ var stations =[ {
       "title": "2Pac - Ghetto Gospel",
       "url": "Do5MMmEygsY",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162854765262
+      "addedAt": 1591377462000
 
     },
     {
@@ -152,7 +152,7 @@ var stations =[ {
       "title": "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
       "url": "mwgZalAFNhM",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162926765262
+      "addedAt": 1654449462000
 
     },
     {
@@ -160,7 +160,7 @@ var stations =[ {
       "title": "2Pac - Dear Mama",
       "url": "Mb1ZvUDvLDY",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162845765262
+      "addedAt": 1683307062000
 
       },
     ],
@@ -192,14 +192,14 @@ var stations =[ {
         "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
         "url": "_CL6n0FJZpk",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-        "addedAt": 162792765262
+        "addedAt": 1559755062000
       },
       {
         "id": "aBcDEf6",
         "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
         "url": "_Rks2oCRS88",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-        "addedAt": 162841765262
+        "addedAt": 1591377462000
 
     },
     {
@@ -207,7 +207,7 @@ var stations =[ {
       "title": "Snoop Dogg - Who Am I (What's My Name)?",
       "url": "2soGJXQAQec",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162981265262
+      "addedAt": 1591377462000
 
     },
     {
