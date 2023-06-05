@@ -18,6 +18,8 @@
 @import "views/ReviewIndex";
 @import "views/UserDetails";
 @import "views/StationIndex";
+@import "views/StationDetails";
+@import "views/SearchPage";
 
 // Components
 @import "cmps/AppHeader";
@@ -26,9 +28,10 @@
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
 @import "cmps/ShoppingCart";
-@import "cmps/StationDetails";
 @import "cmps/StationPreview";
 @import "cmps/StationList";
+@import "cmps/SongList";
+@import "cmps/SongPreview";
 
 
 
