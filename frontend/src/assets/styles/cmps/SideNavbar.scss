@@ -49,6 +49,7 @@
     gap: $layout-padding;
     height: 100%;
     padding: 0px;
+    font-family: CircularStd-Title-Bold;
 
     .navigation {
         border-radius: $layout-padding;
@@ -81,6 +82,9 @@
                 fill: #fff;
                 transition: 0.2s;
                 // transition: all ease 0.2s;
+            }
+            a:active{
+                color: #fff
             }
         }
     }
