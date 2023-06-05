@@ -237,7 +237,7 @@ var stations =[ {
   },
   {
     "_id": "5cksxjas89xjsa8xjsa8j9o0m",
-    "name": "Beyonce",
+    "name": "Omer Adam",
     "tags": [
       "Funk",
       "Happy"

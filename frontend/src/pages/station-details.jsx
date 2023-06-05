@@ -31,7 +31,7 @@ export function StationDetails() {
                     <div className="details">
                         <h1>{station.name}</h1>
                         <p>Artists</p>
-                        <p>{`${station.songs.length}, songs`}</p>
+                        <p>{`${station.songs.length} ${'\u2022'} songs`}</p>
                     </div>
                 </section>
                     <section className="mid-section">
