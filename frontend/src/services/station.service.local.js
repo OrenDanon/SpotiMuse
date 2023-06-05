@@ -12,14 +12,10 @@ export const stationService = {
   remove,
   getEmptyStation,
   addStationMsg,
-  getDefaultSong,
+  getSong,
   addSong,
   removeSong,
-  getNextSong,
-  getPrevSong,
-  getGenreList,
-  dataTransform,
-  getDefaultSongById
+  getSongById
 }
 window.cs = stationService
 
@@ -39,7 +35,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
 function getById(stationId) {
   return storageService.get(STORAGE_KEY, stationId)
 }
-function getDefaultSongById(station, songId) {
+function getSongById(station, songId) {
   return station.songs.filter(song => song.id === songId)
 }
 
@@ -59,13 +55,13 @@ async function save(station) {
   }
   return savedStation
 }
-async function addSong(station) {
-  const newSong = stationService.getDefaultSong()
+async function addSong(station){
+  const newSong = stationService.getSong()
   station.songs.push(newSong)
   return await save(station)
 }
-async function removeSong(station, songId) {
-  station.songs.splice(songId, 1)
+async function removeSong(station,songId){
+  station.songs.splice(songId,1)
   return await save(station)
 }
 
@@ -84,45 +80,7 @@ async function addStationMsg(stationId, txt) {
 
   return msg
 }
-function getNextSong(station, song) {
-  const idx = station.songs.findIndex(nextSong => nextSong.id === song.id)
-  return station.songs[idx + 1]
-}
-function getPrevSong(station, song) {
-  const idx = station.songs.findIndex(prevSong => prevSong.id === song.id)
-  return station.songs[idx - 1]
-}
-function dataTransform(response){
-  const station = {}
-  const songs=[]
-  response.map(res=>{
-    const song = {
-      id: utilService.makeId(),
-      title: res.snippet.title,
-      url: res.id.videoId,
-      imgUrl: res.snippet.thumbnails.default.url,
-      addedAt: ''
-    }
-    songs.push(song)
-  })
-  station.songs = songs
-  return station
-}
-function getGenreList() {
-  return [
-    'Pop',
-    'Hip-Hop',
-    'Rock',
-    'Latin',
-    'R&B',
-    'Metal',
-    'Punk',
-    'Country',
-    'K-pop'
-  ]
-}
-
-function getDefaultSong() {
+function getSong() {
   return {
     id: utilService.makeId(),
     title: '2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD',
@@ -151,34 +109,34 @@ function getEmptyStation() {
   }
 }
 
-var stations = [{
-  "_id": "5cksxjas89xjsa8xjsa8jxs09",
-  "name": "2Pac",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl": "https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
-  },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf0",
-      "title": "2Pac - Changes ft. Talent",
-      "url": "eXvBjCO19QY",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 162521765262
+var stations =[ {
+    "_id": "5cksxjas89xjsa8xjsa8jxs09",
+    "name": "2Pac",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl":"https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    {
-      "id": "aBcDEf1",
-      "title": "2Pac - All Eyez On Me",
-      "url": "H1HdZFgR-aA",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162769765262
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf0",
+        "title": "2Pac - Changes ft. Talent",
+        "url": "eXvBjCO19QY",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 162521765262
+      },
+      {
+        "id": "aBcDEf1",
+        "title": "2Pac - All Eyez On Me",
+        "url": "H1HdZFgR-aA",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 162769765262
 
     },
     {
@@ -204,44 +162,44 @@ var stations = [{
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
       "addedAt": 162845765262
 
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa124sa8jt6g",
-  "name": "Snoop Dogg",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl": "https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
   },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf5",
-      "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
-      "url": "_CL6n0FJZpk",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 162792765262
+  {
+    "_id": "5cksxjas89xjsa124sa8jt6g",
+    "name": "Snoop Dogg",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl":"https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    {
-      "id": "aBcDEf6",
-      "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
-      "url": "_Rks2oCRS88",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162841765262
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf5",
+        "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
+        "url": "_CL6n0FJZpk",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 162792765262
+      },
+      {
+        "id": "aBcDEf6",
+        "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
+        "url": "_Rks2oCRS88",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 162841765262
 
     },
     {
@@ -267,44 +225,44 @@ var stations = [{
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
       "addedAt": 162841765262
 
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa8xjsa8j9o0m",
-  "name": "Beyonce",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl": "https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/6a/24/87/6a24871e-87b8-815d-cc15-0a1b341917c0/mzl.gfsvgwov.jpg/375x375bb.jpg",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
   },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf8",
-      "title": "Beyoncé - Love On Top (Official Video)",
-      "url": "Ob7vObnFUJc",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 162888765262
+  {
+    "_id": "5cksxjas89xjsa8xjsa8j9o0m",
+    "name": "Omer Adam",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl":"https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/6a/24/87/6a24871e-87b8-815d-cc15-0a1b341917c0/mzl.gfsvgwov.jpg/375x375bb.jpg",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    {
-      "id": "aBcDEf9",
-      "title": "Beyoncé - AMERICA HAS A PROBLEM (Feat. Kendrick Lamar) - (Official Lyric Video)",
-      "url": "Q0E4wVF2a4k",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162439765262
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf8",
+        "title": "Beyoncé - Love On Top (Official Video)",
+        "url": "Ob7vObnFUJc",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 162888765262
+      },
+      {
+        "id": "aBcDEf9",
+        "title": "Beyoncé - AMERICA HAS A PROBLEM (Feat. Kendrick Lamar) - (Official Lyric Video)",
+        "url": "Q0E4wVF2a4k",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 162439765262
 
     },
     {
@@ -330,44 +288,44 @@ var stations = [{
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
       "addedAt": 162521765262
 
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa8xjsa8nvc43",
-  "name": "Wiz khalifa",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl": "https://www.rap-up.com/wp-content/uploads/2011/01/wiz-smoke1.jpg",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
   },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf13",
-      "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundsong",
-      "url": "RgKAFK5djSk",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 162249765262
+  {
+    "_id": "5cksxjas89xjsa8xjsa8nvc43",
+    "name": "Wiz khalifa",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl":"https://www.rap-up.com/wp-content/uploads/2011/01/wiz-smoke1.jpg",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    {
-      "id": "aBcDEf14",
-      "title": "Wiz Khalifa - What Would I Do [Official Music Video]",
-      "url": "C4yYiXuUqyM",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162972365262
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf13",
+        "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundsong",
+        "url": "RgKAFK5djSk",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 162249765262
+      },
+      {
+        "id": "aBcDEf14",
+        "title": "Wiz Khalifa - What Would I Do [Official Music Video]",
+        "url": "C4yYiXuUqyM",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 162972365262
 
     },
     {
@@ -393,44 +351,44 @@ var stations = [{
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
       "addedAt": 162521765262
 
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa8xjsa8jx6tc",
-  "name": "Bruno Mars",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl": "https://images.sk-static.com/images/media/profile_images/artists/941964/huge_avatar",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
   },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf18",
-      "title": "Bruno Mars - The Lazy Song (Official Music Video)",
-      "url": "fLexgOxsZu0",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 162437865262
+  {
+    "_id": "5cksxjas89xjsa8xjsa8jx6tc",
+    "name": "Bruno Mars",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl":"https://images.sk-static.com/images/media/profile_images/artists/941964/huge_avatar",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    {
-      "id": "aBcDEf19",
-      "title": "Bruno Mars - Grenade (Official Music Video)",
-      "url": "SR6iYWJxHqs",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 162887765262
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf18",
+        "title": "Bruno Mars - The Lazy Song (Official Music Video)",
+        "url": "fLexgOxsZu0",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 162437865262
+      },
+      {
+        "id": "aBcDEf19",
+        "title": "Bruno Mars - Grenade (Official Music Video)",
+        "url": "SR6iYWJxHqs",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 162887765262
 
     },
     {
@@ -539,9 +497,5 @@ if (!userStations) {
   utilService.saveToStorage('userdb', userStations)
 }
 
-  var cache = utilService.loadFromStorage('cache')
-  if (!cache) {
-    cache = {
-    }
-    utilService.saveToStorage('cache', cache)
-  }
+
+
