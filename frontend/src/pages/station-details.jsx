@@ -106,10 +106,10 @@ export function StationDetails() {
         //     </div>
 
         <div className="station-details">
+            <AppHeader />
             {station._id ? (
                 <>
                     <section className="top-section flex column">
-                        <AppHeader />
                         <div className="flex">
                             <img src={`${station.imgUrl}`} alt="" />
                             <div className="details">
@@ -180,7 +180,7 @@ export function StationDetails() {
                                 )}
                             </div>
                             {/* <div className="edit-modal"> */}
-                                {isEditModalShown && <EditModal />}
+                            {isEditModalShown && <EditModal />}
                             {/* </div> */}
                             <button className="icon" onClick={onAddSong}>
                                 Add song
