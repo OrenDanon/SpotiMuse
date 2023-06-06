@@ -1,10 +1,14 @@
 .main-view-footer {
     margin-block-start: 40px;
-    font-size: 14px;
+    font-size: 16px;
 
     a {
         color: rgb(167, 167, 167);
         font-weight: 400;
+        margin-block-start: 18px;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     nav {
