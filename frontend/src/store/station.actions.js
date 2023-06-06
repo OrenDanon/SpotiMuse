@@ -2,7 +2,7 @@ import { stationService } from "../services/station.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { SET_STATION, SET_SONG, SET_ISPLAYING, SET_STATIONS } from "./station.reducer.js";
+import { SET_STATION, SET_SONG, SET_ISPLAYING, SET_STATIONS,SET_IS_EDIT_MODAL_SHOWN } from "./station.reducer.js";
 import { SET_SCORE } from "./user.reducer.js";
 
 // Action Creators:
@@ -42,6 +42,14 @@ export async function loadStations() {
         console.log('Cannot load stations')
     }
   }
+export function updateIsEditModalShown(isEditModalShown) {
+    return {
+        type: SET_IS_EDIT_MODAL_SHOWN,
+        isEditModalShown
+    }
+}
+
+
 
 export async function loadStation(stationId){
     try{

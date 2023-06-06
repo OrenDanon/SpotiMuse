@@ -17,15 +17,17 @@ export function StationIndex() {
 console.log(stations);
   return (
     <>
-    {stations[0] ? 
-    <div className="station-index">
-            <AppHeader />
-      <h2>Spotify Playlists</h2>
-      <StationList stations={stations} />
-      <h2>Recently played</h2>
-      <StationList stations={stations} />
-      <h2>Popular Playlists</h2>
-      <StationList stations={stations} />
+    {stations[0] ?   
+    <div className='main-home-page'>
+      <AppHeader />
+      <div className="station-index">
+        <h2>Spotify Playlists</h2>
+        <StationList stations={stations} />
+        <h2>Recently played</h2>
+        <StationList stations={stations} />
+        <h2>Popular Playlists</h2>
+        <StationList stations={stations} />
+      </div>
     </div>
     : <p>Loading...</p>   }
     </>

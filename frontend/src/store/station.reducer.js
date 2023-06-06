@@ -3,12 +3,15 @@ export const SET_STATION = 'SET_STATION'
 export const SET_STATIONS = 'SET_STATIONS'
 export const SET_ISPLAYING = 'SET_ISPLAYING'
 
+export const SET_IS_EDIT_MODAL_SHOWN = 'SET_IS_EDIT_MODAL_SHOWN'
+
 
 const initialState = {
     stations:[],
     station: {},
     song: {},
-    isPlaying: false
+    isPlaying: false,
+    isEditModalShown: false,
 }
 
 export function stationReducer(state = initialState, action) {
@@ -26,6 +29,8 @@ export function stationReducer(state = initialState, action) {
         case SET_ISPLAYING:
             newState = { ...state, isPlaying: action.isPlaying }
             break
+            case SET_IS_EDIT_MODAL_SHOWN:
+                newState = { ...state, isEditModalShown: action.isEditModalShown }
         default:
     }
     return newState
