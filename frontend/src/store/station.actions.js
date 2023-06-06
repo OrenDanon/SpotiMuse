@@ -41,7 +41,7 @@ export async function loadStation(stationId){
 
 export async function loadSong(station,songId){
     try{
-    const song = await stationService.getSongById(station,songId)
+    const song = await stationService.getDefaultSongById(station,songId)
     store.dispatch({
         type: SET_SONG,
         station

@@ -1,14 +1,13 @@
 .header {
     display: flex;
     justify-content: space-between;
-    background-color: inherit;
+    background-color: #101010;
     padding: 14px 25px;
     height: 64px;
     border-radius: $layout-padding;
     margin: 0px -24px;
     position: sticky;
     top: 0;
-    
 
     .header-butoons {
         align-items: center;
@@ -35,8 +34,7 @@
     }
 
     .header-user {
-        margin-right: 7px;
-        margin-top: 2px;
+
         button {
             fill: #7a7a7a;
             cursor: not-allowed;
@@ -47,9 +45,6 @@
             background-color: #090909;
             justify-content: center;
             align-items: center;
-            .user-btn{
-                padding: 0px 0px 2px;
-            }
         }
 
 

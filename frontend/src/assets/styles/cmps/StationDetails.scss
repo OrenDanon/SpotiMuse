@@ -1,63 +1,39 @@
 .station-details {
-    .list-section {
-        background: linear-gradient(to top,
-                black,
-                black,
-                rgb(40, 15, 15),
-                rgb(54, 20, 20),
-            );
-        }
-        
-        .top-section {
-        background: linear-gradient(to top,
-                rgb(75, 28, 28),
-                rgb(117 45 45),
-            );
-        height: 340px;
+
+    .top-section {
+        height: 276px;
         display: inline-flex;
-        padding: 0px 24px;
         padding-bottom: 24px;
-        width: 100%;
-        // background-color: rgb(117 45 45);
-        border-top-left-radius: 6px;
-        border-top-Right-radius: 6px;
-        justify-content: space-between;
 
         img {
             height: 192px;
             width: 192px;
             align-self: end;
             margin-inline-end: 24px;
-            box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
-            object-fit: cover;
+            box-shadow: 0 4px 60px rgba(0, 0, 0, .5)
         }
 
         .details {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            color: white;
 
             h1 {
-                font-size: 48px;
-                margin-block-end: 19px;
-                margin-block-start: 25px;            }
+                font-size: 6rem;
+                margin-block-end: 12px
+            }
 
             p {
                 margin: 0;
                 font-size: rem(14px);
-                margin-block-end: 3px;
-                font-family: 'CircularStd-Bold';
-                span{
-                    margin: 0px 4px;
-                }
+                margin-block-start: $layout-padding;
             }
         }
     }
 
     .mid-section {
         display: flex;
-        padding: 24px 24px;
+        padding: 24px 0px;
 
         .play-btn {
             background-color: #1ed760;
@@ -86,55 +62,40 @@
             }
         }
     }
-
+    
     .bottom-section {
         .song-list {
-            padding: 0px 24px;
             table {
                 width: 100%;
                 border-collapse: collapse;
                 font-family: CircularStd-Book;
-                .flex {
-                    font-size: 14px;
-                }
-                .song-title {
-                    font-size: 16px;
-                }
                 .icon {
                     fill: #b3b3b3;
                 }
-
                 tr {
                     padding: 0px 16px;
                     border-radius: 6px;
-
-                    &:hover {
-                        background-color: hsla(0, 0%, 100%, .1);
-
-                        .hidden {
+                    &:hover{
+                        background-color:hsla(0,0%,100%,.1);
+                        .hidden{
                             opacity: 1;
                         }
-
-                        .song-idx {
+                        .song-idx{
                             display: none;
                         }
-
-                        .play {
+                        .play{
                             display: flex;
                         }
                     }
                 }
-
-                .like {
+                .like{
                     width: 100%;
                     padding: 7px 0px 0px 5px;
                 }
-
-                .time {
+                .time{
                     margin-right: 21px;
                 }
-
-                .right-section {
+                .right-section{
                     padding-top: 5px;
                 }
             }
@@ -143,11 +104,13 @@
                 height: 36px;
                 border-bottom: solid #4f4d4d 1px;
                 border-radius: 0px;
-                
+                font-size: 14px;
+
                 td:last-child {
                     margin-right: 36px;
                     justify-self: end;
                 }
+
             }
 
             tr:nth-child(2) {
@@ -162,23 +125,14 @@
                 td {
                     white-space: nowrap;
                     overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-                    text-overflow: ellipsis;
-                }
+                    text-overflow: ellipsis;                }
             }
 
             .song-preview {
-                .song-idx {
-                    font-family: monospace;
-                }
-
-                padding: 5px;
                 img {
                     width: 40px;
                     height: 40px;
                     margin-right: 14.4px;
-                    object-fit: cover;
                 }
 
                 td {
@@ -197,3 +151,4 @@
             }
         }
     }
+}

@@ -12,10 +12,14 @@ export const stationService = {
   remove,
   getEmptyStation,
   addStationMsg,
-  getSong,
+  getDefaultSong,
   addSong,
   removeSong,
-  getSongById
+  getNextSong,
+  getPrevSong,
+  getGenreList,
+  dataTransform,
+  getDefaultSongById
 }
 window.cs = stationService
 
@@ -35,7 +39,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
 function getById(stationId) {
   return storageService.get(STORAGE_KEY, stationId)
 }
-function getSongById(station, songId) {
+function getDefaultSongById(station, songId) {
   return station.songs.filter(song => song.id === songId)
 }
 
@@ -55,13 +59,13 @@ async function save(station) {
   }
   return savedStation
 }
-async function addSong(station){
-  const newSong = stationService.getSong()
+async function addSong(station) {
+  const newSong = stationService.getDefaultSong()
   station.songs.push(newSong)
   return await save(station)
 }
-async function removeSong(station,songId){
-  station.songs.splice(songId,1)
+async function removeSong(station, songId) {
+  station.songs.splice(songId, 1)
   return await save(station)
 }
 
@@ -80,20 +84,58 @@ async function addStationMsg(stationId, txt) {
 
   return msg
 }
-function getSong() {
+function getNextSong(station, song) {
+  const idx = station.songs.findIndex(nextSong => nextSong.id === song.id)
+  return station.songs[idx + 1]
+}
+function getPrevSong(station, song) {
+  const idx = station.songs.findIndex(prevSong => prevSong.id === song.id)
+  return station.songs[idx - 1]
+}
+function dataTransform(response){
+  const station = {}
+  const songs=[]
+  response.map(res=>{
+    const song = {
+      id: utilService.makeId(),
+      title: res.snippet.title,
+      url: res.id.videoId,
+      imgUrl: res.snippet.thumbnails.default.url,
+      addedAt: ''
+    }
+    songs.push(song)
+  })
+  station.songs = songs
+  return station
+}
+function getGenreList() {
+  return [
+    'Pop',
+    'Hip-Hop',
+    'Rock',
+    'Latin',
+    'R&B',
+    'Metal',
+    'Punk',
+    'Country',
+    'K-pop'
+  ]
+}
+
+function getDefaultSong() {
   return {
     id: utilService.makeId(),
     title: '2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD',
     url: 'mwgZalAFNhM',
     imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
-    addedAt: Date.now()
+    addedAt: 162926765262
   }
 }
 
 function getEmptyStation() {
   return {
     name: 'My Playlist',
-    imgUrl: 'https://i.ytimg.com/vi/LjxulQ1bEWg/maxresdefault.jpg',
+    imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
     tags: [
       'Funk',
       'Happy'
@@ -109,34 +151,34 @@ function getEmptyStation() {
   }
 }
 
-var stations =[ {
-    "_id": "5cksxjas89xjsa8xjsa8jxs09",
-    "name": "2Pac",
-    "tags": [
-      "Funk",
-      "Happy"
-    ],
-    "imgUrl":"https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
-    "createdBy": {
-      "_id": "u101",
-      "fullname": "Puki Ben David",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+var stations = [{
+  "_id": "5cksxjas89xjsa8xjsa8jxs09",
+  "name": "2Pac",
+  "tags": [
+    "Funk",
+    "Happy"
+  ],
+  "imgUrl": "https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
+  "createdBy": {
+    "_id": "u101",
+    "fullname": "Puki Ben David",
+    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+  },
+  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+  "songs": [
+    {
+      "id": "aBcDEf0",
+      "title": "2Pac - Changes ft. Talent",
+      "url": "eXvBjCO19QY",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+      "addedAt": 162521765262
     },
-    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-    "songs": [
-      {
-        "id": "aBcDEf0",
-        "title": "2Pac - Changes ft. Talent",
-        "url": "eXvBjCO19QY",
-        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-        "addedAt": 1559755062000
-      },
-      {
-        "id": "aBcDEf1",
-        "title": "2Pac - All Eyez On Me",
-        "url": "H1HdZFgR-aA",
-        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-        "addedAt": 1591377462000
+    {
+      "id": "aBcDEf1",
+      "title": "2Pac - All Eyez On Me",
+      "url": "H1HdZFgR-aA",
+      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+      "addedAt": 162769765262
 
     },
     {
@@ -144,7 +186,7 @@ var stations =[ {
       "title": "2Pac - Ghetto Gospel",
       "url": "Do5MMmEygsY",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1591377462000
+      "addedAt": 162854765262
 
     },
     {
@@ -152,7 +194,7 @@ var stations =[ {
       "title": "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
       "url": "mwgZalAFNhM",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1654449462000
+      "addedAt": 162926765262
 
     },
     {
@@ -160,46 +202,46 @@ var stations =[ {
       "title": "2Pac - Dear Mama",
       "url": "Mb1ZvUDvLDY",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1683307062000
+      "addedAt": 162845765262
 
-      },
-    ],
-    "msgs": [
-      {
-        id: 'm101',
-        from: '{mini-user}',
-        txt: 'Manish?'
-      }
-    ]
-  },
-  {
-    "_id": "5cksxjas89xjsa124sa8jt6g",
-    "name": "Snoop Dogg",
-    "tags": [
-      "Funk",
-      "Happy"
-    ],
-    "imgUrl":"https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
-    "createdBy": {
-      "_id": "u101",
-      "fullname": "Puki Ben David",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-    "songs": [
-      {
-        "id": "aBcDEf5",
-        "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
-        "url": "_CL6n0FJZpk",
-        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-        "addedAt": 1559755062000
-      },
-      {
-        "id": "aBcDEf6",
-        "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
-        "url": "_Rks2oCRS88",
-        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-        "addedAt": 1591377462000
+  ],
+  "msgs": [
+    {
+      id: 'm101',
+      from: '{mini-user}',
+      txt: 'Manish?'
+    }
+  ]
+},
+{
+  "_id": "5cksxjas89xjsa124sa8jt6g",
+  "name": "Snoop Dogg",
+  "tags": [
+    "Funk",
+    "Happy"
+  ],
+  "imgUrl": "https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
+  "createdBy": {
+    "_id": "u101",
+    "fullname": "Puki Ben David",
+    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+  },
+  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+  "songs": [
+    {
+      "id": "aBcDEf5",
+      "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
+      "url": "_CL6n0FJZpk",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+      "addedAt": 162792765262
+    },
+    {
+      "id": "aBcDEf6",
+      "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
+      "url": "_Rks2oCRS88",
+      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+      "addedAt": 162841765262
 
     },
     {
@@ -207,7 +249,7 @@ var stations =[ {
       "title": "Snoop Dogg - Who Am I (What's My Name)?",
       "url": "2soGJXQAQec",
       "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1591377462000
+      "addedAt": 162981265262
 
     },
     {
@@ -497,5 +539,9 @@ if (!userStations) {
   utilService.saveToStorage('userdb', userStations)
 }
 
-
-
+  var cache = utilService.loadFromStorage('cache')
+  if (!cache) {
+    cache = {
+    }
+    utilService.saveToStorage('cache', cache)
+  }
