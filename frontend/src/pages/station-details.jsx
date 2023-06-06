@@ -89,12 +89,12 @@ export function StationDetails() {
 
 
         <div className="station-details">
+            <AppHeader />
             {station._id ?
                 (
                     <>
 
                         <section className="top-section flex column">
-                            <AppHeader />
                             <div className='flex'>
                                 <img src={`${station.imgUrl}`} alt="" />
                                 <div className="details">
