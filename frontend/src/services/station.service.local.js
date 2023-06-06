@@ -19,7 +19,7 @@ export const stationService = {
   getPrevSong,
   getGenreList,
   dataTransform,
-  getDefaultSongById
+  getSongById
 }
 window.cs = stationService
 
@@ -39,7 +39,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
 function getById(stationId) {
   return storageService.get(STORAGE_KEY, stationId)
 }
-function getDefaultSongById(station, songId) {
+function getSongById(station, songId) {
   return station.songs.filter(song => song.id === songId)
 }
 
@@ -51,11 +51,11 @@ async function remove(stationId) {
 async function save(station) {
   var savedStation
   if (station._id) {
-    savedStation = await storageService.put('userdb', station)
+    savedStation = await storageService.put(STORAGE_KEY, station)
   } else {
     // Later, owner is set by the backend
     // station.owner = userService.getLoggedinUser()
-    savedStation = await storageService.post('userdb', station)
+    savedStation = await storageService.post(STORAGE_KEY, station)
   }
   return savedStation
 }
@@ -92,10 +92,10 @@ function getPrevSong(station, song) {
   const idx = station.songs.findIndex(prevSong => prevSong.id === song.id)
   return station.songs[idx - 1]
 }
-function dataTransform(response){
+function dataTransform(response) {
   const station = {}
-  const songs=[]
-  response.map(res=>{
+  const songs = []
+  response.map(res => {
     const song = {
       id: utilService.makeId(),
       title: res.snippet.title,
@@ -150,325 +150,327 @@ function getEmptyStation() {
     msgs: []
   }
 }
-
-var stations =[ {
-  "_id": "5cksxjas89xjsa8xjsa8jxs09",
-  "name": "2Pac",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl":"https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
-  },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf0",
-      "title": "2Pac - Changes ft. Talent",
-      "url": "eXvBjCO19QY",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 1559755062000
+var stations = utilService.loadFromStorage(STORAGE_KEY)
+if (!stations) {
+  stations = [{
+    "_id": "5cksxjas89xjsa8xjsa8jxs09",
+    "name": "2Pac",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl": "https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-    {
-      "id": "aBcDEf1",
-      "title": "2Pac - All Eyez On Me",
-      "url": "H1HdZFgR-aA",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1591377462000
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf0",
+        "title": "2Pac - Changes ft. Talent",
+        "url": "eXvBjCO19QY",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 1559755062000
+      },
+      {
+        "id": "aBcDEf1",
+        "title": "2Pac - All Eyez On Me",
+        "url": "H1HdZFgR-aA",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
 
+      },
+      {
+        "id": "aBcDEf2",
+        "title": "2Pac - Ghetto Gospel",
+        "url": "Do5MMmEygsY",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
+
+      },
+      {
+        "id": "aBcDEf3",
+        "title": "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
+        "url": "mwgZalAFNhM",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1654449462000
+
+      },
+      {
+        "id": "aBcDEf4",
+        "title": "2Pac - Dear Mama",
+        "url": "Mb1ZvUDvLDY",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1683307062000
+
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
   },
   {
-    "id": "aBcDEf2",
-    "title": "2Pac - Ghetto Gospel",
-    "url": "Do5MMmEygsY",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1591377462000
-
-  },
-  {
-    "id": "aBcDEf3",
-    "title": "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
-    "url": "mwgZalAFNhM",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1654449462000
-
-  },
-  {
-    "id": "aBcDEf4",
-    "title": "2Pac - Dear Mama",
-    "url": "Mb1ZvUDvLDY",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1683307062000
-
+    "_id": "5cksxjas89xjsa124sa8jt6g",
+    "name": "Snoop Dogg",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl": "https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
     },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf5",
+        "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
+        "url": "_CL6n0FJZpk",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 1559755062000
+      },
+      {
+        "id": "aBcDEf6",
+        "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
+        "url": "_Rks2oCRS88",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
+
+      },
+      {
+        "id": "aBcDEf6",
+        "title": "Snoop Dogg - Who Am I (What's My Name)?",
+        "url": "2soGJXQAQec",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
+
+      },
+      {
+        "id": "aBcDEf7",
+        "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
+        "url": "Wa5B22KAkEk",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1654449462000
+
+      },
+      {
+        "id": "aBcDEf7",
+        "title": "Snoop Dogg - Drop It Like It's Hot (Official Music Video) ft. Pharrell Williams",
+        "url": "GtUVQei3nX4",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1683307062000
+
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
+  },
+  {
+    "_id": "5cksxjas89xjsa8xjsa8j9o0m",
+    "name": "Omer Adam",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl": "https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/6a/24/87/6a24871e-87b8-815d-cc15-0a1b341917c0/mzl.gfsvgwov.jpg/375x375bb.jpg",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+    },
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf8",
+        "title": "Beyoncé - Love On Top (Official Video)",
+        "url": "Ob7vObnFUJc",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 1559755062000
+      },
+      {
+        "id": "aBcDEf9",
+        "title": "Beyoncé - AMERICA HAS A PROBLEM (Feat. Kendrick Lamar) - (Official Lyric Video)",
+        "url": "Q0E4wVF2a4k",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
+
+      },
+      {
+        "id": "aBcDEf10",
+        "title": "Beyoncé - If I Were A Boy",
+        "url": "AWpsOqh8q0M",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1654449462000
+
+      },
+      {
+        "id": "aBcDEf11",
+        "title": "Beyoncé - Run the World (Girls) (Official Video)",
+        "url": "VBmMU_iwe6U",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1683307062000
+
+      },
+      {
+        "id": "aBcDEf12",
+        "title": "Beyoncé - Irreplaceable",
+        "url": "2EwViQxSJJQ",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1683307062000
+
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
+  },
+  {
+    "_id": "5cksxjas89xjsa8xjsa8nvc43",
+    "name": "Wiz khalifa",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl": "https://www.rap-up.com/wp-content/uploads/2011/01/wiz-smoke1.jpg",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+    },
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf13",
+        "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundsong",
+        "url": "RgKAFK5djSk",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 1557076662000
+      },
+      {
+        "id": "aBcDEf14",
+        "title": "Wiz Khalifa - What Would I Do [Official Music Video]",
+        "url": "C4yYiXuUqyM",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1559755062000
+
+      },
+      {
+        "id": "aBcDEf15",
+        "title": "Wiz Khalifa - Why Not Not Why [Official Music Video]",
+        "url": "MOk-_wCJbcM",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
+
+      },
+      {
+        "id": "aBcDEf16",
+        "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
+        "url": "Wa5B22KAkEk",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1654449462000
+
+      },
+      {
+        "id": "aBcDEf17",
+        "title": "Wiz Khalifa - No Sleep [Music Video]",
+        "url": "KuVAeTHqijk",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1683307062000
+
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
+  },
+  {
+    "_id": "5cksxjas89xjsa8xjsa8jx6tc",
+    "name": "Bruno Mars",
+    "tags": [
+      "Funk",
+      "Happy"
+    ],
+    "imgUrl": "https://images.sk-static.com/images/media/profile_images/artists/941964/huge_avatar",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
+    },
+    "likedByUsers": ['{minimal-user}', '{minimal-user}'],
+    "songs": [
+      {
+        "id": "aBcDEf18",
+        "title": "Bruno Mars - The Lazy Song (Official Music Video)",
+        "url": "fLexgOxsZu0",
+        "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        "addedAt": 1557076662000
+      },
+      {
+        "id": "aBcDEf19",
+        "title": "Bruno Mars - Grenade (Official Music Video)",
+        "url": "SR6iYWJxHqs",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1559755062000
+
+      },
+      {
+        "id": "aBcDEf20",
+        "title": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
+        "url": "OPf0YbXqDm0",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1591377462000
+
+      },
+      {
+        "id": "aBcDEf21",
+        "title": "Bruno Mars - Just The Way You Are (Official Music Video)",
+        "url": "LjhCEhWiKXk",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1654449462000
+
+      },
+      {
+        "id": "aBcDEf22",
+        "title": "Travie McCoy: Billionaire ft. Bruno Mars [OFFICIAL VIDEO]",
+        "url": "8aRor905cCw",
+        "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        "addedAt": 1683307062000
+
+      },
+    ],
+    "msgs": [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?'
+      }
+    ]
+  },
   ]
-},
-{
-  "_id": "5cksxjas89xjsa124sa8jt6g",
-  "name": "Snoop Dogg",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl":"https://e0.pxfuel.com/wallpapers/187/357/desktop-wallpaper-snoop-dogg-for-widescreen-pc-full-thumbnail.jpg",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
-  },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf5",
-      "title": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
-      "url": "_CL6n0FJZpk",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 1559755062000
-    },
-    {
-      "id": "aBcDEf6",
-      "title": "Snoop Dogg, Eminem, Dr. Dre - Back In The Game ft. DMX, Eve, Jadakiss, Ice Cube, Method Man, The Lox",
-      "url": "_Rks2oCRS88",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1591377462000
 
-  },
-  {
-    "id": "aBcDEf6",
-    "title": "Snoop Dogg - Who Am I (What's My Name)?",
-    "url": "2soGJXQAQec",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1591377462000
-
-  },
-  {
-    "id": "aBcDEf7",
-    "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
-    "url": "Wa5B22KAkEk",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1654449462000
-
-  },
-  {
-    "id": "aBcDEf7",
-    "title": "Snoop Dogg - Drop It Like It's Hot (Official Music Video) ft. Pharrell Williams",
-    "url": "GtUVQei3nX4",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1683307062000
-
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa8xjsa8j9o0m",
-  "name": "Omer Adam",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl":"https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/6a/24/87/6a24871e-87b8-815d-cc15-0a1b341917c0/mzl.gfsvgwov.jpg/375x375bb.jpg",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
-  },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf8",
-      "title": "Beyoncé - Love On Top (Official Video)",
-      "url": "Ob7vObnFUJc",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 1559755062000
-    },
-    {
-      "id": "aBcDEf9",
-      "title": "Beyoncé - AMERICA HAS A PROBLEM (Feat. Kendrick Lamar) - (Official Lyric Video)",
-      "url": "Q0E4wVF2a4k",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1591377462000
-
-  },
-  {
-    "id": "aBcDEf10",
-    "title": "Beyoncé - If I Were A Boy",
-    "url": "AWpsOqh8q0M",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1654449462000
-
-  },
-  {
-    "id": "aBcDEf11",
-    "title": "Beyoncé - Run the World (Girls) (Official Video)",
-    "url": "VBmMU_iwe6U",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1683307062000
-
-  },
-  {
-    "id": "aBcDEf12",
-    "title": "Beyoncé - Irreplaceable",
-    "url": "2EwViQxSJJQ",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1683307062000
-
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa8xjsa8nvc43",
-  "name": "Wiz khalifa",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl":"https://www.rap-up.com/wp-content/uploads/2011/01/wiz-smoke1.jpg",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
-  },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf13",
-      "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundsong",
-      "url": "RgKAFK5djSk",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 1557076662000
-    },
-    {
-      "id": "aBcDEf14",
-      "title": "Wiz Khalifa - What Would I Do [Official Music Video]",
-      "url": "C4yYiXuUqyM",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1559755062000
-
-  },
-  {
-    "id": "aBcDEf15",
-    "title": "Wiz Khalifa - Why Not Not Why [Official Music Video]",
-    "url": "MOk-_wCJbcM",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1591377462000
-
-  },
-  {
-    "id": "aBcDEf16",
-    "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
-    "url": "Wa5B22KAkEk",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1654449462000
-
-  },
-  {
-    "id": "aBcDEf17",
-    "title": "Wiz Khalifa - No Sleep [Music Video]",
-    "url": "KuVAeTHqijk",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1683307062000
-
-    },
-  ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
-},
-{
-  "_id": "5cksxjas89xjsa8xjsa8jx6tc",
-  "name": "Bruno Mars",
-  "tags": [
-    "Funk",
-    "Happy"
-  ],
-  "imgUrl":"https://images.sk-static.com/images/media/profile_images/artists/941964/huge_avatar",
-  "createdBy": {
-    "_id": "u101",
-    "fullname": "Puki Ben David",
-    "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg"
-  },
-  "likedByUsers": ['{minimal-user}', '{minimal-user}'],
-  "songs": [
-    {
-      "id": "aBcDEf18",
-      "title": "Bruno Mars - The Lazy Song (Official Music Video)",
-      "url": "fLexgOxsZu0",
-      "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
-      "addedAt": 1557076662000
-    },
-    {
-      "id": "aBcDEf19",
-      "title": "Bruno Mars - Grenade (Official Music Video)",
-      "url": "SR6iYWJxHqs",
-      "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-      "addedAt": 1559755062000
-
-  },
-  {
-    "id": "aBcDEf20",
-    "title": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
-    "url": "OPf0YbXqDm0",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1591377462000
-
-  },
-  {
-    "id": "aBcDEf21",
-    "title": "Bruno Mars - Just The Way You Are (Official Music Video)",
-    "url": "LjhCEhWiKXk",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1654449462000
-
-  },
-  {
-    "id": "aBcDEf22",
-    "title": "Travie McCoy: Billionaire ft. Bruno Mars [OFFICIAL VIDEO]",
-    "url": "8aRor905cCw",
-    "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-    "addedAt": 1683307062000
-
-  },
-],
-"msgs": [
-  {
-    id: 'm101',
-    from: '{mini-user}',
-    txt: 'Manish?'
-  }
-]
-},
-]
-
-utilService.saveToStorage(STORAGE_KEY, stations)
+  utilService.saveToStorage(STORAGE_KEY, stations)
+}
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 var userStations = utilService.loadFromStorage('userdb')
@@ -539,9 +541,9 @@ if (!userStations) {
   utilService.saveToStorage('userdb', userStations)
 }
 
-  var cache = utilService.loadFromStorage('cache')
-  if (!cache) {
-    cache = {
-    }
-    utilService.saveToStorage('cache', cache)
+var cache = utilService.loadFromStorage('cache')
+if (!cache) {
+  cache = {
   }
+  utilService.saveToStorage('cache', cache)
+}

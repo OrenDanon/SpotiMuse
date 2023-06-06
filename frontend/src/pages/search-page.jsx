@@ -41,7 +41,7 @@ export function SearchPage() {
     }
     return (
         <div className="search-page">
-            <form action="">
+            <form onSubmit={(ev)=>ev.preventDefault()} action="">
                 <input onChange={debouncedFetchData} type="search" name="" id="" />
             </form>
             {data.songs ?

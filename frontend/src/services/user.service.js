@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
+import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -13,7 +14,8 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
+    changeScore,
+    save
 }
 
 window.userService = userService
@@ -24,6 +26,10 @@ function getUsers() {
     // return httpService.get(`user`)
 }
 
+async function save(user){
+    const savedUser = await storageService.put('user', user)
+    return savedUser
+}
 
 
 async function getById(userId) {
@@ -57,8 +63,13 @@ async function login(userCred) {
     }
 }
 async function signup(userCred) {
-    userCred.score = 10000
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+    userCred.stations = [{
+        _id: utilService.makeId(),
+        name: 'Liked Song',
+        imgUrl: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
+        songs: []
+    }]
     const user = await storageService.post('user', userCred)
     // const user = await httpService.post('auth/signup', userCred)
     return saveLocalUser(user)
@@ -78,7 +89,7 @@ async function changeScore(by) {
 
 
 function saveLocalUser(user) {
-    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score}
+    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, stations: user.stations}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

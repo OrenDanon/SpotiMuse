@@ -2,7 +2,7 @@ import { stationService } from "../services/station.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { SET_STATION, SET_SONG, SET_ISPLAYING } from "./station.reducer.js";
+import { SET_STATION, SET_SONG, SET_ISPLAYING, SET_STATIONS } from "./station.reducer.js";
 import { SET_SCORE } from "./user.reducer.js";
 
 // Action Creators:
@@ -18,6 +18,12 @@ export function updateCurrentStation(station) {
         station
     }
 }
+export function updateStations(stations) {
+    return {
+        type: SET_STATIONS,
+        stations
+    }
+}
 export function updateIsPlaying(isPlaying) {
     return {
         type: SET_ISPLAYING,
@@ -25,7 +31,17 @@ export function updateIsPlaying(isPlaying) {
     }
 }
 
-
+export async function loadStations() {
+    try {
+      const stations = await stationService.query()
+      store.dispatch({
+        type: SET_STATIONS,
+        stations
+      })
+    } catch (error) {
+        console.log('Cannot load stations')
+    }
+  }
 
 export async function loadStation(stationId){
     try{
@@ -41,7 +57,7 @@ export async function loadStation(stationId){
 
 export async function loadSong(station,songId){
     try{
-    const song = await stationService.getDefaultSongById(station,songId)
+    const song = await stationService.getSongById(station,songId)
     store.dispatch({
         type: SET_SONG,
         station

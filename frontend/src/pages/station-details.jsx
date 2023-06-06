@@ -60,16 +60,23 @@
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stationService } from '../services/station.service.local.js'
-import { updateCurrentStation, updateIsPlaying } from '../store/station.actions.js'
+import { loadStation, updateCurrentStation, updateIsPlaying } from '../store/station.actions.js'
 import { store } from '../store/store.js'
 import { SongList } from '../cmps/song-list.jsx'
 import { useSelector } from 'react-redux'
 import { AppHeader } from '../cmps/app-header.jsx'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 export function StationDetails() {
     const station = useSelector(storeState => storeState.stationModule.station)
     const song = useSelector(storeState => storeState.stationModule.song)
     const isPlaying = useSelector(storeState => storeState.stationModule.isPlaying)
+    const params = useParams()
+
+    useEffect(()=>{
+        loadStation(params.id)
+    },[])
 
     function handlePlayClick() {
         if (!song.id) return

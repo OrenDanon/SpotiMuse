@@ -5,26 +5,47 @@ import { UserStationList } from './user-station-list';
 import { stationService } from '../services/station.service.local';
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { store } from '../store/store';
-import { updateCurrentStation } from '../store/station.actions';
+import { updateCurrentStation, updateStations } from '../store/station.actions';
 import { useSelector } from 'react-redux';
+import { userService } from '../services/user.service';
+import { storageService } from '../services/async-storage.service';
+import { SET_USER  } from '../store/user.reducer';
+import { loadUser } from '../store/user.actions';
 
 export function SideNavbar() {
-    const [userStations, setUserStations] = useState(utilService.loadFromStorage('userdb'))
     const station = useSelector(storeState => storeState.stationModule.station)
+    // const stations = useSelector(
+    //     (storeState) => storeState.stationModule.stations
+    // )
+    const user = useSelector(
+        (storeState) => storeState.userModule.user
+    )
 
     async function onAddStation() {
         const newStation = stationService.getEmptyStation()
         try {
             const savedStation = await stationService.save(newStation)
-            setUserStations(prevUserStations => [...prevUserStations, savedStation]);
             store.dispatch(updateCurrentStation(savedStation))
+            const miniStation = {
+                _id: savedStation._id,
+                imgUrl: savedStation.imgUrl,
+                name: savedStation.name
+            }
+            
+            user.stations.push(miniStation)
+            user = await userService.save(user)
+            store.dispatch({
+                type: SET_USER,
+                user
+            })
+        
             showSuccessMsg(`Station added (id: ${savedStation._id})`)
         } catch (err) {
             showErrorMsg('Cannot add station')
         }
     }
-
-
+    
+ 
     return (
         <div className="side-navbar flex column ">
             <section className="side-navbar-main flex column">
@@ -65,8 +86,12 @@ export function SideNavbar() {
                                 </ul>
                             </header>
                             <div>
-                                <UserStationList
-                                    userStations={userStations} />
+                                {user ?
+                                    <UserStationList
+                                        userStations={user.stations} />
+                                    :
+                                    'Loading...'
+                                }
                             </div>
                         </div>
                     </div>
