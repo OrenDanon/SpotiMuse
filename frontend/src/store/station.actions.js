@@ -2,7 +2,7 @@ import { stationService } from "../services/station.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { SET_STATION, SET_SONG, SET_ISPLAYING } from "./station.reducer.js";
+import { SET_STATION, SET_SONG, SET_ISPLAYING, SET_IS_EDIT_MODAL_SHOWN } from "./station.reducer.js";
 import { SET_SCORE } from "./user.reducer.js";
 
 // Action Creators:
@@ -22,6 +22,13 @@ export function updateIsPlaying(isPlaying) {
     return {
         type: SET_ISPLAYING,
         isPlaying
+    }
+}
+
+export function updateIsEditModalShown(isEditModalShown) {
+    return {
+        type: SET_IS_EDIT_MODAL_SHOWN,
+        isEditModalShown
     }
 }
 
