@@ -4,6 +4,7 @@ import { loadCars, addCar, updateCar, removeCar, addToCart } from '../store/stat
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { StationList } from '../cmps/station-list.jsx'
+import { AppHeader } from '../cmps/app-header.jsx'
 
 export function StationIndex() {
   const [stations, setStations] = useState([])
@@ -24,6 +25,7 @@ export function StationIndex() {
 
   return (
     <div className="station-index">
+            <AppHeader />
       <h2>Spotify Playlists</h2>
       <StationList stations={stations} />
       <h2>Recently played</h2>
