@@ -63,13 +63,13 @@ export function SideNavbar() {
                                         ? "active-route"
                                         : ""
                                 }>
-                                <span className="icon">
+                                {/* <span className="icon"> */}
                                     {location.pathname === "/" ? (
-                                        <ActiveHomeIcon />
+                                        <ActiveHomeIcon className="icon" />
                                     ) : (
-                                        <HomeIcon />
+                                        <HomeIcon className="icon" />
                                     )}
-                                </span>
+                                {/* </span> */}
                                 <span className="">Home</span>
                             </NavLink>
                         </li>
@@ -81,13 +81,12 @@ export function SideNavbar() {
                                         ? "active-route"
                                         : ""
                                 }>
-                                <span className="icon">
                                     {location.pathname === "/search" ? (
-                                        <ActiveSearchIcon />
+                                        <ActiveSearchIcon className="icon"/>
                                     ) : (
-                                        <SearchIcon />
+                                        <SearchIcon className="icon"/>
                                     )}
-                                </span>
+                                
                                 <span className="search">Search</span>
                             </NavLink>
                         </li>
