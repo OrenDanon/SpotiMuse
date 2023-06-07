@@ -32,14 +32,6 @@ export function stationReducer(state = initialState, action) {
         case SET_IS_EDIT_MODAL_SHOWN:
             newState = { ...state, isEditModalShown: action.isEditModalShown }
             break
-        // case UPDATE_STATION_IN_STATIONS:
-        //     newState = {
-        //         stations: state.stations.map((station) =>
-        //             station._id === action.updatedStation._id
-        //                 ? action.updatedStation
-        //                 : station
-        //         )
-        //     }
         default:
     }
     return newState

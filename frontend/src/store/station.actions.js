@@ -59,13 +59,6 @@ export async function loadStations() {
         console.log('Cannot load stations')
     }
   }
-export function updateIsEditModalShown(isEditModalShown) {
-    return {
-        type: SET_IS_EDIT_MODAL_SHOWN,
-        isEditModalShown
-    }
-}
-
 
 
 export async function loadStation(stationId){

@@ -50,28 +50,43 @@ export function SideNavbar() {
         }
     }
 
-
     return (
         <div className="side-navbar flex column ">
             <section className="side-navbar-main flex column">
                 <div className="navigation">
                     <ul>
                         <li>
-                            <NavLink to="/"
-                            className={location.pathname === "/" ? "active-route" : ""}
-                            >
+                            <NavLink
+                                to="/"
+                                className={
+                                    location.pathname === "/"
+                                        ? "active-route"
+                                        : ""
+                                }>
                                 <span className="icon">
-
-                                {location.pathname === "/" ? <ActiveHomeIcon /> : <HomeIcon />}
+                                    {location.pathname === "/" ? (
+                                        <ActiveHomeIcon />
+                                    ) : (
+                                        <HomeIcon />
+                                    )}
                                 </span>
                                 <span className="">Home</span>
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={`/search`}
-                            className={location.pathname === "/" ? "active-route" : ""}>
+                            <NavLink
+                                to={`/search`}
+                                className={
+                                    location.pathname === "/"
+                                        ? "active-route"
+                                        : ""
+                                }>
                                 <span className="icon">
-                                {location.pathname === "/search" ? <ActiveSearchIcon /> : <SearchIcon />}
+                                    {location.pathname === "/search" ? (
+                                        <ActiveSearchIcon />
+                                    ) : (
+                                        <SearchIcon />
+                                    )}
                                 </span>
                                 <span className="search">Search</span>
                             </NavLink>
@@ -124,7 +139,7 @@ export function SideNavbar() {
                                 </ul>
                             </header>
                             <div>
-                                {user?.stations?.length ?
+                                {user?.stations?.length ? (
                                     <UserStationList
                                         userStations={user.stations}
                                     />
