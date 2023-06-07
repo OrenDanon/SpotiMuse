@@ -58,7 +58,7 @@
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { stationService } from "../services/station.service.local.js"
-import { loadStations,
+import { loadStation, loadStations,
     updateCurrentStation,
     updateIsPlaying,
 } from "../store/station.actions.js"
@@ -87,7 +87,7 @@ export function StationDetails() {
     const params = useParams()
 
     useEffect(()=>{
-        loadStations(params.id)
+        loadStation(params.id)
     },[])
 
     function handlePlayClick() {
