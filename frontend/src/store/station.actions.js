@@ -53,13 +53,19 @@ export function updateIsEditModalShown(isEditModalShown) {
 
 export async function loadStation(stationId){
     try{
-    const station = await stationService.getById(stationId)
+        console.log('userId',stationId);
+        let station = await stationService.getById(stationId)
+    if (!station?._id){
+        const userId = userService.getLoggedinUser()._id
+        const user = await userService.getById(userId)
+        station = user.stations[0]
+    }
     store.dispatch({
         type: SET_STATION,
         station
     })
-    }catch{
-        console.log('Cannot load station')
+    }catch(err){
+        console.error('Cannot load station',err)
     }
 }
 

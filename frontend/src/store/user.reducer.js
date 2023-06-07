@@ -12,7 +12,7 @@ export const SET_SCORE = 'SET_SCORE'
 
 
 const initialState = {
-    user: userService.getLoggedinUser(),
+    user: {},
     users: [],
     watchedUser : null
 }

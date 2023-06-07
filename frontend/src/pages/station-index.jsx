@@ -5,6 +5,9 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { StationList } from '../cmps/station-list.jsx'
 import { AppHeader } from '../cmps/app-header.jsx'
+import { userService } from '../services/user.service.js'
+import { store } from '../store/store.js'
+import { SET_USER } from '../store/user.reducer.js'
 
 export function StationIndex() {
     const stations = useSelector(
@@ -14,7 +17,7 @@ export function StationIndex() {
     loadStations()
   }, [])
 
-console.log(stations);
+
   return (
     <>
     {stations[0] ?   
