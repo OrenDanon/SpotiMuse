@@ -124,7 +124,7 @@ export function SideNavbar() {
                                 </ul>
                             </header>
                             <div>
-                                {user ? (
+                                {user?.stations?.length ?
                                     <UserStationList
                                         userStations={user.stations}
                                     />

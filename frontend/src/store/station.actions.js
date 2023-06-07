@@ -59,6 +59,32 @@ export async function loadStations() {
         console.log('Cannot load stations')
     }
   }
+export function updateIsEditModalShown(isEditModalShown) {
+    return {
+        type: SET_IS_EDIT_MODAL_SHOWN,
+        isEditModalShown
+    }
+}
+
+
+
+export async function loadStation(stationId){
+    try{
+        console.log('userId',stationId);
+        let station = await stationService.getById(stationId)
+    if (!station?._id){
+        const userId = userService.getLoggedinUser()._id
+        const user = await userService.getById(userId)
+        station = user.stations[0]
+    }
+    store.dispatch({
+        type: SET_STATION,
+        station
+    })
+    }catch(err){
+        console.error('Cannot load station',err)
+    }
+}
 
 export async function loadSong(station,songId){
     try{

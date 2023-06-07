@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Routes, Route } from "react-router"
 
 import routes from "./routes"
@@ -11,8 +11,24 @@ import { MainView } from "./cmps/main-view"
 import { FooterNav } from "./cmps/footer-nav"
 import { StationDetails } from "./pages/station-details"
 import { SearchPage } from "./pages/search-page"
+import { userService } from "./services/user.service"
+import { SET_USER } from "./store/user.reducer"
+import { store } from "./store/store"
 
 export function RootCmp() {
+
+    async function setInitialUser() {
+        const userId = userService.getLoggedinUser()._id
+        if (!userId) return
+        const user = await userService.getById(userId)
+        store.dispatch({ type: SET_USER, user })
+    }
+
+    useEffect(()=>{
+        setInitialUser()
+    },[])
+
+
     return (
         <div className="main-layout">
             <SideNavbar />
