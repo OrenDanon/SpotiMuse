@@ -1,0 +1,109 @@
+.edit-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+
+    .edit-modal-content {
+        background: #282828;
+        width: 524px;
+        padding: 20px;
+        border-radius: 8px;
+        left: -1%;
+        color: #fff;
+        position: relative;
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h1 {
+                margin-block-end: 15px;
+            }
+
+            .close-modal {
+                background: none;
+                border: none;
+                svg {
+                    fill: #fff;
+                }
+            }
+        }
+
+        .edit-station-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-inline-end: 40px;
+
+            .edit-image-container {
+                flex: 1;
+                width: 180px;
+                height: 180px;
+                img {
+                    margin-block-start: 58px;
+                    margin-inline-start: 20px;
+                    width: 180px;
+                    height: 200px;
+                    object-fit: cover;
+                }
+            }
+
+            .edit-station-form {
+                flex: 0;
+                width: 100%;
+                form {
+                    display: flex;
+                    flex-direction: column;
+
+                    .edit-input-label {
+                        margin-block-start: 15px;
+                        margin-block-end: 5px;
+                    }
+
+                    .edit-name-input,
+                    textarea {
+                        background: #333;
+                        border: none;
+                        border-radius: 3px;
+                        color: #fff;
+                        padding: 10px;
+                    }
+
+                    textarea {
+                        background-color: #333;
+                        padding: 10px;
+                        color: #fff;
+                        border-radius: 3px;
+                        border: none;
+                        resize: none;
+                        max-height: 100px;
+                        max-width: 200px;
+                    }
+
+                    input[type="submit"] {
+                        background-color: #1db954;
+                        color: #fff;
+                        border: none;
+                        border-radius: 50px;
+                        padding: 10px;
+                        margin-block-start: 20px;
+                        cursor: pointer;
+                        transition: background-color 0.2s;
+
+                        &:hover {
+                            background-color: #1ed760;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

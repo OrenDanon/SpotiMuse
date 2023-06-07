@@ -2,7 +2,7 @@ import { stationService } from "../services/station.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { SET_STATION, SET_SONG, SET_ISPLAYING, SET_STATIONS,SET_IS_EDIT_MODAL_SHOWN } from "./station.reducer.js";
+import { SET_STATION,SET_STATIONS, SET_SONG, SET_ISPLAYING, SET_IS_EDIT_MODAL_SHOWN, UPDATE_STATION_IN_STATIONS} from "./station.reducer.js";
 import { SET_SCORE } from "./user.reducer.js";
 
 // Action Creators:
@@ -18,18 +18,35 @@ export function updateCurrentStation(station) {
         station
     }
 }
-export function updateStations(stations) {
-    return {
-        type: SET_STATIONS,
-        stations
-    }
-}
+
 export function updateIsPlaying(isPlaying) {
     return {
         type: SET_ISPLAYING,
         isPlaying
     }
 }
+
+export function updateIsEditModalShown(isEditModalShown) {
+    return {
+        type: SET_IS_EDIT_MODAL_SHOWN,
+        isEditModalShown
+    }
+}
+
+export function updateStationInStations(updatedStation) {
+    return {
+        type: UPDATE_STATION_IN_STATIONS,
+        updatedStation
+    }
+}
+
+export function updateStations(stations) {
+    return {
+        type: SET_STATIONS,
+        stations
+    }
+}
+
 
 export async function loadStations() {
     try {
@@ -42,30 +59,10 @@ export async function loadStations() {
         console.log('Cannot load stations')
     }
   }
-export function updateIsEditModalShown(isEditModalShown) {
-    return {
-        type: SET_IS_EDIT_MODAL_SHOWN,
-        isEditModalShown
-    }
-}
-
-
-
-export async function loadStation(stationId){
-    try{
-    const station = await stationService.getById(stationId)
-    store.dispatch({
-        type: SET_STATION,
-        station
-    })
-    }catch{
-        console.log('Cannot load station')
-    }
-}
 
 export async function loadSong(station,songId){
     try{
-    const song = await stationService.getSongById(station,songId)
+    const song = await stationService.getDefaultSongById(station,songId)
     store.dispatch({
         type: SET_SONG,
         station

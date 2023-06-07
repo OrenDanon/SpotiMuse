@@ -13,8 +13,8 @@ export function StationIndex() {
   useEffect(() => {
     loadStations()
   }, [])
-
-console.log(stations);
+  console.log(stations);
+  
   return (
     <>
     {stations[0] ?   
