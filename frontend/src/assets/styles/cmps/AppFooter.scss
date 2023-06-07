@@ -17,7 +17,13 @@
         align-items: center;
         justify-content: flex-start;
         padding: 0.5em;
+        width: 420px;
 
+        .song-like {
+
+            margin-left: 22px;
+
+        }
 
         .image-container {
             flex-shrink: 0;
@@ -26,7 +32,7 @@
             justify-content: flex-start;
             width: 4em;
             height: 4em;
-            margin-inline-end: 10%;
+            margin-inline-end: 4%;
 
             img {
                 width: 100%;
@@ -187,7 +193,7 @@
         display: flex;
         align-items: center;
         gap: 1em;
-        justify-content: space-between;
+        justify-content: end;
         width: 20%;
 
         .buttons-right {
@@ -196,15 +202,16 @@
         }
 
         .volume-indicator-container {
-            flex:0 1 125px;
+            flex: 0 1 125px;
             position: relative;
             display: flex;
             margin-right: 8px;
             align-items: center;
-            .volume-btn{
+
+            .volume-btn {
                 background-color: transparent;
                 border: none;
-                color: hsla(0,0%,100%,.7);
+                color: hsla(0, 0%, 100%, .7);
                 min-width: 32px;
                 width: 32px;
             }
@@ -217,7 +224,7 @@
             .rc-slider {
                 position: absolute;
                 z-index: -1;
-                top:1px;
+                top: 1px;
                 width: 72%;
 
                 &:hover {

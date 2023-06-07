@@ -1,7 +1,128 @@
-.search-page{
-    input{
-    position: fixed;
-    top: 3%;
-    left: 34%;
+.search-page {
+    padding: 0px 24px;
+    padding-top: 18px;
+    color: rgb(255, 255, 255);
+
+    h2 {
+        margin-bottom: 21px;
+    }
+
+    form {
+        position: fixed;
+        top: 10px;
+        left: 401px;
+        z-index: 1;
+        background-color: #242424;
+        fill: rgba(255, 255, 255, 0.698);
+        border: 0;
+        border-radius: 500px;
+        height: 47px;
+        padding: 6px 48px;
+        text-overflow: ellipsis;
+        width: 28.45%;
+        flex: 0 1 364px;
+        margin-top: 6px;
+
+        .icon{
+            margin-left: -128px;
+            margin-top: 10px;
+        }
+    }
+
+    input {
+        position: fixed;
+        top: 10px;
+        left: 401px;
+        z-index: -1;
+        background-color: #242424;
+        border: 0;
+        border-radius: 500px;
+        height: 47px;
+        padding: 6px 48px;
+        text-overflow: ellipsis;
+        width: 28.45%;
+        flex: 0 1 364px;
+        margin-top: 6px;
+
+        &::placeholder {
+            position: absolute;
+            top: 18px;
+            left: 35px;
+            font-size: 14px;
+          }
+          
+    }
+
+    .genres {
+        margin-top: 16px;
+    }
+
+    .genre-list {
+        grid-gap: 24px;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        padding: 0;
+
+        .genre-preview {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            display: block;
+            padding-bottom: 100%;
+            background-color: rgb(83, 122, 161);
+
+            img {
+                right: 0;
+                transform: rotate(25deg) translate(18%, -2%);
+                bottom: 0;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+                height: 100px;
+                position: absolute;
+                width: 100px;
+            }
+
+            span {
+                box-sizing: border-box;
+                margin-block: 0px;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: inherit;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                padding: 16px;
+                position: absolute;
+            }
+        }
+
+        .pop {
+            background-color: rgb(20, 138, 8);
+        }
+
+        .hip-hop {
+            background-color: rgb(188, 89, 0);
+        }
+
+        .rock {
+            background-color: rgb(233, 20, 41)
+        }
+
+        .latin {
+            background-color: rgb(225, 17, 140);
+        }
+
+        .metal {
+            background-color: rgb(233, 20, 41);
+        }
+
+        .punk {
+            background-color: rgb(186, 93, 7);
+        }
+
+        .k-pop {
+            background-color: rgb(119, 119, 119);
+        }
+
     }
 }

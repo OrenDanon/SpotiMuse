@@ -36,16 +36,40 @@
         background-color: $clr8;
         border-radius: $layout-padding;
         overflow: auto;
-        // padding: 0px 24px;
-        &:hover::-webkit-scrollbar-thumb{
+
+        &:hover::-webkit-scrollbar-thumb {
             opacity: 0.7;
             background-color: rgb(66, 76, 76);
         }
 
+        @include for-small-layout {
+            .station-list {
+                grid-template-columns: repeat(3,minmax(0,1fr));
+            }
+        }
         
+        @include for-narrow-layout {
+            .station-list {
+                grid-template-columns: repeat(4,minmax(0,1fr));
+            }
+        }
+        
+        @include for-normal-layout {
+            .station-list {
+                grid-template-columns: repeat(5,minmax(0,1fr));
+            }
+        }
+        
+        @include for-wide-layout {
+            .station-list {
+                grid-template-columns: repeat(6,minmax(0,1fr));    
+            }
+        }
+
     }
+
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 12px;
 }

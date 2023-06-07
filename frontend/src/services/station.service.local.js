@@ -110,15 +110,42 @@ function dataTransform(response) {
 }
 function getGenreList() {
   return [
-    'Pop',
-    'Hip-Hop',
-    'Rock',
-    'Latin',
-    'R&B',
-    'Metal',
-    'Punk',
-    'Country',
-    'K-pop'
+    {
+      title:"Pop",
+      img:"https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
+    },
+    {
+      title:"Hip-Hop",
+      img:"https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
+    },
+    {
+      title:"Rock",
+      img:"https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+    },
+    {
+      title:"Latin",
+      img:"https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
+    },
+    {
+      title:"R&B",
+      img:"https://i.scdn.co/image/ab67fb8200005cafbe6a6e705e1a71117c2d0c2c",
+    },
+    {
+      title:"Metal",
+      img:"https://i.scdn.co/image/ab67fb8200005cafefa737b67ec51ec989f5a51d",
+    },
+    {
+      title:"Punk",
+      img:"https://i.scdn.co/image/ab67fb8200005cafb2cdd7a95b0a5444aa15cfb5",
+    },
+    {
+      title:"Country",
+      img:"https://i.scdn.co/image/ab67fb8200005cafc0d2222b4c6441930e1a386e",
+    },
+    {
+      title:"K-pop",
+      img:"https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
+    },
   ]
 }
 

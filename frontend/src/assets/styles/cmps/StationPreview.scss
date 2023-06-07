@@ -20,13 +20,22 @@
         .icon-play {
             position: absolute;
             right: 10px;
-            top: -40px;
-            width: 36px;
-            height: 36px;
+            top: -53px;
+            width: 48px;
+            height: 48px;
             background-color: #1db954;
             border-radius: 100%;
             opacity: 0;
             transition: all ease 0.4s;
+
+            &:hover {
+                scale:1.04;
+            }
+            .play-icon{
+                width: 22px;
+                height: 20px;
+                margin-left: 2px;
+            }
         }
     }
 

@@ -5,7 +5,7 @@ export function SongList({ station }) {
         <div className="song-list">
             <table>
                 <tr className="grid-colums">
-                    <td className="flex">
+                    <td className="flex column">
                         #
                     </td>
                     <td className="song-title flex">

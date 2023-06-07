@@ -4,8 +4,8 @@ import { GenrePreview } from "./genre-preview"
 export function GenreList() {
     const genreList = stationService.getGenreList()
     return (
-        <div className="genre-list">
-            <ul>
+        <div >
+            <ul className="genre-list">
                 {genreList.map(genre =>
                     <GenrePreview
                         genre={genre}
