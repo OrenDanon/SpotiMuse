@@ -61,7 +61,7 @@ export function LoginSignup(props) {
                     onChange={handleChange}
                 >
                     <option value="">Select User</option>
-                    {users.map(user => <option key={user._id} value={user.username}>{user.fullname}</option>)}
+                    {users.map(user => <option key={user._id} value={user.username}>{user.username}</option>)}
                 </select>
                 {/* <input
                         type="text"

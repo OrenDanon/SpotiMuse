@@ -18,6 +18,10 @@ export function SearchPage() {
 
     async function fetchData(ev) {
         const songName = ev.target.value.toLowerCase()
+        if (songName === '') {
+            setData(prevData => ({ ...prevData, songs: [] }))
+            return
+          }
         const cache = utilService.loadFromStorage('cache')
         if (cache[songName]) setData(cache[songName])
         else {
@@ -27,7 +31,8 @@ export function SearchPage() {
                         part: 'snippet',
                         type: 'video',
                         key: YT_KEY,
-                        q: songName
+                        q: songName,
+                        maxResults: 8
                     }
                 });
                 const station = stationService.dataTransform(response.data.items)

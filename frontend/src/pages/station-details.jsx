@@ -58,7 +58,7 @@
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { stationService } from "../services/station.service.local.js"
-import { loadStation,
+import { loadStations,
     updateCurrentStation,
     updateIsPlaying,
 } from "../store/station.actions.js"
@@ -83,12 +83,11 @@ export function StationDetails() {
     const isEditModalShown = useSelector(
         (storeState) => storeState.stationModule.isEditModalShown
     )
-
     const [isDropdownShown, setIsDropdownShown] = useState(false)
     const params = useParams()
 
     useEffect(()=>{
-        loadStation(params.id)
+        loadStations(params.id)
     },[])
 
     function handlePlayClick() {
@@ -107,14 +106,14 @@ export function StationDetails() {
     function showDropdownModal() {
         setIsDropdownShown(!isDropdownShown)
     }
-
+    
     return (
         // <div className="top-station">
         //     </div>
 
         <div className="station-details">
             <AppHeader />
-            {station._id ? (
+            {station?._id ? (
                 <>
                     <section className="top-section flex column">
                         <div className="flex">
@@ -125,7 +124,7 @@ export function StationDetails() {
                                 <p>
                                     {" "}
                                     user123 <span>{`${"\u2022"}`}</span>
-                                    {`${station.songs.length} songs`}
+                                    {`${station.songs?.length} songs`}
                                 </p>
                             </div>
                         </div>
