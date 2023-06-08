@@ -26,6 +26,10 @@ export function SideNavbar() {
     const user = useSelector((storeState) => storeState.userModule.user)
     const location = useLocation()
 
+    useEffect(()=>{
+        loadUser()
+    },[])
+
     async function onAddStation() {
         const newStation = stationService.getEmptyStation()
         try {

@@ -58,7 +58,8 @@
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { stationService } from "../services/station.service.local.js"
-import { loadStation, loadStations,
+import {
+    loadStation, loadStations,
     updateCurrentStation,
     updateIsPlaying,
 } from "../store/station.actions.js"
@@ -71,12 +72,16 @@ import { DropdownModal } from "../cmps/dropdown-modal.jsx"
 import { EditModal } from "../cmps/edit-modal.jsx"
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { loadUser } from "../store/user.actions.js"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 
 export function StationDetails() {
     const station = useSelector(
         (storeState) => storeState.stationModule.station
     )
     const song = useSelector((storeState) => storeState.stationModule.song)
+    const user = useSelector((storeState) => storeState.userModule.user)
     const isPlaying = useSelector(
         (storeState) => storeState.stationModule.isPlaying
     )
@@ -86,9 +91,19 @@ export function StationDetails() {
     const [isDropdownShown, setIsDropdownShown] = useState(false)
     const params = useParams()
 
-    useEffect(()=>{
+    useEffect(() => {
         loadStation(params.id)
-    },[])
+        loadUser()
+    }, [])
+
+    // function reorder(list, startIndex, endIndex) {
+    //     const result = Array.from(list);
+    //     const [removed] = result.splice(startIndex, 1);
+    //     result.splice(endIndex, 0, removed);
+    //     return result;
+    //   };
+      
+    //   const grid = 8;
 
     function handlePlayClick() {
         if (!song.id) return
@@ -106,7 +121,10 @@ export function StationDetails() {
     function showDropdownModal() {
         setIsDropdownShown(!isDropdownShown)
     }
-    
+    function isLikedSongStation() {
+        return user?.stations[0]._id === station._id
+    }
+
     return (
         // <div className="top-station">
         //     </div>
@@ -123,7 +141,7 @@ export function StationDetails() {
                                 <h1>{station.name}</h1>
                                 <p>
                                     {" "}
-                                    user123 <span>{`${"\u2022"}`}</span>
+                                    {station.createdBy?.fullname} <span>{`${"\u2022"}`}</span>
                                     {`${station.songs?.length} songs`}
                                 </p>
                             </div>
@@ -162,29 +180,35 @@ export function StationDetails() {
                                     </svg>
                                 </button>
                             )}
-                            <div className="dropdown-container">
-                                <button
-                                    onClick={showDropdownModal}
-                                    className="btn-dropdown">
-                                    <svg
-                                        role="img"
-                                        height="32"
-                                        width="32"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                        data-encore-id="icon"
-                                        class="Svg-sc-ytk21e-0 ldgdZj">
-                                        <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                    </svg>
-                                </button>
-                                {isDropdownShown && (
-                                    <div className="dropdown-modal">
-                                        <DropdownModal
-                                            onClose={showDropdownModal}
-                                        />
-                                    </div>
-                                )}
-                            </div>
+                            {isLikedSongStation() ?
+                                <div></div>
+                                :
+
+                                <div className="dropdown-container">
+                                    <button
+                                        onClick={showDropdownModal}
+                                        className="btn-dropdown">
+                                        <svg
+                                            role="img"
+                                            height="32"
+                                            width="32"
+                                            aria-hidden="true"
+                                            viewBox="0 0 24 24"
+                                            data-encore-id="icon"
+                                            class="Svg-sc-ytk21e-0 ldgdZj">
+                                            <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+                                        </svg>
+                                    </button>
+                                    {isDropdownShown && (
+                                        <div className="dropdown-modal">
+                                            <DropdownModal
+                                                onClose={showDropdownModal}
+                                                station={station}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            }
                             {/* <div className="edit-modal"> */}
                             {isEditModalShown && <EditModal />}
                             {/* </div> */}
