@@ -19,7 +19,8 @@ export async function loadUsers() {
 }
 export async function loadUser() {
     try {
-        const user = await userService.getLoggedinUser()
+        const userId = userService.getLoggedinUser()._id
+        const user = await userService.getById(userId)
         store.dispatch({ type: SET_USER, user })
     } catch (err) {
         console.log('UserActions: err in loadUser', err)
