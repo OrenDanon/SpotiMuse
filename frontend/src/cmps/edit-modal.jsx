@@ -3,7 +3,7 @@ import { useState } from "react"
 import {
     updateIsEditModalShown,
     updateCurrentStation,
-    updateStations
+    updateStations,
 } from "../store/station.actions"
 import { store } from "../store/store"
 import { ReactComponent as CloseIcon } from "../assets/icons/close.svg"
@@ -35,8 +35,8 @@ export function EditModal() {
             name,
             description,
         }
-        
-        console.log('station', station);
+
+        console.log("station", station)
         stationService
             .save(updatedStation)
             .then((savedStation) => {
@@ -50,6 +50,10 @@ export function EditModal() {
             })
     }
 
+    function handleImageUpload (imgUrl){
+        console.log(imgUrl)
+    }
+
     return (
         <div className="edit-modal">
             <div className="edit-modal-content">
@@ -61,8 +65,16 @@ export function EditModal() {
                 </div>
                 <div className="edit-station-content">
                     <div className="edit-image-container">
-                        <img src={`${station.imgUrl}`} alt="station-img" />
-                        {/* <ImgUploader onUploaded={handleImageUpload} /> */}
+                        {/* <input
+                            id="file-uploader"
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            onChange={(ev) => onUploadImg(ev)}
+                        /> */}
+                        {/* <label htmlFor="file-uploader"> */}
+                            <img src={`${station.imgUrl}`} alt="station-img" />
+                        {/* </label> */}
+                        <ImgUploader onUploaded={handleImageUpload} />
                     </div>
                     <div className="edit-station-form">
                         <form action="">

@@ -21,7 +21,6 @@ import "rc-slider/assets/index.css"
 import { stationService } from "../services/station.service.local"
 import { userService } from "../services/user.service"
 import { SET_USER } from "../store/user.reducer"
-
 export function AppFooter() {
     const station = useSelector(
         (storeState) => storeState.stationModule.station
@@ -39,39 +38,31 @@ export function AppFooter() {
     const [isShuffled, setIsShuffled] = useState(false)
     const playerRef = useRef(null)
     const previousVolume = useRef(1)
-
     useEffect(() => {
         if (!isPlaying) return
-
         const timerId = setInterval(() => {
             setPlayedSeconds((prevSeconds) => prevSeconds + 1)
         }, 1000)
-
         return () => {
             clearInterval(timerId)
         }
     }, [isPlaying])
-
     function formatTime(seconds) {
         const mins = Math.floor(seconds / 60)
         const secs = Math.floor(seconds % 60)
         return `${mins}:${secs < 10 ? "0" : ""}${secs}`
     }
-
     function handlePlayClick() {
         if (!song.url) return
         store.dispatch(updateIsPlaying(!isPlaying))
     }
-
     function handleProgress({ playedSeconds, played }) {
         setPlayed(played)
         setPlayedSeconds(playedSeconds)
     }
-
     function handleDuration(duration) {
         setDuration(duration)
     }
-
     function handleSeekChange(value) {
         console.log(value)
         const newPlayedSeconds = value * duration
@@ -79,11 +70,9 @@ export function AppFooter() {
         playerRef.current.seekTo(newPlayedSeconds, "seconds")
         setPlayedSeconds(newPlayedSeconds)
     }
-
     function handleShuffleClick() {
         setIsShuffled((prevState) => !prevState)
     }
-
     function toggleMute() {
         if (volume === 0) {
             setMute(false)
@@ -94,7 +83,6 @@ export function AppFooter() {
             setVolume(0)
         }
     }
-
     function handleVolumeChange(volume) {
         console.log(volume)
         const newVolume = volume
@@ -131,10 +119,7 @@ export function AppFooter() {
             console.error('Can not save song',err);
         }
     }
-
     return (
-        
-        
         <footer className="app-footer">
             <div className="flex player">
             <ReactPlayer
@@ -149,7 +134,6 @@ export function AppFooter() {
                 onDuration={handleDuration}
                 style={{ position: "absolute", top: "-1000px" }}
             />
-
             <div className="song-info">
                 <div className="image-container">
                     <img src={`${song.imgUrl}`} alt="" />
@@ -176,7 +160,7 @@ export function AppFooter() {
                             <PrevIcon title="Previous" className="icon prev-icon" />
                         </button>
                     </div>
-                    <button 
+                    <button
                         onClick={handlePlayClick}
                         className=" flex play-pause-icon">
                         {isPlaying ? (
@@ -189,7 +173,6 @@ export function AppFooter() {
                         )}
                     </button>
                     <div className="flex player-controls-right">
-
                         <button onClick={onNextSong} className="icon">
                             <NextIcon title="Next" className="icon next-icon" />
                         </button>
@@ -203,7 +186,6 @@ export function AppFooter() {
                 </div>
                 <div className="progress-container">
                     <span>{formatTime(playedSeconds)}</span>
-
                     <div className="progress-indicator-container">
                         <Slider
                             min={0}
@@ -212,7 +194,6 @@ export function AppFooter() {
                             value={played}
                             onChange={handleSeekChange}
                         />
-
                         <div className="progress-bar">
                             <div
                                 className="progress"
@@ -232,7 +213,6 @@ export function AppFooter() {
                 </div>
                 <div className="volume-indicator-container flex">
                     <button onClick={toggleMute} className="icon flex volume-btn">
-                        
                         {(muted && (
                             <VolumeOffIcon className="icon volume-icon" />
                         )) ||
@@ -247,7 +227,6 @@ export function AppFooter() {
                             ))}
                     </button>
                     <div className="flex">
-
                     <Slider
                         min={0}
                         max={1}

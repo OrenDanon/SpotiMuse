@@ -76,11 +76,7 @@ export function SideNavbar() {
                         <li>
                             <NavLink
                                 to={`/search`}
-                                className={
-                                    location.pathname === "/"
-                                        ? "active-route"
-                                        : ""
-                                }>
+                              >
                                     {location.pathname === "/search" ? (
                                         <ActiveSearchIcon className="icon"/>
                                     ) : (
