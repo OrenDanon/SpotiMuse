@@ -58,11 +58,7 @@ export function SideNavbar() {
                         <li>
                             <NavLink
                                 to="/"
-                                className={
-                                    location.pathname === "/"
-                                        ? "active-route"
-                                        : ""
-                                }>
+                             >
                                 {/* <span className="icon"> */}
                                     {location.pathname === "/" ? (
                                         <ActiveHomeIcon className="icon" />
@@ -70,17 +66,13 @@ export function SideNavbar() {
                                         <HomeIcon className="icon" />
                                     )}
                                 {/* </span> */}
-                                <span className="">Home</span>
+                                <span className="home">Home</span>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
                                 to={`/search`}
-                                className={
-                                    location.pathname === "/"
-                                        ? "active-route"
-                                        : ""
-                                }>
+                               >
                                     {location.pathname === "/search" ? (
                                         <ActiveSearchIcon className="icon"/>
                                     ) : (

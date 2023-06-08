@@ -1,7 +1,14 @@
 .search-page {
     padding: 0px 24px;
-    padding-top: 18px;
     color: rgb(255, 255, 255);
+
+    .header{
+        padding: 0;
+        .header-user{
+            display: flex;
+            align-items: center;
+        }
+    }
 
     h2 {
         margin-bottom: 21px;
@@ -43,6 +50,7 @@
         width: 28.45%;
         flex: 0 1 364px;
         margin-top: 6px;
+        color: rgb(255, 255, 255);
 
         &::placeholder {
             position: absolute;
@@ -54,7 +62,7 @@
     }
 
     .genres {
-        margin-top: 16px;
+        margin-top: 34px;
     }
 
     .genre-list {

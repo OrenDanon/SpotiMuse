@@ -65,7 +65,7 @@ export function SongPreview({ song, idx }) {
                 </td>
             </div>
             <td className="song-title flex">
-                <div className="flex ">
+                <div className="flex align-center ">
                     <img src={`${song.imgUrl}`} alt="" />
                     <div className='flex column'>
                         <p>{song.title}</p>
