@@ -10,9 +10,11 @@ dayjs.extend(relativeTime)
 
 export function SongPreview({ song, idx }) {
     const station = useSelector(storeState => storeState.stationModule.station)
+    const stations = useSelector(storeState => storeState.stationModule.stations)
     let user = useSelector(storeState => storeState.userModule.user)
     const currSong = useSelector(storeState => storeState.stationModule.song)
     const isPlaying = useSelector(storeState => storeState.stationModule.isPlaying)
+
 
     function timeAgo(timestamp) {
         return dayjs(timestamp).fromNow()
@@ -34,6 +36,16 @@ export function SongPreview({ song, idx }) {
             console.log('Cannot add song');
         }
     }
+    async function onAddToStation() {
+        try {
+            const toStationId = 'vHDCO'
+            const toStation = await stationService.getById(toStationId)
+            toStation.songs.push(song)
+            stationService.save(toStation)
+        }catch(err){
+            console.log('Can not add song to playlist');
+        }
+    }
 
     async function onLike() {
         if (user.stations[0].songs.some(currSong => currSong.id === song.id)) {
@@ -41,13 +53,13 @@ export function SongPreview({ song, idx }) {
         } else user.stations[0].songs.push(song)
         try {
             user = await userService.save(user)
-            console.log('savedUser',user);
+            console.log('savedUser', user);
             store.dispatch({ type: SET_USER, user })
-            if (station._id===user.stations[0]._id){
-            store.dispatch(updateCurrentStation(user.stations[0]))
+            if (station._id === user.stations[0]._id) {
+                store.dispatch(updateCurrentStation(user.stations[0]))
             }
-        } catch(err) {
-            console.error('Can not save song',err);
+        } catch (err) {
+            console.error('Can not save song', err);
         }
     }
 
@@ -73,7 +85,7 @@ export function SongPreview({ song, idx }) {
                     </div>
                 </div>
             </td>
-            <td className="flex">
+            <td onClick={onAddToStation} className="flex">
                 Album
             </td>
             <td className="flex">

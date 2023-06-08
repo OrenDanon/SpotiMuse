@@ -13,18 +13,28 @@ import { Search } from '../cmps/search';
 export function SearchPage() {
     const YT_KEY = `AIzaSyCxLA7x-Komf911aGJmXufVVqBbn7MYavE`
     const [data, setData] = useState({});
+    const [term, setTerm] = useState('')
 
+
+
+    function handleChange(ev) {
+        const songName = ev.target.value.toLowerCase()
+        setTerm(songName)
+    }
 
     const debouncedFetchData = useDebouncedCallback(fetchData, 500)
+    useEffect(() => {
+        debouncedFetchData()
+    }, [term])
 
-    async function fetchData(ev) {
-        const songName = ev.target.value.toLowerCase()
-        if (songName === '') {
-            setData(prevData => ({ ...prevData, songs: [] }))
+    async function fetchData() {
+        if (term === '') {
+            setData({})
             return
         }
+    
         const cache = utilService.loadFromStorage('cache')
-        if (cache[songName]) setData(cache[songName])
+        if (cache[term]) setData(cache[term])
         else {
             try {
                 const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
@@ -32,13 +42,13 @@ export function SearchPage() {
                         part: 'snippet',
                         type: 'video',
                         key: YT_KEY,
-                        q: songName,
+                        q: term,
                         maxResults: 8
                     }
                 });
                 const station = stationService.dataTransform(response.data.items)
                 setData(station);
-                cache[songName] = station
+                cache[term] = station
                 utilService.saveToStorage('cache', cache)
 
             } catch (error) {

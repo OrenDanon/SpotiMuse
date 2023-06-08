@@ -168,9 +168,9 @@ function getEmptyStation() {
       'Happy'
     ],
     createdBy: {
-      _id: 'u101',
-      fullname: 'Puki Ben David',
-      imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg'
+      _id:   userService.getLoggedinUser()._id,
+      fullname: userService.getLoggedinUser().username,
+      imgUrl: userService.getLoggedinUser().imgUrl,
     },
     likedByUsers: [],
     songs: [],

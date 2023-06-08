@@ -15,6 +15,7 @@
     "fast-average-color": "^9.3.0",
     "rc-slider": "^10.2.0",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-player": "^2.12.0",
     "react-redux": "^8.0.5",
