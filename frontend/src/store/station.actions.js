@@ -2,7 +2,7 @@ import { stationService } from "../services/station.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { SET_STATION,SET_STATIONS, SET_SONG, SET_ISPLAYING, SET_IS_EDIT_MODAL_SHOWN, UPDATE_STATION_IN_STATIONS} from "./station.reducer.js";
+import { SET_STATION,SET_STATIONS, SET_SONG, SET_ISPLAYING, SET_IS_EDIT_MODAL_SHOWN, UPDATE_STATION_IN_STATIONS, SET_IS_DROPDOWN_MODAL_SHOWN, SET_OPEN_DROPDOWN_SONG_ID} from "./station.reducer.js";
 import { SET_SCORE } from "./user.reducer.js";
 
 // Action Creators:
@@ -33,6 +33,13 @@ export function updateIsEditModalShown(isEditModalShown) {
     }
 }
 
+export function updateIsDropdownModalShown(isDropdownModalShown) {
+    return {
+        type: SET_IS_DROPDOWN_MODAL_SHOWN,
+        isDropdownModalShown
+    }
+}
+
 export function updateStationInStations(updatedStation) {
     return {
         type: UPDATE_STATION_IN_STATIONS,
@@ -47,6 +54,12 @@ export function updateStations(stations) {
     }
 }
 
+export function updateOpenDropdownSongId(songId) {
+    return {
+        type: SET_OPEN_DROPDOWN_SONG_ID,
+        songId
+    }
+}
 
 export async function loadStations() {
     try {

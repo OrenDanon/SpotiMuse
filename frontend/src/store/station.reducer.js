@@ -4,6 +4,8 @@ export const SET_STATIONS = "SET_STATIONS"
 export const SET_ISPLAYING = "SET_ISPLAYING"
 export const UPDATE_STATION_IN_STATIONS = "UPDATE_STATION_IN_STATIONS"
 
+export const SET_OPEN_DROPDOWN_SONG_ID = "SET_OPEN_DROPDOWN_SONG_ID"
+export const SET_IS_DROPDOWN_MODAL_SHOWN = "SET_IS_DROPDOWN_MODAL_SHOWN"
 export const SET_IS_EDIT_MODAL_SHOWN = "SET_IS_EDIT_MODAL_SHOWN"
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
     song: {},
     isPlaying: false,
     isEditModalShown: false,
+    isDropdownSongShown: null
 }
 
 export function stationReducer(state = initialState, action) {
@@ -31,7 +34,13 @@ export function stationReducer(state = initialState, action) {
             break
         case SET_IS_EDIT_MODAL_SHOWN:
             newState = { ...state, isEditModalShown: action.isEditModalShown }
+            break 
+            case SET_IS_DROPDOWN_MODAL_SHOWN:
+            newState = { ...state, isDropdownModalShown: action.isDropdownModalShown}
             break
+            case SET_OPEN_DROPDOWN_SONG_ID:
+                newState = { ...state, isDropdownSongShown: action.songId }
+                break
         default:
     }
     return newState

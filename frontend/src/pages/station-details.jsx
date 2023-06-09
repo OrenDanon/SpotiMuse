@@ -1,7 +1,8 @@
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { stationService } from "../services/station.service.local.js"
 import {
-    loadStation, loadStations,
+    loadStation,
+    loadStations,
     updateCurrentStation,
     updateIsPlaying,
 } from "../store/station.actions.js"
@@ -12,16 +13,21 @@ import { useState } from "react"
 import { AppHeader } from "../cmps/app-header.jsx"
 import { DropdownModal } from "../cmps/dropdown-modal.jsx"
 import { EditModal } from "../cmps/edit-modal.jsx"
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
 import { Search } from "../cmps/search.jsx"
-import { FastAverageColor } from 'fast-average-color';
+import { FastAverageColor } from "fast-average-color"
 import { useRef } from "react"
 import { loadUser } from "../store/user.actions.js"
-
+import {
+    updateIsEditModalShown,
+    updateIsDropdownModalShown,
+} from "../store/station.actions"
+import { userService } from "../services/user.service"
+import { SET_USER } from "../store/user.reducer"
+import { Link } from "react-router-dom"
 
 export function StationDetails() {
-
     const station = useSelector(
         (storeState) => storeState.stationModule.station
     )
@@ -33,13 +39,18 @@ export function StationDetails() {
     const isEditModalShown = useSelector(
         (storeState) => storeState.stationModule.isEditModalShown
     )
-    const [isDropdownShown, setIsDropdownShown] = useState(false)
+
+    const isDropdownModalShown = useSelector(
+        (storeState) => storeState.stationModule.isDropdownModalShown
+    )
+
     const params = useParams()
 
     useEffect(() => {
         loadStation(params.id)
         loadUser()
-    },  [])
+        store.dispatch(updateIsDropdownModalShown(false))
+    }, [])
 
     // function reorder(list, startIndex, endIndex) {
     //     const result = Array.from(list);
@@ -47,7 +58,7 @@ export function StationDetails() {
     //     result.splice(endIndex, 0, removed);
     //     return result;
     //   };
-      
+
     //   const grid = 8;
 
     function handlePlayClick() {
@@ -63,8 +74,36 @@ export function StationDetails() {
         }
     }
 
+    async function onDelete() {
+        try {
+            await stationService.remove(station._id)
+            const userIdx = userService.getLoggedinUser()._id
+            let user = await userService.getById(userIdx)
+            if (station.createdBy._id === userIdx) {
+                user.stations = user.stations.filter(
+                    (currStation) => currStation._id !== station._id
+                )
+                await userService.save(user)
+                store.dispatch({ type: SET_USER, user })
+            }
+        } catch (err) {
+            console.log("Can not remove station", err)
+        } finally {
+            onClose()
+        }
+    }
+
+    function handleEditModalOpen() {
+        store.dispatch(updateIsEditModalShown(!isEditModalShown))
+        store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
+    }
+
+    const onClose = () => {
+        store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
+      }
+
     function showDropdownModal() {
-        setIsDropdownShown(!isDropdownShown)
+        store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
     }
     function isLikedSongStation() {
         return user?.stations[0]._id === station._id
@@ -86,7 +125,8 @@ export function StationDetails() {
                                 <h1>{station.name}</h1>
                                 <p>
                                     {" "}
-                                    {station.createdBy?.fullname} <span>{`${"\u2022"}`}</span>
+                                    {station.createdBy?.fullname}{" "}
+                                    <span>{`${"\u2022"}`}</span>
                                     {`${station.songs?.length} songs`}
                                 </p>
                             </div>
@@ -125,10 +165,9 @@ export function StationDetails() {
                                     </svg>
                                 </button>
                             )}
-                            {isLikedSongStation() ?
+                            {isLikedSongStation() ? (
                                 <div></div>
-                                :
-
+                            ) : (
                                 <div className="dropdown-container">
                                     <button
                                         onClick={showDropdownModal}
@@ -144,16 +183,31 @@ export function StationDetails() {
                                             <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
                                         </svg>
                                     </button>
-                                    {isDropdownShown && (
+                                    {/* {isDropdownShown && (
+                                        <DropdownModal
+                                        onClose={showDropdownModal}
+                                        station={station}
+                                        />
+                                    )} */}
+                                    {isDropdownModalShown && (
                                         <div className="dropdown-modal">
-                                            <DropdownModal
-                                                onClose={showDropdownModal}
-                                                station={station}
-                                            />
+                                            <DropdownModal>
+                                                <li
+                                                    onClick={
+                                                        handleEditModalOpen
+                                                    }>
+                                                    Edit details
+                                                </li>
+                                                <Link to={`/`}>
+                                                    <li onClick={onDelete}>
+                                                        Delete
+                                                    </li>
+                                                </Link>
+                                            </DropdownModal>
                                         </div>
                                     )}
                                 </div>
-                            }
+                            )}
                             {/* <div className="edit-modal"> */}
                             {isEditModalShown && <EditModal />}
                             {/* </div> */}
@@ -165,8 +219,8 @@ export function StationDetails() {
                             <SongList station={station} />
                         </section>
                         <div className="search-section">
-                        <h2>Let's find something for your playlist</h2>
-                        <Search />
+                            <h2>Let's find something for your playlist</h2>
+                            <Search />
                         </div>
                     </div>
                 </>

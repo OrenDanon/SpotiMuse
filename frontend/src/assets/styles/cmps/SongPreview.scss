@@ -1,34 +1,38 @@
 .song-preview {
     height: 56px;
 
-    .song-idx {
-        font-family: monospace;
-        font-size: 16px;
+    .delete-modal {
+        top: 56%;
+        right: 4.5%;
+    }
+}
+
+.song-idx {
+    font-family: monospace;
+    font-size: 16px;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    margin-right: 14.4px;
+    object-fit: cover;
+}
+
+td {
+    height: 54.4px;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+
+    p {
+        margin: 0px;
+        color: white;
     }
 
-    img {
-        width: 40px;
-        height: 40px;
-        margin-right: 14.4px;
-        object-fit: cover;
-
-    }
-
-    td {
-        height: 54.4px;
-        align-items: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    span {
         font-size: 14px;
-
-        p {
-            margin: 0px;
-            color: white;
-        }
-
-        span {
-            font-size: 14px;
-        }
     }
 }
