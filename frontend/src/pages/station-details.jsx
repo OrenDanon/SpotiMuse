@@ -15,9 +15,10 @@ import { EditModal } from "../cmps/edit-modal.jsx"
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Search } from "../cmps/search.jsx"
-import { FastAverageColor } from 'fast-average-color';
+import { FastAverageColor } from 'fast-average-color'
 import { useRef } from "react"
 import { loadUser } from "../store/user.actions.js"
+
 
 
 export function StationDetails() {
@@ -34,21 +35,16 @@ export function StationDetails() {
         (storeState) => storeState.stationModule.isEditModalShown
     )
     const [isDropdownShown, setIsDropdownShown] = useState(false)
+
     const params = useParams()
+
 
     useEffect(() => {
         loadStation(params.id)
         loadUser()
-    },  [])
+    }, [])
 
-    // function reorder(list, startIndex, endIndex) {
-    //     const result = Array.from(list);
-    //     const [removed] = result.splice(startIndex, 1);
-    //     result.splice(endIndex, 0, removed);
-    //     return result;
-    //   };
-      
-    //   const grid = 8;
+
 
     function handlePlayClick() {
         if (!song.id) return
@@ -67,7 +63,8 @@ export function StationDetails() {
         setIsDropdownShown(!isDropdownShown)
     }
     function isLikedSongStation() {
-        return user?.stations[0]._id === station._id
+        if (!user.stations) return
+        return user.stations[0]._id === station._id
     }
 
     return (
@@ -164,10 +161,13 @@ export function StationDetails() {
                         <section className="bottom-section">
                             <SongList station={station} />
                         </section>
-                        <div className="search-section">
-                        <h2>Let's find something for your playlist</h2>
-                        <Search />
-                        </div>
+                        {isLikedSongStation() ? <div></div>
+                            :
+                            <div className="search-section">
+                                <h2>Let's find something for your playlist</h2>
+                                <Search />
+                            </div>
+                        }
                     </div>
                 </>
             ) : (

@@ -6,6 +6,13 @@
         width: 100%;
         border-collapse: collapse;
         font-family: CircularStd-Book;
+        tbody{
+            tr{
+                &:first-child {
+                    margin-top: 18px;
+                }
+            }
+        }
 
         tr {
             padding: 0px 16px;
@@ -14,56 +21,55 @@
             gap: 16px;
             text-overflow: ellipsis;
 
-            &:nth-child(2) {
-                margin-top: 18px;
-            }
-           
-            &:hover{
-                background-color:hsla(0,0%,100%,.1);
+            
+
+            &:hover {
+                background-color: hsla(0, 0%, 100%, .1);
                 border-radius: 6px;
-                .hidden{
+
+                .hidden {
                     opacity: 1;
                 }
-                .song-idx{
+
+                .song-idx {
                     display: none;
                 }
-                .play{
+
+                .play {
                     display: flex;
                 }
             }
         }
-        .like{
+
+        .like {
             width: 100%;
             padding: 7px 0px 0px 5px;
         }
-        .time{
+
+        .time {
             margin-right: 21px;
         }
-        .right-section{
+
+        .right-section {
             padding-top: 5px;
         }
-        .column{
+
+        .column {
             font-size: 16px;
         }
     }
 
-    tr:first-child {
-        font-size: 14px;
-        height: 36px;
-        border-bottom: 1px solid hsla(0deg, 0%, 100%, 0.1);
-        border-radius: 0px;
-
-
-        td:last-child {
-            margin-right: 36px;
-            justify-self: end;
+    thead {
+        tr:first-child {
+            font-size: 14px;
+            height: 36px;
+            border-bottom: 1px solid hsla(0deg, 0%, 100%, 0.1);
+            border-radius: 0px;
         }
-
     }
 
-
-
-
-
-    
+    td:last-child {
+        margin-right: 36px;
+        justify-self: end;
+    }
 }

@@ -63,13 +63,13 @@ export async function loadStations() {
 
 export async function loadStation(stationId){
     try{
-        console.log('userId',stationId);
-        let station = await stationService.getById(stationId)
-    if (!station?._id){
-        const userId = userService.getLoggedinUser()._id
-        const user = await userService.getById(userId)
-        station = user.stations[0]
-    }
+        let station
+        const user = userService.getLoggedinUser()
+        if (stationId === user.stations[0]._id ){
+            station = user.stations[0]
+        } else{
+             station = await stationService.getById(stationId)
+        }
     store.dispatch({
         type: SET_STATION,
         station
