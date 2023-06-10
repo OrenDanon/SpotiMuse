@@ -17,16 +17,17 @@ export function ImgUploader({ onUploaded = null }) {
     onUploaded && onUploaded(secure_url)
   }
 
+
+
   function getUploadLabel() {
-    if (imgData.imgUrl) return 'Upload Another?'
+    if (imgData.imgUrl) return 'Upload a new one?'
     return isUploading ? 'Uploading....' : 'Upload Image'
   }
 
   return (
     <div className="upload-preview">
-      {imgData.imgUrl && <img src={imgData.imgUrl} style={{ maxWidth: '200px', float: 'right' }} />}
-      <label htmlFor="imgUpload">{getUploadLabel()}</label>
-      <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
+      <label className="file-input-label" htmlFor="imgUpload">{getUploadLabel()}</label>
+      <input type="file" className="upload-file" onChange={uploadImg} accept="img/*" id="imgUpload" />
     </div>
   )
 }

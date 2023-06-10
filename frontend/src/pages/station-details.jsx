@@ -46,20 +46,13 @@ export function StationDetails() {
 
     const params = useParams()
 
+
     useEffect(() => {
         loadStation(params.id)
         loadUser()
         store.dispatch(updateIsDropdownModalShown(false))
     }, [])
 
-    // function reorder(list, startIndex, endIndex) {
-    //     const result = Array.from(list);
-    //     const [removed] = result.splice(startIndex, 1);
-    //     result.splice(endIndex, 0, removed);
-    //     return result;
-    //   };
-
-    //   const grid = 8;
 
     function handlePlayClick() {
         if (!song.id) return
@@ -106,12 +99,11 @@ export function StationDetails() {
         store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
     }
     function isLikedSongStation() {
-        return user?.stations[0]._id === station._id
+        if (!user.stations) return
+        return user.stations[0]._id === station._id
     }
 
     return (
-        // <div className="top-station">
-        //     </div>
 
         <div className="station-details">
             <AppHeader />
@@ -183,12 +175,6 @@ export function StationDetails() {
                                             <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
                                         </svg>
                                     </button>
-                                    {/* {isDropdownShown && (
-                                        <DropdownModal
-                                        onClose={showDropdownModal}
-                                        station={station}
-                                        />
-                                    )} */}
                                     {isDropdownModalShown && (
                                         <div className="dropdown-modal">
                                             <DropdownModal>
@@ -208,9 +194,7 @@ export function StationDetails() {
                                     )}
                                 </div>
                             )}
-                            {/* <div className="edit-modal"> */}
                             {isEditModalShown && <EditModal />}
-                            {/* </div> */}
                             <button className="icon" onClick={onAddSong}>
                                 Add song
                             </button>
@@ -218,10 +202,13 @@ export function StationDetails() {
                         <section className="bottom-section">
                             <SongList station={station} />
                         </section>
-                        <div className="search-section">
-                            <h2>Let's find something for your playlist</h2>
-                            <Search />
-                        </div>
+                        {isLikedSongStation() ? <div></div>
+                            :
+                            <div className="search-section">
+                                <h2>Let's find something for your playlist</h2>
+                                <Search />
+                            </div>
+                        }
                     </div>
                 </>
             ) : (

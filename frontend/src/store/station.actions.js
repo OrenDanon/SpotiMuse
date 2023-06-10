@@ -2,7 +2,7 @@ import { stationService } from "../services/station.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { SET_STATION,SET_STATIONS, SET_SONG, SET_ISPLAYING, SET_IS_EDIT_MODAL_SHOWN, UPDATE_STATION_IN_STATIONS, SET_IS_DROPDOWN_MODAL_SHOWN, SET_OPEN_DROPDOWN_SONG_ID} from "./station.reducer.js";
+import { SET_STATION,SET_STATIONS, SET_SONG, SET_ISPLAYING, SET_IS_EDIT_MODAL_SHOWN, UPDATE_STATION_IN_STATIONS, SET_IS_DROPDOWN_MODAL_SHOWN, SET_STATIONS_DROPDOWN_SHOWN} from "./station.reducer.js";
 import { SET_SCORE } from "./user.reducer.js";
 
 // Action Creators:
@@ -54,10 +54,10 @@ export function updateStations(stations) {
     }
 }
 
-export function updateOpenDropdownSongId(songId) {
+export function updateIsStationsDropdownShown(isStationsDropdownShown) {
     return {
-        type: SET_OPEN_DROPDOWN_SONG_ID,
-        songId
+        type: SET_STATIONS_DROPDOWN_SHOWN,
+        isStationsDropdownShown
     }
 }
 
@@ -76,13 +76,13 @@ export async function loadStations() {
 
 export async function loadStation(stationId){
     try{
-        console.log('userId',stationId);
-        let station = await stationService.getById(stationId)
-    if (!station?._id){
-        const userId = userService.getLoggedinUser()._id
-        const user = await userService.getById(userId)
-        station = user.stations[0]
-    }
+        let station
+        const user = userService.getLoggedinUser()
+        if (stationId === user.stations[0]._id ){
+            station = user.stations[0]
+        } else{
+             station = await stationService.getById(stationId)
+        }
     store.dispatch({
         type: SET_STATION,
         station

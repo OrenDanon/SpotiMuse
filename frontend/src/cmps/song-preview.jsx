@@ -6,7 +6,7 @@ import {
     updateCurrentSong,
     updateCurrentStation,
     updateIsPlaying,
-    updateIsDropdownModalShown,
+    updateIsStationsDropdownShown,
 } from "../store/station.actions"
 import { store } from "../store/store.js"
 import dayjs from "dayjs"
@@ -28,14 +28,18 @@ export function SongPreview({ song, idx }) {
     const isPlaying = useSelector(
         (storeState) => storeState.stationModule.isPlaying
     )
-    const isDropdownModalShown = useSelector(
-        (storeState) => storeState.stationModule.isDropdownModalShown
+    const isStationsDropdownShown = useSelector(
+        (storeState) => storeState.stationModule.isStationsDropdownShown
     )
+
+        // const [isStationModalShown, setStationModalShown] = useState(false)
+        // const [isEditDeletedropdownShown ,setEditDeleteDropdownShown] = useState(false)
 
     const location = useLocation()
 
     useEffect(() => {
-        store.dispatch(updateIsDropdownModalShown(false))
+        // store.dispatch(updateIsDropdownModalShown(false))
+        store.dispatch(updateIsStationsDropdownShown(false))
     }, [])
 
     function timeAgo(timestamp) {
@@ -59,9 +63,9 @@ export function SongPreview({ song, idx }) {
             console.log("Cannot add song")
         }
     }
-    async function onAddToStation() {
+    async function onAddToStation(toStationId) {
         try {
-            const toStationId = "vHDCO"
+            song.addedAt = Date.now()
             const toStation = await stationService.getById(toStationId)
             toStation.songs.push(song)
             stationService.save(toStation)
@@ -70,8 +74,13 @@ export function SongPreview({ song, idx }) {
         }
     }
 
-    function showDropdownModal() {
-        store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
+    // function showEditDeleteDropdown() {
+    //     store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
+    //     setEditDeleteDropdownShown(!isEditDeletedropdownShown)
+    // }
+
+    function showStationsDropdownModal() {
+        store.dispatch(updateIsStationsDropdownShown(!isStationsDropdownShown))
     }
 
     async function onLike() {
@@ -95,7 +104,7 @@ export function SongPreview({ song, idx }) {
     }
 
     return (
-        <tr className="song-preview grid-colums" onClick={() => onSong(song)}>
+        <>
             <div className="flex">
                 <td className="flex song-idx">{idx + 1}</td>
                 <td onClick={onPlay} className="flex icon display-none play">
@@ -136,7 +145,7 @@ export function SongPreview({ song, idx }) {
             <td onClick={onAddToStation} className="flex">
                 Album
             </td>
-            <td className="flex" onClick={showDropdownModal}>
+            <td className="flex">
                 {timeAgo(song.addedAt) ? timeAgo(song.addedAt) : ""}
                 {/* {isDropdownModalShown && location.pathname === "/search" ? (
                     <div className="dropdown-modal">
@@ -164,8 +173,8 @@ export function SongPreview({ song, idx }) {
                 <div className="time icon">3:10</div>
                 <div className="dropdown-container">
                     <div
-                        onClick={showDropdownModal}
-                        // onClick={() => onRemove(station, song)}
+                        // onClick={showEditDeleteDropdown}
+                        onClick={() => onRemove(station, song)}
 
                         className="right-section icon hidden">
                         <svg
@@ -179,9 +188,19 @@ export function SongPreview({ song, idx }) {
                             <path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
                         </svg>
                     </div>
+                    <button onClick={showStationsDropdownModal}>Add</button>           
                 </div>
             </td>
-            {isDropdownModalShown ? (
+            {isStationsDropdownShown ? (
+                <div className="dropdown-modal">
+                    <DropdownModal>
+                        {stations.map((station, idx) => (
+                            <li onClick={() => onAddToStation(station._id)} key={idx}>{station.name}</li>
+                        ))}
+                    </DropdownModal>
+                </div>
+            ) : null}
+            {/* {isDropdownModalShown ? (
                 location.pathname === "/search" ? (
                     <div className="dropdown-modal">
                         <DropdownModal>
@@ -197,7 +216,7 @@ export function SongPreview({ song, idx }) {
                         </DropdownModal>
                     </div>
                 )
-            ) : null}
-        </tr>
+            ) : null} */}
+        </>
     )
 }

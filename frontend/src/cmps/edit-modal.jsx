@@ -21,6 +21,7 @@ export function EditModal() {
 
     const [name, setName] = useState(station.name)
     const [description, setDescription] = useState(station.description || "")
+    const [uploadedImgUrl, setUploadedImgUrl] = useState()
     const dispatch = useDispatch()
 
     function closeEditModal() {
@@ -30,10 +31,14 @@ export function EditModal() {
 
     function handleSubmit(e) {
         e.preventDefault()
+
+        const imgUrl = uploadedImgUrl || station.imgUrl
+        
         const updatedStation = {
             ...station,
             name,
             description,
+            imgUrl
         }
 
         console.log("station", station)
@@ -51,7 +56,7 @@ export function EditModal() {
     }
 
     function handleImageUpload (imgUrl){
-        console.log(imgUrl)
+        setUploadedImgUrl(imgUrl)
     }
 
     return (
@@ -65,15 +70,7 @@ export function EditModal() {
                 </div>
                 <div className="edit-station-content">
                     <div className="edit-image-container">
-                        {/* <input
-                            id="file-uploader"
-                            type="file"
-                            accept="image/png, image/jpeg"
-                            onChange={(ev) => onUploadImg(ev)}
-                        /> */}
-                        {/* <label htmlFor="file-uploader"> */}
-                            <img src={`${station.imgUrl}`} alt="station-img" />
-                        {/* </label> */}
+                        <img src={`${uploadedImgUrl || station.imgUrl}`} alt="station-img"/>
                         <ImgUploader onUploaded={handleImageUpload} />
                     </div>
                     <div className="edit-station-form">

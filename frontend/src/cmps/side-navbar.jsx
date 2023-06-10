@@ -63,13 +63,11 @@ export function SideNavbar() {
                             <NavLink
                                 to="/"
                              >
-                                {/* <span className="icon"> */}
                                     {location.pathname === "/" ? (
                                         <ActiveHomeIcon className="icon" />
                                     ) : (
                                         <HomeIcon className="icon" />
                                     )}
-                                {/* </span> */}
                                 <span className="home">Home</span>
                             </NavLink>
                         </li>
