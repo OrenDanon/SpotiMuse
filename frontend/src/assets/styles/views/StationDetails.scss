@@ -85,12 +85,16 @@
             color: rgb(255, 255, 255);
             fill: rgb(179, 179, 179);
 
+            .right-section {
+                display: none;
+            }
+
             .search-icon {
                 position: absolute;
                 width: 30px;
                 margin-top: 12px;
             }
-    
+
             input {
                 background-color: hsla(0, 0%, 100%, .1);
                 border: 0;
@@ -104,6 +108,7 @@
                 width: 34%;
                 margin-top: 23px;
             }
+
             h2 {
                 border-top: 1px solid hsla(0, 0%, 100%, .1);
                 padding-top: 33px;
@@ -199,50 +204,51 @@
     }
 
     .bottom-section {
+        padding: 0 24px;
         .song-list {
-
+            
             table {
-
-                .icon {
-                    fill: #b3b3b3;
+                thead{
+                    .grid-colums{
+                        display: grid;
+                    }
                 }
-
+                
                 tr {
+                    .added-at {
+                        opacity: 1;
+                    }
+                    
+                    .icon {
+                        fill: white;
+                    }
 
+                    .add-btn {
+                        display: none;
+                    }
+    
+                    .time {
+                        margin-right: 21px;
+                    }
+                    
+                    .right-section {
+                        padding-top: 5px;
+                    
+                    }
                     &:hover {
-
+        
                         .hidden {
                             opacity: 1;
                         }
-
+        
                         .play {
                             display: flex;
                         }
                     }
                 }
-
-                .like {
-                    width: 100%;
-                    padding: 7px 0px 0px 5px;
-                }
-
-                .time {
-                    margin-right: 21px;
-                }
-
-                .right-section {
-                    padding-top: 5px;
-                }
+                
             }
-
-            tr:first-child {
-
-                td:last-child {
-                    margin-right: 36px;
-                    justify-self: end;
-                }
-            }
-
+      
         }
 
     }

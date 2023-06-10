@@ -9,6 +9,9 @@
             align-items: center;
         }
     }
+    .right-section{
+        display: none;
+    }
 
     h2 {
         margin-bottom: 21px;
@@ -54,7 +57,7 @@
 
         &::placeholder {
             position: absolute;
-            top: 18px;
+            top: 16px;
             left: 35px;
             font-size: 14px;
           }
