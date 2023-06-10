@@ -64,8 +64,8 @@ async function addSong(station) {
   station.songs.push(newSong)
   return await save(station)
 }
-async function removeSong(station, songId) {
-  station.songs.splice(songId, 1)
+async function removeSong(station, songIdx) {
+  station.songs.splice(songIdx, 1)
   return await save(station)
 }
 

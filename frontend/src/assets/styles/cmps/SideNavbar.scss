@@ -80,7 +80,6 @@
                     span {
                         margin-top: 5px;
                         transition: 0.2s;
-                        letter-spacing: 0.7px;
                     }
                 }
 
@@ -101,7 +100,6 @@
 
         .user-station-list {
             overflow: auto;
-
             img {
                 width: 44px;
                 height: 44px;
@@ -146,29 +144,9 @@
     .library {
         flex: 1;
 
-        
-        ul {
-            gap: 8px;
-            height: 56px;
-            align-items: center;
-            li{
-                a {
-                    gap: 0;
-                }
-
-            }
-
-        }
-
-        .icon {
-            margin: 0;
-            margin-right: 12px;
-        }
-
         .add-library {
-            display: flex;
-            align-self: baseline;
-            margin-left: 45px;
+            margin-left: 56px;
+            align-items: center;
         }
     }
 }

@@ -55,7 +55,7 @@ export function SongList({ station }) {
           <tr className="grid-colums">
             <td className="flex column">#</td>
             <td className="song-title flex">Title</td>
-            {/* <td className="flex">Album</td> */}
+            <td className="flex">Album</td>
             <td className="flex">Date added</td>
             <td className="flex icon align-center">
               <svg
