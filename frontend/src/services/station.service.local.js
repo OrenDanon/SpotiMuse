@@ -19,7 +19,8 @@ export const stationService = {
   getPrevSong,
   getGenreList,
   dataTransform,
-  getSongById
+  getSongById,
+  convertDuration
 }
 window.cs = stationService
 
@@ -92,13 +93,14 @@ function getPrevSong(station, song) {
   const idx = station.songs.findIndex(prevSong => prevSong.id === song.id)
   return station.songs[idx - 1]
 }
-function dataTransform(response) {
+function dataTransform(response,durations) {
   const station = {}
   const songs = []
-  response.map(res => {
+  response.map((res ,idx) => {
     const song = {
       id: utilService.makeId(),
       title: res.snippet.title,
+      duration: convertDuration(durations[idx]),
       url: res.id.videoId,
       imgUrl: res.snippet.thumbnails.default.url,
       addedAt: ''
@@ -157,6 +159,23 @@ function getDefaultSong() {
     imgUrl: 'https://i.ytimg.com/vi/LjxulQ1bEWg/maxresdefault.jpg',
     addedAt: Date.now()
   }
+}
+function convertDuration(duration) {
+  const durationRegex = /PT(\d+H)?(\d+M)?(\d+S)?/;
+  const matches = duration.match(durationRegex);
+
+  let minutes = 0;
+  let seconds = 0;
+
+  if (matches[2]) {
+    minutes = parseInt(matches[2].slice(0, -1));
+  }
+
+  if (matches[3]) {
+    seconds = parseInt(matches[3].slice(0, -1));
+  }
+
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
 function getEmptyStation() {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { NavLink, useLocation, useParams } from "react-router-dom"
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom"
 import { utilService } from "../services/util.service"
 import { UserStationList } from "./user-station-list"
 import { stationService } from "../services/station.service.local"
@@ -25,6 +25,7 @@ export function SideNavbar() {
     // )
     const user = useSelector((storeState) => storeState.userModule.user)
     const location = useLocation()
+    const navigate = useNavigate()    
 
     useEffect(()=>{
         loadUser()
@@ -34,6 +35,7 @@ export function SideNavbar() {
         const newStation = stationService.getEmptyStation()
         try {
             const savedStation = await stationService.save(newStation)
+            navigate(`/station/${savedStation._id}`)
             store.dispatch(updateCurrentStation(savedStation))
             const miniStation = {
                 _id: savedStation._id,
@@ -47,12 +49,12 @@ export function SideNavbar() {
                 type: SET_USER,
                 user,
             })
-
             showSuccessMsg(`Station added (id: ${savedStation._id})`)
         } catch (err) {
             showErrorMsg("Cannot add station")
         }
     }
+   
     return (
         <div className="side-navbar flex column ">
             <section className="side-navbar-main flex column">
@@ -116,7 +118,7 @@ export function SideNavbar() {
                                     <li
                                         onClick={onAddStation}
                                         className="add-library">
-                                        <NavLink to={`/station/${station._id}`}>
+                                        {/* <NavLink to={`/station/${station._id}`}> */}
                                             <span className="icon flex">
                                                 <svg
                                                     role="img"
@@ -129,7 +131,7 @@ export function SideNavbar() {
                                                     <path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path>
                                                 </svg>
                                             </span>
-                                        </NavLink>
+                                        {/* </NavLink> */}
                                     </li>
                                 </ul>
                             </header>

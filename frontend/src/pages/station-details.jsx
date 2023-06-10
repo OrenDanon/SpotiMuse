@@ -41,7 +41,7 @@ export function StationDetails() {
 
     useEffect(() => {
         loadStation(params.id)
-        loadUser()
+        // loadUser()
     }, [])
 
 
