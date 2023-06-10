@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import { utilService } from "../services/util.service"
 import { UserStationList } from "./user-station-list"
 import { stationService } from "../services/station.service.local"
@@ -47,7 +47,6 @@ export function SideNavbar() {
                 type: SET_USER,
                 user,
             })
-
             showSuccessMsg(`Station added (id: ${savedStation._id})`)
         } catch (err) {
             showErrorMsg("Cannot add station")

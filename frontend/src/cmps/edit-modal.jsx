@@ -4,11 +4,13 @@ import {
     updateIsEditModalShown,
     updateCurrentStation,
     updateStations,
+    updateCurrentUser
 } from "../store/station.actions"
 import { store } from "../store/store"
 import { ReactComponent as CloseIcon } from "../assets/icons/close.svg"
 import { stationService } from "../services/station.service.local"
 import { ImgUploader } from "../cmps/img-uploader"
+import { userService } from "../services/user.service"
 
 export function EditModal() {
     const isEditModalShown = useSelector(
@@ -18,6 +20,8 @@ export function EditModal() {
     const station = useSelector(
         (storeState) => storeState.stationModule.station
     )
+
+    let user = useSelector(storeState => storeState.userModule.user)
 
     const [name, setName] = useState(station.name)
     const [description, setDescription] = useState(station.description || "")
@@ -29,8 +33,8 @@ export function EditModal() {
         console.log(station)
     }
 
-    function handleSubmit(e) {
-        e.preventDefault()
+    function handleSubmit(ev) {
+        ev.preventDefault()
 
         const imgUrl = uploadedImgUrl || station.imgUrl
         
@@ -54,6 +58,34 @@ export function EditModal() {
                 console.log("Error saving station", error)
             })
     }
+
+    // async function handleSubmit(ev) {
+    //     ev.preventDefault()
+
+    //     const imgUrl = uploadedImgUrl || station.imgUrl
+
+    //     const updatedStation = {
+    //         ...station,
+    //         name,
+    //         description,
+    //         imgUrl
+    //     }
+
+    //     try {
+    //         const savedStation = await stationService.save(updatedStation);
+    //         const stationIdx = user.stations.findIndex(currStation => currStation._id === updatedStation._id)
+    //         user.stations[stationIdx].imgUrl = updatedStation.imgUrl
+    //         user.stations[stationIdx].name = updatedStation.name
+    //         // dispatch(store.dispatch({ type: SET_USER, user}))
+    //         const updatedUser = await userService.update(user)
+    //     store.dispatch(updateCurrentUser(updatedUser))
+    //         dispatch(updateStations(savedStation))
+    //         dispatch(updateCurrentStation(savedStation))
+    //         dispatch(updateIsEditModalShown(!isEditModalShown))
+    //     } catch (error) {
+    //         console.log("Error saving station", error)
+    //     }
+    // }
 
     function handleImageUpload (imgUrl){
         setUploadedImgUrl(imgUrl)
@@ -86,7 +118,7 @@ export function EditModal() {
                                 id="edit-input"
                                 className="edit-name-input"
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(ev) => setName(ev.target.value)}
                             />
                             <label
                                 htmlFor="edit-desc-textarea"
@@ -100,8 +132,8 @@ export function EditModal() {
                                 cols="30"
                                 rows="10"
                                 value={description}
-                                onChange={(e) =>
-                                    setDescription(e.target.value)
+                                onChange={(ev) =>
+                                    setDescription(ev.target.value)
                                 }></textarea>
                             <input
                                 onClick={handleSubmit}

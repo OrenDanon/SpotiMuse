@@ -5,6 +5,7 @@ import {
     loadStations,
     updateCurrentStation,
     updateIsPlaying,
+    updateStations,
 } from "../store/station.actions.js"
 import { store } from "../store/store.js"
 import { SongList } from "../cmps/song-list.jsx"
@@ -30,6 +31,9 @@ import { Link } from "react-router-dom"
 export function StationDetails() {
     const station = useSelector(
         (storeState) => storeState.stationModule.station
+    )
+    let stations = useSelector(
+        (storeState) => storeState.stationModule.stations
     )
     const song = useSelector((storeState) => storeState.stationModule.song)
     const user = useSelector((storeState) => storeState.userModule.user)
@@ -70,6 +74,8 @@ export function StationDetails() {
     async function onDelete() {
         try {
             await stationService.remove(station._id)
+            stations = stations.filter(currStation => (currStation._id !== station._id))
+            store.dispatch(updateStations(stations))
             const userIdx = userService.getLoggedinUser()._id
             let user = await userService.getById(userIdx)
             if (station.createdBy._id === userIdx) {
@@ -195,9 +201,9 @@ export function StationDetails() {
                                 </div>
                             )}
                             {isEditModalShown && <EditModal />}
-                            <button className="icon" onClick={onAddSong}>
+                            {/* <button className="icon" onClick={onAddSong}>
                                 Add song
-                            </button>
+                            </button> */}
                         </section>
                         <section className="bottom-section">
                             <SongList station={station} />

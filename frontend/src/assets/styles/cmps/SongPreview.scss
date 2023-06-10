@@ -1,38 +1,85 @@
 .song-preview {
     height: 56px;
 
+    .add-song-dropdown {
+        position: absolute;
+        left: 87.5%;
+        margin-block-start: 40px;
+
+        .dropdown-modal {
+            position: absolute;
+            background-color: #282828;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            padding: 4px;
+            z-index: 5;
+            min-width: 160px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+            .dropdown-modal-actions {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    width: 100%;
+                    padding: 12px;
+                    padding-inline-end: 8px;
+                    cursor: pointer;
+                    color: hsla(0, 0%, 100%, 0.9);
+                    font-family: CircularStd-Title-Bold;
+                    font-size: 14px;
+                    line-height: 16px;
+
+                    &:hover {
+                        background-color: hsla(0, 0%, 100%, 0.1);
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
     .delete-modal {
         top: 56%;
         right: 4.5%;
     }
-}
 
-.song-idx {
-    font-family: monospace;
-    font-size: 16px;
-}
-
-img {
-    width: 40px;
-    height: 40px;
-    margin-right: 14.4px;
-    object-fit: cover;
-}
-
-td {
-    height: 54.4px;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 14px;
-
-    p {
-        margin: 0px;
-        color: white;
+    .play-animateds {
+        width: 18px;
     }
 
-    span {
+    .song-idx {
+        font-size: 16px;
+    }
+
+    .equaliser-animated {
+        width: 14px;
+        height: 14px;
+    }
+
+    img {
+        width: 40px;
+        height: 40px;
+        margin-right: 14.4px;
+        object-fit: cover;
+    }
+
+    td {
+        height: 54.4px;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 14px;
+
+        p {
+            margin: 0px;
+            color: white;
+        }
+
+        span {
+            font-size: 14px;
+        }
     }
 }
