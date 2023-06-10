@@ -13,9 +13,7 @@ export function UserStationPreview({ userStation }) {
             loadStations()
         },[])
     function onStationPreview(userStation) {
-        console.log('userStation',userStation);
         if (!userStation.songs) {
-            console.log(stations.map(station => station._id === userStation._id));
             userStation = stations.find(station => station._id === userStation._id)
         }
         store.dispatch(updateCurrentStation(userStation))

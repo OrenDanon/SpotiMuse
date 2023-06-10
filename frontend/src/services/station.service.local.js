@@ -19,7 +19,8 @@ export const stationService = {
   getPrevSong,
   getGenreList,
   dataTransform,
-  getSongById
+  getSongById,
+  convertDuration
 }
 window.cs = stationService
 
@@ -64,8 +65,8 @@ async function addSong(station) {
   station.songs.push(newSong)
   return await save(station)
 }
-async function removeSong(station, songId) {
-  station.songs.splice(songId, 1)
+async function removeSong(station, songIdx) {
+  station.songs.splice(songIdx, 1)
   return await save(station)
 }
 
@@ -92,13 +93,14 @@ function getPrevSong(station, song) {
   const idx = station.songs.findIndex(prevSong => prevSong.id === song.id)
   return station.songs[idx - 1]
 }
-function dataTransform(response) {
+function dataTransform(response,durations) {
   const station = {}
   const songs = []
-  response.map(res => {
+  response.map((res ,idx) => {
     const song = {
       id: utilService.makeId(),
       title: res.snippet.title,
+      duration: convertDuration(durations[idx]),
       url: res.id.videoId,
       imgUrl: res.snippet.thumbnails.default.url,
       addedAt: ''
@@ -157,6 +159,23 @@ function getDefaultSong() {
     imgUrl: 'https://i.ytimg.com/vi/LjxulQ1bEWg/maxresdefault.jpg',
     addedAt: Date.now()
   }
+}
+function convertDuration(duration) {
+  const durationRegex = /PT(\d+H)?(\d+M)?(\d+S)?/;
+  const matches = duration.match(durationRegex);
+
+  let minutes = 0;
+  let seconds = 0;
+
+  if (matches[2]) {
+    minutes = parseInt(matches[2].slice(0, -1));
+  }
+
+  if (matches[3]) {
+    seconds = parseInt(matches[3].slice(0, -1));
+  }
+
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
 function getEmptyStation() {
@@ -273,7 +292,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf6",
+        "id": "aBcDEf7",
         "title": "Snoop Dogg - Who Am I (What's My Name)?",
         "url": "2soGJXQAQec",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -281,7 +300,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf7",
+        "id": "aBcDEf8",
         "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
         "url": "Wa5B22KAkEk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -289,7 +308,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf7",
+        "id": "aBcDEf9",
         "title": "Snoop Dogg - Drop It Like It's Hot (Official Music Video) ft. Pharrell Williams",
         "url": "GtUVQei3nX4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -321,14 +340,14 @@ if (!stations) {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "aBcDEf8",
+        "id": "aBcDEf10",
         "title": "Beyoncé - Love On Top (Official Video)",
         "url": "Ob7vObnFUJc",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 1559755062000
       },
       {
-        "id": "aBcDEf9",
+        "id": "aBcDEf11",
         "title": "Beyoncé - AMERICA HAS A PROBLEM (Feat. Kendrick Lamar) - (Official Lyric Video)",
         "url": "Q0E4wVF2a4k",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -336,7 +355,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf10",
+        "id": "aBcDEf12",
         "title": "Beyoncé - If I Were A Boy",
         "url": "AWpsOqh8q0M",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -344,7 +363,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf11",
+        "id": "aBcDEf13",
         "title": "Beyoncé - Run the World (Girls) (Official Video)",
         "url": "VBmMU_iwe6U",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -352,7 +371,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf12",
+        "id": "aBcDEf14",
         "title": "Beyoncé - Irreplaceable",
         "url": "2EwViQxSJJQ",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -384,14 +403,14 @@ if (!stations) {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "aBcDEf13",
+        "id": "aBcDEf15",
         "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundsong",
         "url": "RgKAFK5djSk",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 1557076662000
       },
       {
-        "id": "aBcDEf14",
+        "id": "aBcDEf16",
         "title": "Wiz Khalifa - What Would I Do [Official Music Video]",
         "url": "C4yYiXuUqyM",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -399,7 +418,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf15",
+        "id": "aBcDEf17",
         "title": "Wiz Khalifa - Why Not Not Why [Official Music Video]",
         "url": "MOk-_wCJbcM",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -407,7 +426,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf16",
+        "id": "aBcDEf18",
         "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
         "url": "Wa5B22KAkEk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -415,7 +434,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf17",
+        "id": "aBcDEf19",
         "title": "Wiz Khalifa - No Sleep [Music Video]",
         "url": "KuVAeTHqijk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -447,14 +466,14 @@ if (!stations) {
     "likedByUsers": ['{minimal-user}', '{minimal-user}'],
     "songs": [
       {
-        "id": "aBcDEf18",
+        "id": "aBcDEf20",
         "title": "Bruno Mars - The Lazy Song (Official Music Video)",
         "url": "fLexgOxsZu0",
         "imgUrl": "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
         "addedAt": 1557076662000
       },
       {
-        "id": "aBcDEf19",
+        "id": "aBcDEf21",
         "title": "Bruno Mars - Grenade (Official Music Video)",
         "url": "SR6iYWJxHqs",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -462,7 +481,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf20",
+        "id": "aBcDEf22",
         "title": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
         "url": "OPf0YbXqDm0",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -470,7 +489,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf21",
+        "id": "aBcDEf23",
         "title": "Bruno Mars - Just The Way You Are (Official Music Video)",
         "url": "LjhCEhWiKXk",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -478,7 +497,7 @@ if (!stations) {
 
       },
       {
-        "id": "aBcDEf22",
+        "id": "aBcDEf24",
         "title": "Travie McCoy: Billionaire ft. Bruno Mars [OFFICIAL VIDEO]",
         "url": "8aRor905cCw",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",

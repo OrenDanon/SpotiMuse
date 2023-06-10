@@ -1,49 +1,4 @@
-// .side-navbar{
 
-//     .navigation{
-//         ul{
-//             list-style: none;
-//             margin-top: 20px;
-//             padding: 0;
-//             li{
-//                 padding: 10px 0px;
-//             }
-//         }
-//         a{
-//             color: #b3b3b3;
-//             text-decoration: none;
-//             font-weight: bold;
-//             font-size: 13px;
-//         }
-//     }
-
-//     .navigation ul li a:hover,
-//     .navigation ul li a:active,
-//     .navigation ul li a:focus{
-//         color: #ffffff;
-//     }
-//      .policies{
-//         position: absolute;
-//         flex-wrap: wrap;
-//         margin-right: 20px;
-//         bottom: 0;
-//         ul{
-//             list-style: none;
-//             margin: 0;
-//             padding: 0;
-//             margin-right: 44px;
-//             li{
-//                 padding-bottom: 5px;
-//                 a{
-//                     color: #b3b3b3;
-//                     font-weight: 500;
-//                     text-decoration: none;
-//                     font-size: 10px;
-//                 }
-//             }
-//         }
-//      }
-// }
 
 .side-navbar-main {
     gap: $layout-padding;
@@ -81,6 +36,7 @@
                         margin-top: 5px;
                         transition: 0.2s;
                         letter-spacing: 0.7px;
+
                     }
                 }
 
@@ -146,12 +102,40 @@
     .library {
         flex: 1;
 
-        
+        header {
+            ul {
+                height: 54px;
+                padding-top: 4px;
+
+                .add-library {
+                    a {
+                        span {
+                            border-radius: 50%;
+                            width: 32px;
+                            justify-content: center;
+                            height: 32px;
+                        }
+                    }
+                }
+
+                a {
+                    span {
+                        align-items: center;
+
+                        &:hover {
+                            background-color: rgb(26, 26, 26);
+                            fill: #fff;
+
+                        }
+                    }
+                }
+            }
+        }
+
+
         ul {
-            gap: 8px;
-            height: 56px;
-            align-items: center;
-            li{
+
+            li {
                 a {
                     gap: 0;
                 }

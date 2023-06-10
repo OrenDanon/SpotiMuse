@@ -53,7 +53,7 @@ export function StationDetails() {
 
     useEffect(() => {
         loadStation(params.id)
-        loadUser()
+        // loadUser()
         store.dispatch(updateIsDropdownModalShown(false))
     }, [])
 
@@ -108,6 +108,7 @@ export function StationDetails() {
         if (!user.stations) return
         return user.stations[0]._id === station._id
     }
+    console.log('stationnn',station);
 
     return (
 

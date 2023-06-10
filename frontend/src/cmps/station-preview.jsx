@@ -15,7 +15,6 @@ export function StationPreview({ station }) {
     )
     function onStation(station) {
         store.dispatch(updateCurrentStation(station))
-        console.log(station)
     }
     function onPlay(ev) {
         ev.stopPropagation()

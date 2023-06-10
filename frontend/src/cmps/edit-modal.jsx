@@ -11,6 +11,7 @@ import { ReactComponent as CloseIcon } from "../assets/icons/close.svg"
 import { stationService } from "../services/station.service.local"
 import { ImgUploader } from "../cmps/img-uploader"
 import { userService } from "../services/user.service"
+import { SET_USER } from "../store/user.reducer"
 
 export function EditModal() {
     const isEditModalShown = useSelector(
@@ -33,62 +34,36 @@ export function EditModal() {
         console.log(station)
     }
 
-    function handleSubmit(ev) {
-        ev.preventDefault()
+    async function handleSubmit(e) {
+        e.preventDefault();
 
         const imgUrl = uploadedImgUrl || station.imgUrl
-        
+
         const updatedStation = {
             ...station,
             name,
             description,
             imgUrl
-        }
+        };
 
-        console.log("station", station)
-        stationService
-            .save(updatedStation)
-            .then((savedStation) => {
-                console.log("updatedStation", savedStation)
-                dispatch(updateStations(savedStation))
-                dispatch(updateCurrentStation(savedStation))
-                dispatch(updateIsEditModalShown(!isEditModalShown))
-            })
-            .catch((error) => {
-                console.log("Error saving station", error)
-            })
+        try {
+            const savedStation = await stationService.save(updatedStation);
+            const stationIdx = user.stations.findIndex(currStation => currStation._id === updatedStation._id)
+            user.stations[stationIdx].imgUrl = updatedStation.imgUrl
+            user.stations[stationIdx].name = updatedStation.name
+            user = await userService.save(user)
+            dispatch(store.dispatch({ type: SET_USER, user}))
+            dispatch(updateStations(savedStation));
+            dispatch(updateCurrentStation(savedStation));
+            dispatch(updateIsEditModalShown(!isEditModalShown));
+        } catch (error) {
+            console.log("Error saving station", error);
+        }
     }
 
-    // async function handleSubmit(ev) {
-    //     ev.preventDefault()
-
-    //     const imgUrl = uploadedImgUrl || station.imgUrl
-
-    //     const updatedStation = {
-    //         ...station,
-    //         name,
-    //         description,
-    //         imgUrl
-    //     }
-
-    //     try {
-    //         const savedStation = await stationService.save(updatedStation);
-    //         const stationIdx = user.stations.findIndex(currStation => currStation._id === updatedStation._id)
-    //         user.stations[stationIdx].imgUrl = updatedStation.imgUrl
-    //         user.stations[stationIdx].name = updatedStation.name
-    //         // dispatch(store.dispatch({ type: SET_USER, user}))
-    //         const updatedUser = await userService.update(user)
-    //     store.dispatch(updateCurrentUser(updatedUser))
-    //         dispatch(updateStations(savedStation))
-    //         dispatch(updateCurrentStation(savedStation))
-    //         dispatch(updateIsEditModalShown(!isEditModalShown))
-    //     } catch (error) {
-    //         console.log("Error saving station", error)
-    //     }
-    // }
-
-    function handleImageUpload (imgUrl){
+    function handleImageUpload(imgUrl) {
         setUploadedImgUrl(imgUrl)
+        console.log(imgUrl)
     }
 
     return (

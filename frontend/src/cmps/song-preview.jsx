@@ -31,7 +31,6 @@ export function SongPreview({ song, idx }) {
 
     const [isDropdownShown, setIsDropdownShown] = useState(false)
 
-
     function timeAgo(timestamp) {
         return dayjs(timestamp).fromNow()
     }
@@ -46,8 +45,10 @@ export function SongPreview({ song, idx }) {
     }
     async function onRemove(station, song) {
         try {
-            const newStation = await stationService.removeSong(station, song.id)
-            console.log(newStation)
+            const songIdx = station.songs.findIndex(
+                (currSong) => currSong.id === song.id
+            )
+            const newStation = await stationService.removeSong(station, songIdx)
             store.dispatch(updateCurrentStation(newStation))
         } catch {
             console.log("Cannot add song")
@@ -76,10 +77,14 @@ export function SongPreview({ song, idx }) {
             user.stations[0].songs = user.stations[0].songs.filter(
                 (currSong) => currSong.id !== song.id
             )
-        } else user.stations[0].songs.push(song)
+        } else { user.stations[0].songs.push(song)
+        const songIdx = user.stations[0].songs.findIndex(
+            (currSong) => currSong.id === song.id
+        )
+        user.stations[0].songs[songIdx].addedAt = Date.now()
+        }
         try {
             user = await userService.save(user)
-            console.log("savedUser", user)
             store.dispatch({ type: SET_USER, user })
             if (station._id === user.stations[0]._id) {
                 store.dispatch(updateCurrentStation(user.stations[0]))
@@ -180,7 +185,21 @@ export function SongPreview({ song, idx }) {
                         </svg>
                     )}
                 </div>
-                <div className="time icon">3:10</div>
+                {/* <div
+                    onClick={() => onRemove(station, song)}
+                    className="right-section icon hidden">
+                    <svg
+                        role="img"
+                        height="16"
+                        width="16"
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        data-encore-id="icon"
+                        class="Svg-sc-ytk21e-0 ldgdZj">
+                        <path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
+                    </svg>
+                </div> */}
+                <div className="time icon">{song.duration}</div>
                 <div
                     onClick={() => onRemove(station, song)}
                     className="right-section icon hidden">
@@ -197,7 +216,7 @@ export function SongPreview({ song, idx }) {
                 </div>
                 <button onClick={showStationsDropdownModal} className="add-btn">
                     Add
-                </button>{" "}
+                </button>
             </td>
             <div className="add-song-dropdown">
                 {isDropdownShown ? (
