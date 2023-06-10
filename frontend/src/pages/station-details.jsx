@@ -66,6 +66,7 @@ export function StationDetails() {
         if (!user.stations) return
         return user.stations[0]._id === station._id
     }
+    console.log('stationnn',station);
 
     return (
         // <div className="top-station">

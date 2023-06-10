@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink, useLocation, useParams } from "react-router-dom"
 import { utilService } from "../services/util.service"
 import { UserStationList } from "./user-station-list"
 import { stationService } from "../services/station.service.local"
@@ -9,7 +9,7 @@ import { ReactComponent as HomeIcon } from "../assets/icons/home.svg"
 import { ReactComponent as ActiveSearchIcon } from "../assets/icons/active-search.svg"
 import { ReactComponent as SearchIcon } from "../assets/icons/search.svg"
 import { store } from "../store/store"
-import { updateCurrentStation, updateStations } from "../store/station.actions"
+import { loadStation, updateCurrentStation, updateStations } from "../store/station.actions"
 import { useSelector } from "react-redux"
 import { userService } from "../services/user.service"
 import { storageService } from "../services/async-storage.service"
@@ -53,7 +53,6 @@ export function SideNavbar() {
             showErrorMsg("Cannot add station")
         }
     }
-
     return (
         <div className="side-navbar flex column ">
             <section className="side-navbar-main flex column">
