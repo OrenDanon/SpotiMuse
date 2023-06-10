@@ -118,7 +118,7 @@ export function SideNavbar() {
                                         onClick={onAddStation}
                                         className="add-library">
                                         <NavLink to={`/station/${station._id}`}>
-                                            <span className="icon">
+                                            <span className="icon flex">
                                                 <svg
                                                     role="img"
                                                     height="16"

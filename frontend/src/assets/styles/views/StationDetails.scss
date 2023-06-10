@@ -199,50 +199,51 @@
     }
 
     .bottom-section {
+        padding: 0 24px;
         .song-list {
-
+            
             table {
-
-                .icon {
-                    fill: #b3b3b3;
+                thead{
+                    .grid-colums{
+                        display: grid;
+                    }
                 }
-
+                
                 tr {
+                    .added-at {
+                        opacity: 1;
+                    }
+                    
+                    .icon {
+                        fill: white;
+                    }
 
+                    .add-btn {
+                        display: none;
+                    }
+    
+                    .time {
+                        margin-right: 21px;
+                    }
+                    
+                    .right-section {
+                        padding-top: 5px;
+                    
+                    }
                     &:hover {
-
+        
                         .hidden {
                             opacity: 1;
                         }
-
+        
                         .play {
                             display: flex;
                         }
                     }
                 }
-
-                .like {
-                    width: 100%;
-                    padding: 7px 0px 0px 5px;
-                }
-
-                .time {
-                    margin-right: 21px;
-                }
-
-                .right-section {
-                    padding-top: 5px;
-                }
+                
             }
-
-            tr:first-child {
-
-                td:last-child {
-                    margin-right: 36px;
-                    justify-self: end;
-                }
-            }
-
+      
         }
 
     }
