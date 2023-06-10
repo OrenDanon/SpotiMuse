@@ -80,6 +80,8 @@
                     span {
                         margin-top: 5px;
                         transition: 0.2s;
+                        letter-spacing: 0.7px;
+
                     }
                 }
 
@@ -100,6 +102,7 @@
 
         .user-station-list {
             overflow: auto;
+
             img {
                 width: 44px;
                 height: 44px;
@@ -144,9 +147,57 @@
     .library {
         flex: 1;
 
+        header {
+            ul {
+                height: 54px;
+                padding-top: 4px;
+
+                .add-library {
+                    a {
+                        span {
+                            border-radius: 50%;
+                            width: 32px;
+                            justify-content: center;
+                            height: 32px;
+                        }
+                    }
+                }
+
+                a {
+                    span {
+                        align-items: center;
+
+                        &:hover {
+                            background-color: rgb(26, 26, 26);
+                            fill: #fff;
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+        ul {
+
+            li {
+                a {
+                    gap: 0;
+                }
+
+            }
+
+        }
+
+        .icon {
+            margin: 0;
+            margin-right: 12px;
+        }
+
         .add-library {
-            margin-left: 56px;
-            align-items: center;
+            display: flex;
+            align-self: baseline;
+            margin-left: 45px;
         }
     }
 }
