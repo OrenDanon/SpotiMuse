@@ -39,7 +39,7 @@ export function SongPreview({ song, idx }) {
             const toStation = await stationService.getById(toStationId)
             toStation.songs.push(song)
             stationService.save(toStation)
-        }catch(err){
+        } catch (err) {
             console.log('Can not add song to playlist');
         }
     }
@@ -94,6 +94,6 @@ export function SongPreview({ song, idx }) {
                 <div onClick={() => onRemove(station, song)} className='right-section icon hidden'><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 ldgdZj"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg></div>
                 <button>Add</button>
             </td>
-            </>
+        </>
     )
 }
