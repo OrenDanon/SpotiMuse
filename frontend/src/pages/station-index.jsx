@@ -18,6 +18,10 @@ export function StationIndex() {
     loadStations()
   }, [])
 
+  function yourStations() {
+    return userService.getLoggedinUser()
+  }
+
   return (
     <>
     {stations[0] ?   
@@ -26,8 +30,14 @@ export function StationIndex() {
       <div className="station-index">
         <h2>Spotify Playlists</h2>
         <StationList stations={stations} />
-        <h2>Your Playlists</h2>
-        <StationList stations={stations.filter(station=> station.createdBy._id === userService.getLoggedinUser()._id)} />
+        {yourStations() ?
+        <div>
+          <h2>Your Playlists</h2>
+          <StationList stations={stations.filter(station=> station.createdBy._id === userService.getLoggedinUser()._id)} />
+        </div>
+      : 
+      <div></div>
+      }
         {/* <h2>Popular Playlists</h2>
         <StationList stations={stations} /> */}
       </div>
