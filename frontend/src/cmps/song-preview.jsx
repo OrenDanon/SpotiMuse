@@ -202,7 +202,7 @@ export function SongPreview({ song, idx }) {
                 <div className="time icon">{song.duration}</div>
                 <div
                     onClick={() => onRemove(station, song)}
-                    className="right-section icon hidden">
+                    className="right-section icon display-none">
                     <svg
                         role="img"
                         height="16"

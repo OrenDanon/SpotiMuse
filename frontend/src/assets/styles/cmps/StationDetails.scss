@@ -76,7 +76,10 @@
                     border-radius: 6px;
                     &:hover {
                         background-color: hsla(0, 0%, 100%, 0.1);
-                        
+                        .right-section {
+                            display: flex;
+                        }
+
                         .hidden {
                             opacity: 1;
                         }

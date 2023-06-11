@@ -28,7 +28,6 @@
             }
 
             tr {
-
                 padding: 0px 16px;
                 align-items: center;
                 justify-content: start;
@@ -47,19 +46,13 @@
                     margin-top: 18px;
                 }
 
-                .right-section {
-                        opacity: 0;             
-                }
-
                 &:hover {
-                    background-color: hsla(0, 0%, 100%, .1);
+                    background-color: hsla(0, 0%, 100%, 0.1);
                     border-radius: 6px;
-
-
+                 
                     .hidden {
-                        // opacity: 1;
+                        opacity: 1;
                     }
-
                     .song-idx {
                         display: none;
                     }
@@ -72,7 +65,6 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                    
                     }
                 }
             }
@@ -116,5 +108,4 @@
             margin-right: 36px;
         }
     }
-
 }
