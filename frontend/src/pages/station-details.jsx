@@ -108,8 +108,7 @@ export function StationDetails() {
         if (!user.stations) return
         return user.stations[0]._id === station._id
     }
-    console.log('stationnn',station);
-
+    
     return (
 
         <div className="station-details">
@@ -123,10 +122,12 @@ export function StationDetails() {
                                 <p>Playlist</p>
                                 <h1>{station.name}</h1>
                                 <p>
-                                    {" "}
-                                    {station.createdBy?.fullname}{" "}
+                                    
+                                    {station.createdBy?.fullname}
                                     <span>{`${"\u2022"}`}</span>
-                                    {`${station.songs?.length} songs`}
+                                    {`${station.songs?.length} songs, 
+                                    ${stationService.totalSongsDuration(station)}`}
+
                                 </p>
                             </div>
                         </div>

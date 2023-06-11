@@ -13,6 +13,7 @@ export function StationIndex() {
     const stations = useSelector(
         (storeState) => storeState.stationModule.stations
     )
+    
   useEffect(() => {
     loadStations()
   }, [])

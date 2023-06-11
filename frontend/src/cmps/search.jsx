@@ -52,7 +52,6 @@ export function Search() {
                     }
                 });
                 const durations = videosResponse.data.items.map(item => item.contentDetails.duration)
-                console.log(durations)
                 const station = stationService.dataTransform(response.data.items,durations)
                 setData(station);
                 cache[term] = station

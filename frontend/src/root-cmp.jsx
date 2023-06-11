@@ -14,9 +14,10 @@ import { SearchPage } from "./pages/search-page"
 import { userService } from "./services/user.service"
 import { SET_USER } from "./store/user.reducer"
 import { store } from "./store/store"
+import { Genre } from "./pages/genre"
 
 export function RootCmp() {
-
+    
     async function setInitialUser() {
         const userId = userService.getLoggedinUser()._id
         if (!userId) return
@@ -45,6 +46,7 @@ export function RootCmp() {
                     ))}
                     <Route path="search" element={<SearchPage />} />
                     <Route path="station/:id" element={<StationDetails />} />
+                    <Route path="genre/:genre" element={<Genre />} />
                 </Routes>
                 <FooterNav />
             </main>
