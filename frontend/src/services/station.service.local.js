@@ -20,7 +20,9 @@ export const stationService = {
   getGenreList,
   dataTransform,
   getSongById,
-  convertDuration
+  convertDuration,
+  totalSongsDuration,
+
 }
 window.cs = stationService
 
@@ -69,7 +71,14 @@ async function removeSong(station, songIdx) {
   station.songs.splice(songIdx, 1)
   return await save(station)
 }
+function _transformSongTitle(title) {
+  title = title.replace(/\([^()]*\)/g, '');
+  title = title.replace(/\{[^{}]*\}/g, '');
+  title = title.replace(/&#?\w+;/g, '');
+  title = title.trim();
 
+  return title;
+}
 async function addStationMsg(stationId, txt) {
   // Later, this is all done by the backend
   const station = await getById(stationId)
@@ -93,13 +102,35 @@ function getPrevSong(station, song) {
   const idx = station.songs.findIndex(prevSong => prevSong.id === song.id)
   return station.songs[idx - 1]
 }
-function dataTransform(response,durations) {
+function totalSongsDuration(station) {
+  const totalDuration = station.songs.reduce((acc, currSong) => {
+    const durationParts = currSong.duration.split(":");
+    const minutes = parseInt(durationParts[0]);
+    const seconds = parseInt(durationParts[1]);
+    const songDurationInSeconds = minutes * 60 + seconds;
+    return acc + songDurationInSeconds;
+  }, 0);
+
+  const minutes = Math.floor(totalDuration / 60);
+  const seconds = totalDuration % 60;
+
+  let formattedDuration = "";
+
+  if (minutes > 0) {
+    formattedDuration += `${minutes} min `;
+  }
+
+  formattedDuration += `${seconds} sec`;
+
+  return formattedDuration;
+}
+function dataTransform(response, durations) {
   const station = {}
   const songs = []
-  response.map((res ,idx) => {
+  response.map((res, idx) => {
     const song = {
       id: utilService.makeId(),
-      title: res.snippet.title,
+      title: _transformSongTitle(res.snippet.title),
       duration: convertDuration(durations[idx]),
       url: res.id.videoId,
       imgUrl: res.snippet.thumbnails.default.url,
@@ -113,40 +144,40 @@ function dataTransform(response,durations) {
 function getGenreList() {
   return [
     {
-      title:"Pop",
-      img:"https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
+      title: "Pop",
+      img: "https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
     },
     {
-      title:"Hip-Hop",
-      img:"https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
+      title: "Hip-Hop",
+      img: "https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
     },
     {
-      title:"Rock",
-      img:"https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+      title: "Rock",
+      img: "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
     },
     {
-      title:"Latin",
-      img:"https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
+      title: "Latin",
+      img: "https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
     },
     {
-      title:"R&B",
-      img:"https://i.scdn.co/image/ab67fb8200005cafbe6a6e705e1a71117c2d0c2c",
+      title: "R&B",
+      img: "https://i.scdn.co/image/ab67fb8200005cafbe6a6e705e1a71117c2d0c2c",
     },
     {
-      title:"Metal",
-      img:"https://i.scdn.co/image/ab67fb8200005cafefa737b67ec51ec989f5a51d",
+      title: "Metal",
+      img: "https://i.scdn.co/image/ab67fb8200005cafefa737b67ec51ec989f5a51d",
     },
     {
-      title:"Punk",
-      img:"https://i.scdn.co/image/ab67fb8200005cafb2cdd7a95b0a5444aa15cfb5",
+      title: "Funk",
+      img: "https://i.scdn.co/image/ab67fb8200005cafb2cdd7a95b0a5444aa15cfb5",
     },
     {
-      title:"Country",
-      img:"https://i.scdn.co/image/ab67fb8200005cafc0d2222b4c6441930e1a386e",
+      title: "Country",
+      img: "https://i.scdn.co/image/ab67fb8200005cafc0d2222b4c6441930e1a386e",
     },
     {
-      title:"K-pop",
-      img:"https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
+      title: "K-pop",
+      img: "https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
     },
   ]
 }
@@ -182,12 +213,9 @@ function getEmptyStation() {
   return {
     name: 'My Playlist',
     imgUrl: 'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-dimensions/2500?v=v2&px=-1',
-    tags: [
-      'Funk',
-      'Happy'
-    ],
+    tags: ["Pop"],
     createdBy: {
-      _id:   userService.getLoggedinUser()._id,
+      _id: userService.getLoggedinUser()._id,
       fullname: userService.getLoggedinUser().username,
       imgUrl: userService.getLoggedinUser().imgUrl,
     },

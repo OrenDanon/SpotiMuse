@@ -43,7 +43,7 @@ export function EditModal() {
             ...station,
             name,
             description,
-            imgUrl
+            imgUrl,
         };
 
         try {
