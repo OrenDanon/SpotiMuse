@@ -43,6 +43,8 @@ export function AppFooter() {
     // const [isPlayerReady, setIsPlayerReady] = useState(false)
     const [isPlayerLoading, setIsPlayerLoading] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
+    const [isRepeatOn, setIsRepeatOn] = useState(false)
+    const [isRepeatOnceOn, setIsRepeatOnceOn] = useState(false)
     const playerRef = useRef(null)
     const previousVolume = useRef(1)
 
@@ -58,6 +60,13 @@ export function AppFooter() {
         const mins = Math.floor(seconds / 60)
         const secs = Math.floor(seconds % 60)
         return `${mins}:${secs < 10 ? "0" : ""}${secs}`
+    }
+
+    const shuffleArray = (array) => {
+        return array
+            .map((value) => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value)
     }
 
     function handlePlayClick() {
@@ -83,7 +92,14 @@ export function AppFooter() {
     }
 
     function handleShuffleClick() {
-        setIsShuffled((prevState) => !prevState)
+        setIsShuffled(!isShuffled)
+        let shuffledStation = []
+        if (isShuffled) shuffledStation = shuffleArray(station.songs)
+        console.log('aaaaaaaaaaaaaaaaa', shuffledStation)
+    }
+
+    function handleRepeatOn() {
+        setIsRepeatOn(!isRepeatOn)
     }
 
     function toggleMute() {
@@ -109,11 +125,9 @@ export function AppFooter() {
         }
     }
     function onNextSong() {
-        const nextSong = stationService.getNextSong(station, song)
+        const nextSong = stationService.getNextSong(station, song, isRepeatOn)
         if (!nextSong) return
-        // if (isPlaying === false) store.dispatch(updateIsPlaying(!isPlaying))
         store.dispatch(updateCurrentSong(nextSong))
-        // setIsPlayerReady(false)
         setIsPlayerLoading(true)
     }
     function onPrevSong() {
@@ -205,7 +219,7 @@ export function AppFooter() {
                     <div className="control-buttons">
                         <div className="flex player-controls-left">
                             <button className="icon">
-                                <ShuffleIcon
+                                <ShuffleIcon onClick={handleShuffleClick}
                                     title="Enable shuffle"
                                     className={`icon shuffle-icon ${
                                         isShuffled ? "icon-green" : "icon-gray"
@@ -245,6 +259,7 @@ export function AppFooter() {
                             </button>
                             <button className="icon">
                                 <RepeatOffIcon
+                                onClick={handleRepeatOn}
                                     title="Enable repeat"
                                     className="icon repeat-off-icon"
                                 />
