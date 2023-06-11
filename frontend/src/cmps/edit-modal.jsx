@@ -4,6 +4,7 @@ import {
     updateIsEditModalShown,
     updateCurrentStation,
     updateStations,
+    updateIsDropdownModalShown,
     updateCurrentUser
 } from "../store/station.actions"
 import { store } from "../store/store"
@@ -12,8 +13,15 @@ import { stationService } from "../services/station.service.local"
 import { ImgUploader } from "../cmps/img-uploader"
 import { userService } from "../services/user.service"
 import { SET_USER } from "../store/user.reducer"
+import { DropdownModal } from "./dropdown-modal"
+import { useEffect } from "react"
+import { Geners } from "./Geners"
+
 
 export function EditModal() {
+    useEffect(() => {
+        store.dispatch(updateIsDropdownModalShown(false))
+    }, [])
     const isEditModalShown = useSelector(
         (storeState) => storeState.stationModule.isEditModalShown
     )
@@ -52,7 +60,7 @@ export function EditModal() {
             user.stations[stationIdx].imgUrl = updatedStation.imgUrl
             user.stations[stationIdx].name = updatedStation.name
             user = await userService.save(user)
-            dispatch(store.dispatch({ type: SET_USER, user}))
+            dispatch(store.dispatch({ type: SET_USER, user }))
             dispatch(updateStations(savedStation));
             dispatch(updateCurrentStation(savedStation));
             dispatch(updateIsEditModalShown(!isEditModalShown));
@@ -66,6 +74,21 @@ export function EditModal() {
         console.log(imgUrl)
     }
 
+    const isDropdownModalShown = useSelector(
+        (storeState) => storeState.stationModule.isDropdownModalShown
+    )
+
+
+    function handleEditModalOpen() {
+        store.dispatch(updateIsEditModalShown(!isEditModalShown))
+        store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
+    }
+    function showDropdownModal() {
+        store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
+    }
+
+    const geners = stationService.getGenreList()
+
     return (
         <div className="edit-modal">
             <div className="edit-modal-content">
@@ -77,10 +100,10 @@ export function EditModal() {
                 </div>
                 <div className="edit-station-content">
                     <div className="edit-image-container">
-                        <img src={`${uploadedImgUrl || station.imgUrl}`} alt="station-img"/>
+                        <img src={`${uploadedImgUrl || station.imgUrl}`} alt="station-img" />
                         <ImgUploader onUploaded={handleImageUpload} />
                     </div>
-                    <div className="edit-station-form">
+                    <div className="edit-station-form-name">
                         <form action="">
                             <label
                                 htmlFor="edit-input"
@@ -95,6 +118,33 @@ export function EditModal() {
                                 value={name}
                                 onChange={(ev) => setName(ev.target.value)}
                             />
+                        </form>
+                    </div>
+
+                    <div className="edit-station-label">
+                        <div className="dropdown-container">
+                            <button
+                                onClick={showDropdownModal}
+                                className="btn-dropdown">
+                                Add genre
+                            </button>
+                            {isDropdownModalShown && (
+                                <div className="dropdown-modal">
+                                    <DropdownModal>
+                                        <li
+                                            onClick={
+                                                handleEditModalOpen
+                                            }>
+                                            <Geners geners={geners} />
+                                        </li>
+                                    </DropdownModal>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="edit-station-form-desc">
+                        <form action="">
                             <label
                                 htmlFor="edit-desc-textarea"
                                 className="edit-input-label">
@@ -110,13 +160,17 @@ export function EditModal() {
                                 onChange={(ev) =>
                                     setDescription(ev.target.value)
                                 }></textarea>
-                            <input
-                                onClick={handleSubmit}
-                                type="submit"
-                                value="Save"
-                            />
                         </form>
                     </div>
+                    <div className="save">
+                        <form action="">
+                            <button
+                                onClick={handleSubmit}
+                                type="submit"
+                            ><span>Save</span></button>
+                        </form>
+                    </div>
+                    <p>By proceeding, you agree to give Spotify access to the image you choose to upload. Please make sure you have the right to upload the image.</p>
                 </div>
             </div>
         </div>
