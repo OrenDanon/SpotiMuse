@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { stationService } from "../services/station.service.local"
 import {
     updateCurrentSong,
@@ -13,6 +13,8 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { userService } from "../services/user.service"
 import { SET_USER } from "../store/user.reducer"
 import { DropdownModal } from "../cmps/dropdown-modal.jsx"
+import useOnClickOutside from "../customHooks/useOnClickOutside"
+
 dayjs.extend(relativeTime)
 
 export function SongPreview({ song, idx }) {
@@ -30,6 +32,9 @@ export function SongPreview({ song, idx }) {
     )
 
     const [isDropdownShown, setIsDropdownShown] = useState(false)
+    const dropdownRef = useRef()
+    useOnClickOutside(dropdownRef, () => setIsDropdownShown(false))
+
 
     function timeAgo(timestamp) {
         return dayjs(timestamp).fromNow()
@@ -61,8 +66,11 @@ export function SongPreview({ song, idx }) {
             const toStation = await stationService.getById(toStationId)
             toStation.songs.push(song)
             stationService.save(toStation)
+            store.dispatch(updateCurrentStation(toStation))
         } catch (err) {
             console.log("Can not add song to playlist")
+        } finally {
+            setIsDropdownShown(false)
         }
     }
 
@@ -77,11 +85,12 @@ export function SongPreview({ song, idx }) {
             user.stations[0].songs = user.stations[0].songs.filter(
                 (currSong) => currSong.id !== song.id
             )
-        } else { user.stations[0].songs.push(song)
-        const songIdx = user.stations[0].songs.findIndex(
-            (currSong) => currSong.id === song.id
-        )
-        user.stations[0].songs[songIdx].addedAt = Date.now()
+        } else {
+            user.stations[0].songs.push(song)
+            const songIdx = user.stations[0].songs.findIndex(
+                (currSong) => currSong.id === song.id
+            )
+            user.stations[0].songs[songIdx].addedAt = Date.now()
         }
         try {
             user = await userService.save(user)
@@ -220,7 +229,7 @@ export function SongPreview({ song, idx }) {
             </td>
             <div className="add-song-dropdown">
                 {isDropdownShown ? (
-                    <div className="dropdown-modal">
+                    <div className="dropdown-modal" ref={dropdownRef}>
                         <DropdownModal>
                             {stations.map((station, idx) => (
                                 <li

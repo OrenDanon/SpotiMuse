@@ -181,7 +181,7 @@ function convertDuration(duration) {
 function getEmptyStation() {
   return {
     name: 'My Playlist',
-    imgUrl: 'https://i.ytimg.com/vi/LjxulQ1bEWg/maxresdefault.jpg',
+    imgUrl: 'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-dimensions/2500?v=v2&px=-1',
     tags: [
       'Funk',
       'Happy'
@@ -196,6 +196,7 @@ function getEmptyStation() {
     msgs: []
   }
 }
+
 var stations = utilService.loadFromStorage(STORAGE_KEY)
 if (!stations) {
   stations = [{

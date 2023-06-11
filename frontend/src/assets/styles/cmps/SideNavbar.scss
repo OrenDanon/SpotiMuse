@@ -1,5 +1,3 @@
-
-
 .side-navbar-main {
     gap: $layout-padding;
     height: 100%;
@@ -16,6 +14,8 @@
             border: 0;
             margin: 0;
             list-style: none;
+            overflow: auto;
+            max-height: 745px;
 
 
             li {
@@ -88,6 +88,8 @@
 
             &:hover {
                 background-color: #1a1a1a;
+                border-radius: 50%;
+                fill: #fff;
             }
         }
 
@@ -151,8 +153,18 @@
 
         .add-library {
             display: flex;
-            align-self: baseline;
+            align-self: end;
             margin-left: 45px;
+
+            span {
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+            }
+
+            svg{
+                align-self: center;
+            }
         }
     }
 }
