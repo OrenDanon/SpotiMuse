@@ -28,12 +28,9 @@ export async function getById(req, res) {
 }
 
 export async function addStation(req, res) {
-  const { loggedinUser } = req
-  console.log(loggedinUser)
 
   try {
     const station = req.body
-    station.createdBy = loggedinUser
     const addedStation = await stationService.add(station)
     res.json(addedStation)
   } catch (err) {

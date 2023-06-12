@@ -27,14 +27,14 @@ function getUsers() {
 }
 
 async function save(user) {
-    const savedUser = await storageService.put('user', user)
+    const savedUser = await httpService.put(`user/${user._id}`, user)
     return savedUser
 }
 
 
 async function getById(userId) {
-    const user = await storageService.get('user', userId)
-    // const user = await httpService.get(`user/${userId}`)
+    // const user = await storageService.get('user', userId)
+    const user = await httpService.get(`user/${userId}`)
     return user
 }
 
@@ -58,8 +58,8 @@ async function login(userCred) {
     try {
         userCred.password = '123'
         const user = await httpService.post('auth/login', userCred)
+        return saveLocalUser(user)
     } catch (err) {
-        console.log(5);
         throw err
     }
 
@@ -67,7 +67,6 @@ async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username)
     // // const user = await httpService.post('auth/login', userCred)
     // if (user) {
-    //     return saveLocalUser(user)
     // }
 }
 async function signup(userCred) {
@@ -78,9 +77,9 @@ async function signup(userCred) {
         imgUrl: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
         songs: []
     }]
-    const user = await storageService.post('user', userCred)
-    // const user = await httpService.post('auth/signup', userCred)
-    return saveLocalUser(user)
+    // const user = await storageService.post('user', userCred)
+    const user = await httpService.post('auth/signup', userCred)
+    // return saveLocalUser(user)
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)

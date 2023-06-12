@@ -21,27 +21,32 @@ import { Geners } from "./Geners"
 export function EditModal() {
     const isEditModalShown = useSelector(
         (storeState) => storeState.stationModule.isEditModalShown
-        )
-        
-        const station = useSelector(
-            (storeState) => storeState.stationModule.station
-            )
-            
-            let user = useSelector(storeState => storeState.userModule.user)
-            
-            const [name, setName] = useState(station.name)
-            const [description, setDescription] = useState(station.description || "")
-            const [uploadedImgUrl, setUploadedImgUrl] = useState()
-            const [tags, setTags] = useState(station.tags || [])
-            const dispatch = useDispatch()
-            
-            useEffect(() => {
-                store.dispatch(updateIsDropdownModalShown(false))
-                console.log(tags)
-            }, [tags])
+    )
+
+    const station = useSelector(
+        (storeState) => storeState.stationModule.station
+    )
+    const [tags, setTags] = useState(station.tags || [])
+
+    let user = useSelector(storeState => storeState.userModule.user)
+
+    const [name, setName] = useState(station.name)
+    const [description, setDescription] = useState(station.description || "")
+    const [uploadedImgUrl, setUploadedImgUrl] = useState()
+    const dispatch = useDispatch()
 
     function closeEditModal() {
         dispatch(updateIsEditModalShown(!isEditModalShown))
+    }
+    function handleGenreSelection(gener) {
+        console.log(gener)
+        setTags(prevTags => {
+            if (!prevTags.includes(gener.title)) {
+                return [...prevTags, gener.title]
+            }
+            return prevTags
+        })
+        console.log(tags);
     }
 
     async function handleSubmit(ev) {
@@ -55,7 +60,7 @@ export function EditModal() {
             description,
             imgUrl,
             tags
-        }
+        };
 
         try {
             const savedStation = await stationService.save(updatedStation);
@@ -63,7 +68,7 @@ export function EditModal() {
             user.stations[stationIdx].imgUrl = updatedStation.imgUrl
             user.stations[stationIdx].name = updatedStation.name
             if (!user.stations[stationIdx].tags) user.stations[stationIdx].tags = []
-              user.stations[stationIdx].tags.push(...updatedStation.tags)
+            user.stations[stationIdx].tags.push(...updatedStation.tags)
             user = await userService.save(user)
             dispatch(store.dispatch({ type: SET_USER, user }))
             dispatch(updateStations(savedStation))
@@ -147,12 +152,8 @@ export function EditModal() {
                             {isDropdownModalShown && (
                                 <div className="dropdown-modal">
                                     <DropdownModal>
-                                        <li
-                                            // onClick={
-                                            //     handleEditModalOpen
-                                            // }
-                                            >
-                                            <Geners geners={geners} onSelect={handleGenreSelection}/>
+                                        <li>
+                                            <Geners geners={geners} onSelect={handleGenreSelection} />
                                         </li>
                                     </DropdownModal>
                                 </div>
