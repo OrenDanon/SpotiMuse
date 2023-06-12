@@ -43,6 +43,7 @@ export function AppFooter() {
     // const [isPlayerReady, setIsPlayerReady] = useState(false)
     const [isPlayerLoading, setIsPlayerLoading] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
+    let [shuffledSongs, setShuffledSongs] = useState([])
     const [isRepeatOn, setIsRepeatOn] = useState(false)
     const [isRepeatOnceOn, setIsRepeatOnceOn] = useState(false)
     const playerRef = useRef(null)
@@ -93,9 +94,14 @@ export function AppFooter() {
 
     function handleShuffleClick() {
         setIsShuffled(!isShuffled)
-        let shuffledStation = []
-        if (isShuffled) shuffledStation = shuffleArray(station.songs)
-        console.log('aaaaaaaaaaaaaaaaa', shuffledStation)
+        if (!isShuffled) {
+            shuffledSongs = shuffleArray(station.songs)
+            setShuffledSongs(shuffledSongs)
+        } else {
+            shuffledSongs = []
+        }
+        console.log(shuffledSongs)
+        console.log(!isShuffled)
     }
 
     function handleRepeatOn() {
@@ -125,17 +131,26 @@ export function AppFooter() {
         }
     }
     function onNextSong() {
-        const nextSong = stationService.getNextSong(station, song, isRepeatOn)
+        const nextSong = stationService.getNextSong(
+            station,
+            song,
+            isRepeatOn,
+            isShuffled,
+            shuffledSongs
+        )
         if (!nextSong) return
         store.dispatch(updateCurrentSong(nextSong))
         setIsPlayerLoading(true)
     }
     function onPrevSong() {
-        const prevSong = stationService.getPrevSong(station, song)
+        const prevSong = stationService.getPrevSong(
+            station,
+            song,
+            isShuffled,
+            shuffledSongs
+        )
         if (!prevSong) return
-        // if (isPlaying === false) store.dispatch(updateIsPlaying(!isPlaying))
         store.dispatch(updateCurrentSong(prevSong))
-        // setIsPlayerReady(false)
         setIsPlayerLoading(true)
     }
     async function onLike() {
@@ -219,10 +234,11 @@ export function AppFooter() {
                     <div className="control-buttons">
                         <div className="flex player-controls-left">
                             <button className="icon">
-                                <ShuffleIcon onClick={handleShuffleClick}
-                                    title="Enable shuffle"
+                                <ShuffleIcon
+                                    onClick={handleShuffleClick}
+                                    title={isShuffled ? "Disable shuffle" : "Enable shuffle"}
                                     className={`icon shuffle-icon ${
-                                        isShuffled ? "icon-green" : "icon-gray"
+                                        isShuffled ? "icon-green" : ""
                                     }`}
                                 />
                             </button>
@@ -259,9 +275,11 @@ export function AppFooter() {
                             </button>
                             <button className="icon">
                                 <RepeatOffIcon
-                                onClick={handleRepeatOn}
-                                    title="Enable repeat"
-                                    className="icon repeat-off-icon"
+                                    onClick={handleRepeatOn}
+                                    title={isRepeatOn ? "Disable repeat" : "Enable repeat"}
+                                    className={`icon repeat-off-icon ${
+                                        isRepeatOn ? "icon-green" : ""
+                                    }`}
                                 />
                             </button>
                         </div>
@@ -303,19 +321,19 @@ export function AppFooter() {
                             onClick={toggleMute}
                             className="icon flex volume-btn">
                             {(muted && (
-                                <VolumeOffIcon className="icon volume-icon" />
+                                <VolumeOffIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
                             )) ||
                                 (volume > 0 && volume <= 0.33 && (
-                                    <VolumeLowIcon className="icon volume-icon" />
+                                    <VolumeLowIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
                                 )) ||
                                 (volume > 0.33 && volume <= 0.66 && (
-                                    <VolumeMediumIcon className="icon volume-icon" />
+                                    <VolumeMediumIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
                                 )) ||
                                 (volume > 0.66 && (
-                                    <VolumeHighIcon className="icon volume-icon" />
+                                    <VolumeHighIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
                                 ))}
                         </button>
-                        <div className="flex">
+                        <div className="flex" title={Math.ceil(volume * 100)}>
                             <Slider
                                 min={0}
                                 max={1}

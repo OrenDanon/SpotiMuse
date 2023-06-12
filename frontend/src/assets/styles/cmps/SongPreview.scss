@@ -43,6 +43,10 @@
         }
     }
 
+    .right-options{
+        display: grid;
+        grid-template-columns: 5fr 1fr 1fr;    }
+
     .delete-modal {
         top: 56%;
         right: 4.5%;

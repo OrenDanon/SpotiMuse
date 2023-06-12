@@ -26,7 +26,7 @@ function getUsers() {
     // return httpService.get(`user`)
 }
 
-async function save(user){
+async function save(user) {
     const savedUser = await storageService.put('user', user)
     return savedUser
 }
@@ -43,7 +43,7 @@ function remove(userId) {
     // return httpService.delete(`user/${userId}`)
 }
 
-async function update({_id, score}) {
+async function update({ _id, score }) {
     const user = await storageService.get('user', _id)
     user.score = score
     await storageService.put('user', user)
@@ -55,12 +55,20 @@ async function update({_id, score}) {
 }
 
 async function login(userCred) {
-    const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
-    // const user = await httpService.post('auth/login', userCred)
-    if (user) {
-        return saveLocalUser(user)
+    try {
+        userCred.password = '123'
+        const user = await httpService.post('auth/login', userCred)
+    } catch (err) {
+        console.log(5);
+        throw err
     }
+
+    // const users = await storageService.query('user')
+    // const user = users.find(user => user.username === userCred.username)
+    // // const user = await httpService.post('auth/login', userCred)
+    // if (user) {
+    //     return saveLocalUser(user)
+    // }
 }
 async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
@@ -89,7 +97,7 @@ async function changeScore(by) {
 
 
 function saveLocalUser(user) {
-    user = {_id: user._id, username: user.username, imgUrl: user.imgUrl, stations: user.stations}
+    user = { _id: user._id, username: user.username, imgUrl: user.imgUrl, stations: user.stations }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

@@ -7,9 +7,14 @@ $clr5: #dff0ea;
 $clr6: #fff;
 $clr7: #222;
 $clr8: #121212;
-// Breakpoints
-$small-breakpoint: 835px;
-$narrow-breakpoint: 1050px;
-$normal-breakpoint: 1410px;
-$wide-breakpoint:1600px;
+
 $layout-padding: 8px;
+
+// Breakpoints
+
+$small-tablet-breakpoint: 400px;
+$tablet-breakpoint: 830px;
+$small-breakpoint: 1050px;
+$narrow-breakpoint: 1340px;
+$normal-breakpoint: 1550px;
+$wide-breakpoint:1750px;

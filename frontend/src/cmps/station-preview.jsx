@@ -31,7 +31,7 @@ export function StationPreview({ station }) {
                 <img src={`${station.imgUrl}`} alt="" />
                 <div className="play">
                     {isPlaying && (station._id === currStation._id) ?
-                        <span onClick={onPlay} className="icon-play flex align-center justify-center" style={{ opacity: 1,transform: 'translateY(-20px)' }}><PauseIcon title="Pause" />
+                        <span onClick={onPlay} className="icon-play flex align-center justify-center" style={{opacity:1}}><PauseIcon title="Pause" />
                         </span>
 
                         :

@@ -166,7 +166,7 @@ export function SongPreview({ song, idx }) {
             <td className="flex added-at ">
                 {timeAgo(song.addedAt) ? timeAgo(song.addedAt) : ""}
             </td>
-            <td className="flex">
+            <td className="flex right-options">
                 <div onClick={onLike} className="like icon flex">
                     {user.stations[0].songs.find(
                         (songUser) => songUser.id === song.id

@@ -52,6 +52,7 @@
                  
                     .hidden {
                         opacity: 1;
+                        margin-right: 14px
                     }
                     .song-idx {
                         display: none;
@@ -78,7 +79,6 @@
         }
 
         .time {
-            margin-right: 21px;
         }
 
         .right-section {
@@ -105,7 +105,7 @@
 
         .icon {
             justify-content: end;
-            margin-right: 36px;
+            margin-right: 45px;
         }
     }
 }

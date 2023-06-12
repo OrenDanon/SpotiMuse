@@ -18,6 +18,7 @@ export function StationIndex() {
   function yourStations() {
     return userService.getLoggedinUser()
   }
+
   return (
     <>
     {stations[0] ?

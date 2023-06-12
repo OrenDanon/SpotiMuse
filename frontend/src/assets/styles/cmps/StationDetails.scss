@@ -68,14 +68,18 @@
                 width: 100%;
                 border-collapse: collapse;
                 font-family: CircularStd-Book;
+
                 .icon {
                     fill: #b3b3b3;
                 }
+
                 tr {
                     padding: 0px 16px;
                     border-radius: 6px;
+
                     &:hover {
                         background-color: hsla(0, 0%, 100%, 0.1);
+
                         .right-section {
                             display: flex;
                         }
@@ -83,21 +87,27 @@
                         .hidden {
                             opacity: 1;
                         }
+
                         .song-idx {
                             display: none;
                         }
+
                         .play {
                             display: flex;
                         }
                     }
                 }
+
                 .like {
                     width: 100%;
                     padding: 7px 0px 0px 5px;
                 }
+
                 .time {
-                    margin-right: 21px;
+                    display: flex;
+                    justify-content: end;
                 }
+
                 .right-section {
                     padding-top: 5px;
                 }
