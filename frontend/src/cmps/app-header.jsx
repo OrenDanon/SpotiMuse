@@ -9,11 +9,11 @@ export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const navigate = useNavigate();
 
-    function goBack(){
+    function goBack() {
         navigate(-1);
     };
 
-    function goForward(){
+    function goForward() {
         navigate(1);
     };
 
@@ -52,6 +52,25 @@ export function AppHeader() {
                     <svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 eNWijz IYDlXmBmmUKHveMzIPCF" viewBox="0 0 16 16" data-encore-id="icon"><path d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8l-6.47 6.47a.75.75 0 1 0 1.06 1.06L13.56 8 6.03.47a.75.75 0 0 0-1.06 0z"></path></svg>
                 </button>
             </div>
+            <div className="btn-play-header flex">
+                <button
+                    className="play-btn">
+                    <svg
+                        role="img"
+                        height="28"
+                        width="28"
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        data-encore-id="icon"
+                        class="Svg-sc-ytk21e-0 ldgdZj">
+                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
+                    </svg>
+                </button>
+                <div className="section-name">
+                    My Playlist
+                </div>
+            </div>
+
             <div className="header-user">
                 {user &&
                     <button onClick={onLogout} className="user-btn flex" href="#">

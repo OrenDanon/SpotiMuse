@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom"
 import { StationList } from "../cmps/station-list"
 import { useSelector } from "react-redux"
+import { AppHeader } from "../cmps/app-header"
 
-export function Genre(){
+export function Genre() {
     const stations = useSelector(
         (storeState) => storeState.stationModule.stations
     )
@@ -13,11 +14,12 @@ export function Genre(){
     });
     console.log(genreStations);
 
-    return(
+    return (
         <div className="genre">
+            <AppHeader />
             <h1>{params.genre}</h1>
-            <StationList 
-            stations={genreStations}/>
+            <StationList
+                stations={genreStations} />
         </div>
     )
 }

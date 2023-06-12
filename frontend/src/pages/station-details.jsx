@@ -29,6 +29,25 @@ import { SET_USER } from "../store/user.reducer"
 import { Link } from "react-router-dom"
 
 export function StationDetails() {
+    useEffect(
+        () => {
+            const topSection = document.querySelector('.top-section')
+            const header = document.querySelector('.header')
+            const btnPlay = document.querySelector('.btn-play-header')
+
+            const headerObserver = new IntersectionObserver(onHeaderObserved, {
+                rootMargin: "-100px 0px 0px"
+            })
+            headerObserver.observe(topSection)
+
+            function onHeaderObserved(entries) {
+                entries.forEach((entry) => {
+                    header.style.backgroundImage = entry.isIntersecting ? 'inherit' : 'linear-gradient(rgb(75,28,28),rgb(18,18,18,1))'
+                    btnPlay.style.opacity = entry.isIntersecting ? '0' : '1'
+                })
+            }
+        }
+    )
     const station = useSelector(
         (storeState) => storeState.stationModule.station
     )
@@ -99,7 +118,7 @@ export function StationDetails() {
 
     const onClose = () => {
         store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
-      }
+    }
 
     function showDropdownModal() {
         store.dispatch(updateIsDropdownModalShown(!isDropdownModalShown))
@@ -108,7 +127,7 @@ export function StationDetails() {
         if (!user.stations) return
         return user.stations[0]._id === station._id
     }
-    
+
     return (
 
         <div className="station-details">
@@ -122,7 +141,7 @@ export function StationDetails() {
                                 <p>Playlist</p>
                                 <h1>{station.name}</h1>
                                 <p>
-                                    
+
                                     {station.createdBy?.fullname}
                                     <span>{`${"\u2022"}`}</span>
                                     {`${station.songs?.length} songs, 
