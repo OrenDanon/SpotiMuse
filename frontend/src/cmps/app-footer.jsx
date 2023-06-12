@@ -190,7 +190,6 @@ export function AppFooter() {
                     onReady={() => {
                         setIsPlayerLoading(false)
                         store.dispatch(updateIsPlaying(true))
-                        console.log("Player is ready")
                     }}
                     // onPlay={() => {
                     //     console.log("Player is playing")
@@ -236,7 +235,11 @@ export function AppFooter() {
                             <button className="icon">
                                 <ShuffleIcon
                                     onClick={handleShuffleClick}
-                                    title={isShuffled ? "Disable shuffle" : "Enable shuffle"}
+                                    title={
+                                        isShuffled
+                                            ? "Disable shuffle"
+                                            : "Enable shuffle"
+                                    }
                                     className={`icon shuffle-icon ${
                                         isShuffled ? "icon-green" : ""
                                     }`}
@@ -276,7 +279,11 @@ export function AppFooter() {
                             <button className="icon">
                                 <RepeatOffIcon
                                     onClick={handleRepeatOn}
-                                    title={isRepeatOn ? "Disable repeat" : "Enable repeat"}
+                                    title={
+                                        isRepeatOn
+                                            ? "Disable repeat"
+                                            : "Enable repeat"
+                                    }
                                     className={`icon repeat-off-icon ${
                                         isRepeatOn ? "icon-green" : ""
                                     }`}
@@ -321,16 +328,28 @@ export function AppFooter() {
                             onClick={toggleMute}
                             className="icon flex volume-btn">
                             {(muted && (
-                                <VolumeOffIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
+                                <VolumeOffIcon
+                                    className="icon volume-icon"
+                                    title={Math.ceil(volume * 100)}
+                                />
                             )) ||
                                 (volume > 0 && volume <= 0.33 && (
-                                    <VolumeLowIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
+                                    <VolumeLowIcon
+                                        className="icon volume-icon"
+                                        title={Math.ceil(volume * 100)}
+                                    />
                                 )) ||
                                 (volume > 0.33 && volume <= 0.66 && (
-                                    <VolumeMediumIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
+                                    <VolumeMediumIcon
+                                        className="icon volume-icon"
+                                        title={Math.ceil(volume * 100)}
+                                    />
                                 )) ||
                                 (volume > 0.66 && (
-                                    <VolumeHighIcon className="icon volume-icon" title={Math.ceil(volume * 100)}/>
+                                    <VolumeHighIcon
+                                        className="icon volume-icon"
+                                        title={Math.ceil(volume * 100)}
+                                    />
                                 ))}
                         </button>
                         <div className="flex" title={Math.ceil(volume * 100)}>

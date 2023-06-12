@@ -119,9 +119,9 @@ export function SongPreview({ song, idx }) {
                     <td className="flex song-idx">{idx + 1}</td>
                 )}
 
-                <td onClick={onPlay} className="flex icon display-none play">
+                <td className="flex icon display-none play">
                     {isPlaying && song.id === currSong.id ? (
-                        <svg
+                        <svg onClick={onPlay} 
                             role="img"
                             height="24"
                             width="24"
@@ -132,7 +132,7 @@ export function SongPreview({ song, idx }) {
                             <path d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
                         </svg>
                     ) : (
-                        <svg
+                        <svg onClick={onPlay} 
                             role="img"
                             height="24"
                             width="24"
@@ -156,7 +156,6 @@ export function SongPreview({ song, idx }) {
                         ) : (
                             <p>{song.title}</p>
                         )}
-                        <span>Artist</span>
                     </div>
                 </div>
             </td>
@@ -194,7 +193,7 @@ export function SongPreview({ song, idx }) {
                         </svg>
                     )}
                 </div>
-                {/* <div
+                <div
                     onClick={() => onRemove(station, song)}
                     className="right-section icon hidden">
                     <svg
@@ -207,7 +206,7 @@ export function SongPreview({ song, idx }) {
                         class="Svg-sc-ytk21e-0 ldgdZj">
                         <path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
                     </svg>
-                </div> */}
+                </div>
                 <div className="time icon">{song.duration}</div>
                 <div
                     onClick={() => onRemove(station, song)}

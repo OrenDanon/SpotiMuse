@@ -5,23 +5,22 @@ import { userService } from "./user.service.js"
 const STORAGE_KEY = "station"
 
 export const stationService = {
-  query,
-  getById,
-  save,
-  remove,
-  getEmptyStation,
-  addStationMsg,
-  getDefaultSong,
-  addSong,
-  removeSong,
-  getNextSong,
-  getPrevSong,
-  getGenreList,
-  dataTransform,
-  getSongById,
-  convertDuration,
-  totalSongsDuration,
-
+    query,
+    getById,
+    save,
+    remove,
+    getEmptyStation,
+    addStationMsg,
+    getDefaultSong,
+    addSong,
+    removeSong,
+    getNextSong,
+    getPrevSong,
+    getGenreList,
+    dataTransform,
+    getSongById,
+    convertDuration,
+    totalSongsDuration,
 }
 window.cs = stationService
 
@@ -73,12 +72,12 @@ async function removeSong(station, songIdx) {
     return await save(station)
 }
 function _transformSongTitle(title) {
-  title = title.replace(/\([^()]*\)/g, '');
-  title = title.replace(/\{[^{}]*\}/g, '');
-  title = title.replace(/&#?\w+;/g, '');
-  title = title.trim();
+    title = title.replace(/\([^()]*\)/g, "")
+    title = title.replace(/\{[^{}]*\}/g, "")
+    title = title.replace(/&#?\w+;/g, "")
+    title = title.trim()
 
-  return title;
+    return title
 }
 async function addStationMsg(stationId, txt) {
     // Later, this is all done by the backend
@@ -112,83 +111,83 @@ function getPrevSong(station, song, isShuffled, shuffledSongs) {
 }
 
 function totalSongsDuration(station) {
-  const totalDuration = station.songs.reduce((acc, currSong) => {
-    const durationParts = currSong.duration.split(":");
-    const minutes = parseInt(durationParts[0]);
-    const seconds = parseInt(durationParts[1]);
-    const songDurationInSeconds = minutes * 60 + seconds;
-    return acc + songDurationInSeconds;
-  }, 0);
+    const totalDuration = station.songs.reduce((acc, currSong) => {
+        const durationParts = currSong.duration.split(":")
+        const minutes = parseInt(durationParts[0])
+        const seconds = parseInt(durationParts[1])
+        const songDurationInSeconds = minutes * 60 + seconds
+        return acc + songDurationInSeconds
+    }, 0)
 
-  const minutes = Math.floor(totalDuration / 60);
-  const seconds = totalDuration % 60;
+    const minutes = Math.floor(totalDuration / 60)
+    const seconds = totalDuration % 60
 
-  let formattedDuration = "";
+    let formattedDuration = ""
 
-  if (minutes > 0) {
-    formattedDuration += `${minutes} min `;
-  }
+    if (minutes > 0) {
+        formattedDuration += `${minutes} min `
+    }
 
-  formattedDuration += `${seconds} sec`;
+    formattedDuration += `${seconds} sec`
 
-  return formattedDuration;
+    return formattedDuration
 }
 function dataTransform(response, durations) {
-  const station = {}
-  const songs = []
-  response.map((res, idx) => {
-    const song = {
-      id: utilService.makeId(),
-      title: _transformSongTitle(res.snippet.title),
-      duration: convertDuration(durations[idx]),
-      url: res.id.videoId,
-      imgUrl: res.snippet.thumbnails.default.url,
-      addedAt: ''
-    }
-    songs.push(song)
-  })
-  station.songs = songs
-  return station
+    const station = {}
+    const songs = []
+    response.map((res, idx) => {
+        const song = {
+            id: utilService.makeId(),
+            title: _transformSongTitle(res.snippet.title),
+            duration: convertDuration(durations[idx]),
+            url: res.id.videoId,
+            imgUrl: res.snippet.thumbnails.default.url,
+            addedAt: "",
+        }
+        songs.push(song)
+    })
+    station.songs = songs
+    return station
 }
 function getGenreList() {
-  return [
-    {
-      title: "Pop",
-      img: "https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
-    },
-    {
-      title: "Hip-Hop",
-      img: "https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
-    },
-    {
-      title: "Rock",
-      img: "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
-    },
-    {
-      title: "Latin",
-      img: "https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
-    },
-    {
-      title: "R&B",
-      img: "https://i.scdn.co/image/ab67fb8200005cafbe6a6e705e1a71117c2d0c2c",
-    },
-    {
-      title: "Metal",
-      img: "https://i.scdn.co/image/ab67fb8200005cafefa737b67ec51ec989f5a51d",
-    },
-    {
-      title: "Funk",
-      img: "https://i.scdn.co/image/ab67fb8200005cafb2cdd7a95b0a5444aa15cfb5",
-    },
-    {
-      title: "Country",
-      img: "https://i.scdn.co/image/ab67fb8200005cafc0d2222b4c6441930e1a386e",
-    },
-    {
-      title: "K-pop",
-      img: "https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
-    },
-  ]
+    return [
+        {
+            title: "Pop",
+            img: "https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
+        },
+        {
+            title: "Hip-Hop",
+            img: "https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
+        },
+        {
+            title: "Rock",
+            img: "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+        },
+        {
+            title: "Latin",
+            img: "https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
+        },
+        {
+            title: "R&B",
+            img: "https://i.scdn.co/image/ab67fb8200005cafbe6a6e705e1a71117c2d0c2c",
+        },
+        {
+            title: "Metal",
+            img: "https://i.scdn.co/image/ab67fb8200005cafefa737b67ec51ec989f5a51d",
+        },
+        {
+            title: "Funk",
+            img: "https://i.scdn.co/image/ab67fb8200005cafb2cdd7a95b0a5444aa15cfb5",
+        },
+        {
+            title: "Country",
+            img: "https://i.scdn.co/image/ab67fb8200005cafc0d2222b4c6441930e1a386e",
+        },
+        {
+            title: "K-pop",
+            img: "https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
+        },
+    ]
 }
 
 function getDefaultSong() {
@@ -221,79 +220,131 @@ function convertDuration(duration) {
 }
 
 function getEmptyStation() {
-  return {
-    name: 'My Playlist',
-    imgUrl: 'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-dimensions/2500?v=v2&px=-1',
-    tags: ["Pop"],
-    createdBy: {
-      _id: userService.getLoggedinUser()._id,
-      fullname: userService.getLoggedinUser().username,
-      imgUrl: userService.getLoggedinUser().imgUrl,
-    },
-    likedByUsers: [],
-    songs: [],
-    msgs: []
-  }
+    return {
+        name: "My Playlist",
+        imgUrl: "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-dimensions/2500?v=v2&px=-1",
+        tags: [],
+        createdBy: {
+            _id: userService.getLoggedinUser()._id,
+            fullname: userService.getLoggedinUser().username,
+            imgUrl: userService.getLoggedinUser().imgUrl,
+        },
+        likedByUsers: [],
+        songs: [],
+    }
 }
 
 var stations = utilService.loadFromStorage(STORAGE_KEY)
 if (!stations) {
     stations = [
+        // {
+        //     _id: "5cksxjas89xjsa8xjsa8jxs09",
+        //     name: "2Pac",
+        //     tags: ["Funk", "Happy"],
+        //     imgUrl: "https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
+        //     createdBy: {
+        //         _id: "u101",
+        //         fullname: "Puki Ben David",
+        //         imgUrl: "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        //     },
+        //     likedByUsers: ["{minimal-user}", "{minimal-user}"],
+        //     songs: [
+        //         {
+        //             id: "aBcDEf0",
+        //             title: "2Pac - Changes ft. Talent",
+        //             url: "eXvBjCO19QY",
+        //             imgUrl: "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+        //             addedAt: 1559755062000,
+        //         },
+        //         {
+        //             id: "aBcDEf1",
+        //             title: "2Pac - All Eyez On Me",
+        //             url: "H1HdZFgR-aA",
+        //             imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        //             addedAt: 1591377462000,
+        //         },
+        //         {
+        //             id: "aBcDEf2",
+        //             title: "2Pac - Ghetto Gospel",
+        //             url: "Do5MMmEygsY",
+        //             imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        //             addedAt: 1591377462000,
+        //         },
+        //         {
+        //             id: "aBcDEf3",
+        //             title: "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
+        //             url: "mwgZalAFNhM",
+        //             imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        //             addedAt: 1654449462000,
+        //         },
+        //         {
+        //             id: "aBcDEf4",
+        //             title: "2Pac - Dear Mama",
+        //             url: "Mb1ZvUDvLDY",
+        //             imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
+        //             addedAt: 1683307062000,
+        //         },
+        //     ],
+        //     msgs: [
+        //         {
+        //             id: "m101",
+        //             from: "{mini-user}",
+        //             txt: "Manish?",
+        //         },
+        //     ],
+        // },
         {
-            _id: "5cksxjas89xjsa8xjsa8jxs09",
-            name: "2Pac",
-            tags: ["Funk", "Happy"],
-            imgUrl: "https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
             createdBy: {
-                _id: "u101",
-                fullname: "Puki Ben David",
-                imgUrl: "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
+                _id: "MyhqE",
+                fullname: "SpotiMuse",
+                imgUrl: "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
             },
-            likedByUsers: ["{minimal-user}", "{minimal-user}"],
+            description: "",
+            imgUrl: "https://i.scdn.co/image/ab676161000051747f5cc432c9c109248ebec1ac",
+            name: "2Pac",
             songs: [
                 {
-                    id: "aBcDEf0",
+                    id: "T7KzkB",
                     title: "2Pac - Changes ft. Talent",
+                    duration: "04:31",
                     url: "eXvBjCO19QY",
                     imgUrl: "https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg",
                     addedAt: 1559755062000,
                 },
                 {
-                    id: "aBcDEf1",
-                    title: "2Pac - All Eyez On Me",
-                    url: "H1HdZFgR-aA",
-                    imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-                    addedAt: 1591377462000,
+                    id: "CLYgD4",
+                    title: "2Pac - Hit Em Up HD",
+                    duration: "05:23",
+                    url: "41qC3w3UUkU",
+                    
                 },
                 {
-                    id: "aBcDEf2",
-                    title: "2Pac - Ghetto Gospel",
-                    url: "Do5MMmEygsY",
-                    imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-                    addedAt: 1591377462000,
-                },
-                {
-                    id: "aBcDEf3",
-                    title: "2Pac - California Love feat. Dr. Dre (Dirty) (Music Video) HD",
+                    id: "NZ1HW2",
+                    title: "2Pac - California Love feat. Dr. Dre HD",
+                    duration: "05:29",
                     url: "mwgZalAFNhM",
-                    imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-                    addedAt: 1654449462000,
                 },
                 {
-                    id: "aBcDEf4",
+                    id: "q0MEF5",
+                    title: "2Pac - All Eyez On Me",
+                    duration: "05:08",
+                    url: "H1HdZFgR-aA",
+                },
+                {
+                    id: "XF4BQt",
                     title: "2Pac - Dear Mama",
+                    duration: "04:36",
                     url: "Mb1ZvUDvLDY",
-                    imgUrl: "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
-                    addedAt: 1683307062000,
                 },
-            ],
-            msgs: [
                 {
-                    id: "m101",
-                    from: "{mini-user}",
-                    txt: "Manish?",
+                    id: "1Hpgqx",
+                    title: "2Pac - Ghetto Gospel",
+                    duration: "04:26",
+                    url: "Do5MMmEygsY",
                 },
             ],
+            tags: ["Hip-Hop"],
+            _id: "POuaZ",
         },
         {
             _id: "5cksxjas89xjsa124sa8jt6g",

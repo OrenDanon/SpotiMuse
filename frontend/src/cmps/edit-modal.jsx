@@ -8,6 +8,7 @@ import {
     updateCurrentUser
 } from "../store/station.actions"
 import { store } from "../store/store"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { ReactComponent as CloseIcon } from "../assets/icons/close.svg"
 import { stationService } from "../services/station.service.local"
 import { ImgUploader } from "../cmps/img-uploader"
@@ -56,21 +57,23 @@ export function EditModal() {
             imgUrl,
             tags
         }
-
+        
         try {
             const savedStation = await stationService.save(updatedStation);
             const stationIdx = user.stations.findIndex(currStation => currStation._id === updatedStation._id)
             user.stations[stationIdx].imgUrl = updatedStation.imgUrl
             user.stations[stationIdx].name = updatedStation.name
             if (!user.stations[stationIdx].tags) user.stations[stationIdx].tags = []
-              user.stations[stationIdx].tags.push(...updatedStation.tags)
+            user.stations[stationIdx].tags.push(...updatedStation.tags)
             user = await userService.save(user)
             dispatch(store.dispatch({ type: SET_USER, user }))
             dispatch(updateStations(savedStation))
             dispatch(updateCurrentStation(savedStation))
             dispatch(updateIsEditModalShown(!isEditModalShown))
+            showSuccessMsg('Playlist edited')
         } catch (error) {
             console.log("Error saving station", error);
+            showErrorMsg('Cannot edit playlist')
         }
     }
 
@@ -147,11 +150,7 @@ export function EditModal() {
                             {isDropdownModalShown && (
                                 <div className="dropdown-modal">
                                     <DropdownModal>
-                                        <li
-                                            // onClick={
-                                            //     handleEditModalOpen
-                                            // }
-                                            >
+                                        <li>
                                             <Geners geners={geners} onSelect={handleGenreSelection}/>
                                         </li>
                                     </DropdownModal>
