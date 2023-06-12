@@ -8,23 +8,19 @@ import { AppHeader } from '../cmps/app-header.jsx'
 import { userService } from '../services/user.service.js'
 import { store } from '../store/store.js'
 import { SET_USER } from '../store/user.reducer.js'
-
 export function StationIndex() {
     const stations = useSelector(
         (storeState) => storeState.stationModule.stations
     )
-    
   useEffect(() => {
     loadStations()
   }, [])
-
   function yourStations() {
     return userService.getLoggedinUser()
   }
-
   return (
     <>
-    {stations[0] ?   
+    {stations[0] ?
     <div className='main-home-page'>
       <AppHeader />
       <div className="station-index">
@@ -35,7 +31,7 @@ export function StationIndex() {
           <h2>Your Playlists</h2>
           <StationList stations={stations.filter(station=> station.createdBy._id === userService.getLoggedinUser()._id)} />
         </div>
-      : 
+      :
       <div></div>
       }
         {/* <h2>Popular Playlists</h2>
