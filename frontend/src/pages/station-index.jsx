@@ -18,22 +18,23 @@ export function StationIndex() {
   function yourStations() {
     return userService.getLoggedinUser()
   }
+
   return (
     <>
     {stations[0] ?
     <div className='main-home-page'>
       <AppHeader />
       <div className="station-index">
-        <h2>Spotify Playlists</h2>
-        <StationList stations={stations} />
         {yourStations() ?
-        <div>
-          <h2>Your Playlists</h2>
+        <div className='my-sections'>
+          <h2>My Playlists</h2>
           <StationList stations={stations.filter(station=> station.createdBy._id === userService.getLoggedinUser()._id)} />
         </div>
       :
       <div></div>
       }
+        <h2>Spotify Playlists</h2>
+        <StationList stations={stations} />
         {/* <h2>Popular Playlists</h2>
         <StationList stations={stations} /> */}
       </div>

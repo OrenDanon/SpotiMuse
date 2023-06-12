@@ -1,6 +1,7 @@
 import { storageService } from "./async-storage.service.js"
 import { utilService } from "./util.service.js"
 import { userService } from "./user.service.js"
+import { httpService } from "./http.service.js"
 
 const STORAGE_KEY = "station"
 
@@ -25,22 +26,25 @@ export const stationService = {
 window.cs = stationService
 
 async function query(filterBy = { txt: "", price: 0 }) {
-    var stations = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, "i")
-        stations = stations.filter(
-            (station) =>
-                regex.test(station.vendor) || regex.test(station.description)
-        )
-    }
-    if (filterBy.price) {
-        stations = stations.filter((station) => station.price <= filterBy.price)
-    }
-    return stations
+    return httpService.get(STORAGE_KEY)
+
+    // var stations = await storageService.query(STORAGE_KEY)
+    // if (filterBy.txt) {
+    //     const regex = new RegExp(filterBy.txt, "i")
+    //     stations = stations.filter(
+    //         (station) =>
+    //             regex.test(station.vendor) || regex.test(station.description)
+    //     )
+    // }
+    // if (filterBy.price) {
+    //     stations = stations.filter((station) => station.price <= filterBy.price)
+    // }
+    // return stations
 }
 
 function getById(stationId) {
-    return storageService.get(STORAGE_KEY, stationId)
+    // return storageService.get(STORAGE_KEY, stationId)
+    return httpService.get(`station/${stationId}`)
 }
 function getSongById(station, songId) {
     return station.songs.filter((song) => song.id === songId)
@@ -48,17 +52,19 @@ function getSongById(station, songId) {
 
 async function remove(stationId) {
     // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, stationId)
+    // await storageService.remove(STORAGE_KEY, stationId)
+    return httpService.delete(`station/${stationId}`)
+
 }
 
 async function save(station) {
     var savedStation
     if (station._id) {
-        savedStation = await storageService.put(STORAGE_KEY, station)
+        savedStation = await httpService.put(`station/${station._id}`, station)
     } else {
         // Later, owner is set by the backend
         // station.owner = userService.getLoggedinUser()
-        savedStation = await storageService.post(STORAGE_KEY, station)
+        savedStation = await httpService.post('station', station)
     }
     return savedStation
 }
@@ -229,7 +235,6 @@ function getEmptyStation() {
             fullname: userService.getLoggedinUser().username,
             imgUrl: userService.getLoggedinUser().imgUrl,
         },
-        likedByUsers: [],
         songs: [],
     }
 }

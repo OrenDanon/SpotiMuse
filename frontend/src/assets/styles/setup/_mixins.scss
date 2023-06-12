@@ -1,4 +1,15 @@
 /* Breakpoint mixins */
+@mixin for-small-tablet-layout {
+    @media (min-width:$small-tablet-breakpoint) {
+        @content;
+      }
+}
+
+@mixin for-tablet-layout {
+    @media (min-width:$tablet-breakpoint) {
+        @content;
+      }
+}
 
 @mixin for-small-layout {
     @media (min-width:$small-breakpoint) {

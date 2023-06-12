@@ -80,8 +80,8 @@ async function update(user) {
         // peek only updatable properties
         const userToSave = {
             _id: ObjectId(user._id), // needed for the returnd obj
-            fullname: user.fullname,
-            score: user.score,
+            username: user.username,
+            stations: user.stations
         }
         const collection = await dbService.getCollection(COLLECTION_NAME)
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })

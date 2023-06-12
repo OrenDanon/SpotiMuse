@@ -42,27 +42,61 @@
             background-color: rgb(66, 76, 76);
         }
 
+        @include for-small-tablet-layout {
+            .station-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @include for-tablet-layout {
+            .station-list {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            
+        }
+
         @include for-small-layout {
             .station-list {
-                grid-template-columns: repeat(3,minmax(0,1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr));
             }
         }
-        
+
         @include for-narrow-layout {
             .station-list {
-                grid-template-columns: repeat(4,minmax(0,1fr));
+                grid-template-columns: repeat(5, minmax(0, 1fr));
             }
+            .station-index {
+                .my-sections {
+                    .station-list {
+                        grid-gap: 12px 24px;
+                        display: grid;
+                        grid-template: auto/repeat(auto-fill, minmax(max(270px, 25%), 1fr));
+
+                        a{
+                            height: 64px;
+                            .station-preview{
+                                min-height: 64px;
+                                &:hover .play .icon-play{
+                                    top: 28px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
-        
+
         @include for-normal-layout {
             .station-list {
-                grid-template-columns: repeat(5,minmax(0,1fr));
+                grid-template-columns: repeat(6, minmax(0, 1fr));
             }
+            
         }
-        
+
         @include for-wide-layout {
             .station-list {
-                grid-template-columns: repeat(6,minmax(0,1fr));    
+                grid-template-columns: repeat(8, minmax(0, 1fr));
             }
         }
 

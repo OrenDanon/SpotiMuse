@@ -23,7 +23,7 @@
                 width: 30px;
                 margin-top: 12px;
             }
-    
+
             input {
                 background-color: hsla(0, 0%, 100%, .1);
                 border: 0;
@@ -37,6 +37,7 @@
                 width: 34%;
                 margin-top: 23px;
             }
+
             h2 {
                 border-top: 1px solid hsla(0, 0%, 100%, .1);
                 padding-top: 33px;
@@ -133,20 +134,21 @@
 
     .bottom-section {
         padding: 0 24px;
+
         .song-list {
-            
+
             table {
-                thead{
-                    .grid-colums{
+                thead {
+                    .grid-colums {
                         display: grid;
                     }
                 }
-                
+
                 tr {
                     .added-at {
                         opacity: 1;
                     }
-                    
+
                     .icon {
                         fill: white;
                     }
@@ -154,29 +156,31 @@
                     .add-btn {
                         display: none;
                     }
-    
+
                     .time {
-                        margin-right: 21px;
+                        display: flex;
+                        justify-content: end;
                     }
-                    
+
                     .right-section {
                         padding-top: 5px;
-                    
+
                     }
+
                     &:hover {
-        
+
                         .hidden {
                             opacity: 1;
                         }
-        
+
                         .play {
                             display: flex;
                         }
                     }
                 }
-                
+
             }
-      
+
         }
 
     }
