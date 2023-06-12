@@ -59,6 +59,7 @@ async function login(userCred) {
         userCred.password = '123'
         const user = await httpService.post('auth/login', userCred)
     } catch (err) {
+        console.log(5);
         throw err
     }
 
