@@ -95,18 +95,22 @@ async function addStationMsg(stationId, txt) {
 
     return msg
 }
-function getNextSong(station, song, isRepeatOn) {
-    const idx = station.songs.findIndex((nextSong) => nextSong.id === song.id)
-    if (isRepeatOn && idx + 1 >= station.songs.length) {
-        return station.songs[0]
+function getNextSong(station, song, isRepeatOn, isShuffled, shuffledSongs) {
+    const songs = isShuffled ? shuffledSongs : station.songs
+    const idx = songs.findIndex((nextSong) => nextSong.id === song.id)
+    if (isRepeatOn && idx + 1 >= songs.length) {
+        return songs[0]
     } else {
-        return station.songs[idx + 1]
+        return songs[idx + 1]
     }
 }
-function getPrevSong(station, song) {
-    const idx = station.songs.findIndex((prevSong) => prevSong.id === song.id)
-    return station.songs[idx - 1]
+
+function getPrevSong(station, song, isShuffled, shuffledSongs) {
+    const songs = isShuffled ? shuffledSongs : station.songs
+    const idx = songs.findIndex((prevSong) => prevSong.id === song.id)
+    return songs[idx - 1]
 }
+
 function totalSongsDuration(station) {
   const totalDuration = station.songs.reduce((acc, currSong) => {
     const durationParts = currSong.duration.split(":");
