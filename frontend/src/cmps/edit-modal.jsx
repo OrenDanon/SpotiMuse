@@ -19,9 +19,6 @@ import { Geners } from "./Geners"
 
 
 export function EditModal() {
-    useEffect(() => {
-        store.dispatch(updateIsDropdownModalShown(false))
-    }, [])
     const isEditModalShown = useSelector(
         (storeState) => storeState.stationModule.isEditModalShown
     )
@@ -40,7 +37,6 @@ export function EditModal() {
 
     function closeEditModal() {
         dispatch(updateIsEditModalShown(!isEditModalShown))
-        console.log(station)
     }
     function handleGenreSelection(gener) {
         console.log(gener)
@@ -54,8 +50,8 @@ export function EditModal() {
     }
 
     async function handleSubmit(ev) {
-        ev.preventDefault();
-        console.log(ev.target);
+        ev.preventDefault()
+
         const imgUrl = uploadedImgUrl || station.imgUrl
 
         const updatedStation = {
@@ -75,12 +71,23 @@ export function EditModal() {
             user.stations[stationIdx].tags.push(...updatedStation.tags)
             user = await userService.save(user)
             dispatch(store.dispatch({ type: SET_USER, user }))
-            dispatch(updateStations(savedStation));
-            dispatch(updateCurrentStation(savedStation));
-            dispatch(updateIsEditModalShown(!isEditModalShown));
+            dispatch(updateStations(savedStation))
+            dispatch(updateCurrentStation(savedStation))
+            dispatch(updateIsEditModalShown(!isEditModalShown))
         } catch (error) {
             console.log("Error saving station", error);
         }
+    }
+
+    function handleGenreSelection(gener) {
+        console.log(gener)
+        setTags(prevTags => {
+            if (!prevTags.includes(gener.title)) {
+                return [...prevTags, gener.title]
+            }
+            return prevTags
+        })
+        console.log(tags);
     }
 
     function handleImageUpload(imgUrl) {
