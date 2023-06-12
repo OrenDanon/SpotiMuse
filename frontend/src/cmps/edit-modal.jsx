@@ -29,6 +29,7 @@ export function EditModal() {
     const station = useSelector(
         (storeState) => storeState.stationModule.station
     )
+    const [tags, setTags] = useState(station.tags || [])
 
     let user = useSelector(storeState => storeState.userModule.user)
 
@@ -41,10 +42,20 @@ export function EditModal() {
         dispatch(updateIsEditModalShown(!isEditModalShown))
         console.log(station)
     }
+    function handleGenreSelection(gener) {
+        console.log(gener)
+        setTags(prevTags => {
+            if (!prevTags.includes(gener.title)) {
+                return [...prevTags, gener.title]
+            }
+            return prevTags
+        })
+        console.log(tags);
+    }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-
+    async function handleSubmit(ev) {
+        ev.preventDefault();
+        console.log(ev.target);
         const imgUrl = uploadedImgUrl || station.imgUrl
 
         const updatedStation = {
@@ -52,6 +63,7 @@ export function EditModal() {
             name,
             description,
             imgUrl,
+            tags
         };
 
         try {
@@ -59,6 +71,8 @@ export function EditModal() {
             const stationIdx = user.stations.findIndex(currStation => currStation._id === updatedStation._id)
             user.stations[stationIdx].imgUrl = updatedStation.imgUrl
             user.stations[stationIdx].name = updatedStation.name
+            if (!user.stations[stationIdx].tags) user.stations[stationIdx].tags = []
+            user.stations[stationIdx].tags.push(...updatedStation.tags)
             user = await userService.save(user)
             dispatch(store.dispatch({ type: SET_USER, user }))
             dispatch(updateStations(savedStation));
@@ -131,11 +145,8 @@ export function EditModal() {
                             {isDropdownModalShown && (
                                 <div className="dropdown-modal">
                                     <DropdownModal>
-                                        <li
-                                            onClick={
-                                                handleEditModalOpen
-                                            }>
-                                            <Geners geners={geners} />
+                                        <li>
+                                            <Geners geners={geners} onSelect={handleGenreSelection} />
                                         </li>
                                     </DropdownModal>
                                 </div>

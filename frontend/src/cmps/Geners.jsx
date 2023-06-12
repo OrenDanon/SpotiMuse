@@ -1,13 +1,11 @@
-export function Geners({ geners }) {
+export function Geners({ geners, onSelect }) {
 
     return (
         <div className="geners-list ">
-            {geners.map(gener => {
-                return <li >{gener.title}</li>
-            }
-            )
-            }
-        </div >
+        {geners.map(gener => {
+            return <li onClick={() => onSelect(gener)}>{gener.title}</li>
+        })}
+    </div >
     )
 
 }
