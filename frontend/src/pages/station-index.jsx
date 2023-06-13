@@ -12,6 +12,7 @@ export function StationIndex() {
     const stations = useSelector(
         (storeState) => storeState.stationModule.stations
     )
+    const genres = stationService.getGenreList()
   useEffect(() => {
     loadStations()
   }, [])
@@ -21,25 +22,41 @@ export function StationIndex() {
 
   return (
     <>
-    {stations[0] ?
-    <div className='main-home-page'>
-      <AppHeader />
-      <div className="station-index">
-        {yourStations() ?
-        <div className='my-sections'>
-          <h2>My Playlists</h2>
-          <StationList stations={stations.filter(station=> station.createdBy._id === userService.getLoggedinUser()._id)} />
+      {stations[0] ? (
+        <div className='main-home-page'>
+          <AppHeader />
+          <div className="station-index">
+            {yourStations() ? (
+              <div className='my-sections'>
+                <h2>My Playlists</h2>
+                <StationList
+                  stations={stations.filter(station =>
+                    station.createdBy._id === userService.getLoggedinUser()._id
+                  )}
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
+            <h2>Spotify Playlists</h2>
+            <StationList stations={stations} />
+            {genres.map(genre => (
+              <React.Fragment key={genre.title}>
+                <h2>{genre.title}</h2>
+                <StationList
+                  stations={stations.filter(station =>
+                    station.tags.includes(genre.title)
+                  )}
+                />
+              </React.Fragment>
+            ))}
+            {/* <h2>Popular Playlists</h2>
+            <StationList stations={stations} /> */}
+          </div>
         </div>
-      :
-      <div></div>
-      }
-        <h2>Spotify Playlists</h2>
-        <StationList stations={stations} />
-        {/* <h2>Popular Playlists</h2>
-        <StationList stations={stations} /> */}
-      </div>
-    </div>
-    : <p>Loading...</p>   }
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   )
 }
