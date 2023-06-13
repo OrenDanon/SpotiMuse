@@ -78,8 +78,12 @@ async function signup(userCred) {
         songs: []
     }]
     // const user = await storageService.post('user', userCred)
+    try{
     const user = await httpService.post('auth/signup', userCred)
-    // return saveLocalUser(user)
+    return saveLocalUser(user)
+    }catch {
+        console.log('can not signup');
+    }
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
