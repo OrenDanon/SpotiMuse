@@ -109,7 +109,7 @@ function getNextSong(station, song, isRepeatOn, isShuffled, shuffledSongs) {
         return songs[0]
     } else {
         return songs[idx + 1]
-    }
+}
 }
 
 function getPrevSong(station, song, isShuffled, shuffledSongs) {

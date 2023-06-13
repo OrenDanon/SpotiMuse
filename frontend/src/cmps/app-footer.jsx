@@ -214,7 +214,6 @@ export function AppFooter() {
                     </div>
                     <div className="song-description">
                         <p className="title">{`${song.title}`}</p>
-                        <p className="artist">Masaru Yokoyama</p>
                     </div>
                     <div onClick={onLike} className="song-like icon">
                         <svg
