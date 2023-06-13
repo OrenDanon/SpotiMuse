@@ -2,6 +2,7 @@ import { storageService } from "./async-storage.service.js"
 import { utilService } from "./util.service.js"
 import { userService } from "./user.service.js"
 import { httpService } from "./http.service.js"
+import { socketService } from "./socket.service.js"
 
 const STORAGE_KEY = "station"
 
@@ -66,6 +67,7 @@ async function save(station) {
         // station.owner = userService.getLoggedinUser()
         savedStation = await httpService.post('station', station)
     }
+    socketService.emit('update-station', savedStation)
     return savedStation
 }
 async function addSong(station) {
@@ -321,7 +323,7 @@ if (!stations) {
                     title: "2Pac - Hit Em Up HD",
                     duration: "05:23",
                     url: "41qC3w3UUkU",
-                    
+
                 },
                 {
                     id: "NZ1HW2",

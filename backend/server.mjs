@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 import { authRoutes } from './api/auth/auth.routes.mjs'
 import { userRoutes } from './api/user/user.routes.mjs'
 import { stationRoutes } from './api/station/station.routes.mjs'
-// import { setupSocketAPI } from './services/socket.service.mjs'
+import { setupSocketAPI } from './services/socket.service.mjs'
 
 // routes
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.mjs'
@@ -38,7 +38,7 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/station', stationRoutes)
-// setupSocketAPI(server)
+setupSocketAPI(server)
 
 // Make every server-side-route to match the index.html
 // so when requesting http://localhost:3030/index.html/car/123 it will still respond with

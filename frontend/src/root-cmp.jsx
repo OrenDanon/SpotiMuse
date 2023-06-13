@@ -15,9 +15,10 @@ import { userService } from "./services/user.service"
 import { SET_USER } from "./store/user.reducer"
 import { store } from "./store/store"
 import { Genre } from "./pages/genre"
+import { socketService } from "./services/socket.service"
 
 export function RootCmp() {
-    
+
     async function setInitialUser() {
         const userId = userService.getLoggedinUser()._id
         if (!userId) return
@@ -25,9 +26,9 @@ export function RootCmp() {
         store.dispatch({ type: SET_USER, user })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setInitialUser()
-    },[])
+    }, [])
 
 
     return (

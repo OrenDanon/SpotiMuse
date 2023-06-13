@@ -79,8 +79,12 @@ export async function loadStation(stationId) {
         let station
         const userId = userService.getLoggedinUser()._id
         const user = await userService.getById(userId)
-        if (stationId === user.stations[0]._id ){
-            station = user.stations[0]
+        if (Array.isArray(user?.stations)) {
+            if (stationId === user?.stations[0]._id) {
+                station = user?.stations[0]
+            } else {
+                station = await stationService.getById(stationId)
+            }
         } else {
             station = await stationService.getById(stationId)
         }

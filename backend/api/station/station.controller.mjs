@@ -1,5 +1,6 @@
 import { stationService } from './station.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
+import { socketService } from '../../services/socket.service.mjs'
 
 export async function getStations(req, res) {
   try {

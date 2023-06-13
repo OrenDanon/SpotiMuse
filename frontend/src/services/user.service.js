@@ -21,9 +21,9 @@ export const userService = {
 window.userService = userService
 
 
-function getUsers() {
-    return storageService.query('user')
-    // return httpService.get(`user`)
+async function getUsers() {
+    // return storageService.query('user')
+    return await httpService.get(`user`)
 }
 
 async function save(user) {
