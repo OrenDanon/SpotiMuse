@@ -65,25 +65,25 @@
             .station-list {
                 grid-template-columns: repeat(5, minmax(0, 1fr));
             }
-            .station-index {
-                .my-sections {
-                    .station-list {
-                        grid-gap: 12px 24px;
-                        display: grid;
-                        grid-template: auto/repeat(auto-fill, minmax(max(270px, 25%), 1fr));
+            // .station-index {
+            //     .my-sections {
+            //         .station-list {
+            //             grid-gap: 12px 24px;
+            //             display: grid;
+            //             grid-template: auto/repeat(auto-fill, minmax(max(270px, 25%), 1fr));
 
-                        a{
-                            height: 64px;
-                            .station-preview{
-                                min-height: 64px;
-                                &:hover .play .icon-play{
-                                    top: 28px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            //             a{
+            //                 height: 64px;
+            //                 .station-preview{
+            //                     min-height: 64px;
+            //                     &:hover .play .icon-play{
+            //                         top: 28px;
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
             
         }
 

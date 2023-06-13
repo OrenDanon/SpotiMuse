@@ -12,7 +12,9 @@
     }
 
     nav {
-        padding: $layout-padding 16px 40px;
+        padding: 6px 16px 40px;
+        border-top: 1px solid hsla(0deg, 0%, 100%, 0.1);        
+        margin-top: 180px;
 
         .footer-top-section {
             display: flex;

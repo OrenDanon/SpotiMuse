@@ -121,7 +121,7 @@ export function SongPreview({ song, idx }) {
 
                 <td className="flex icon display-none play">
                     {isPlaying && song.id === currSong.id ? (
-                        <svg onClick={onPlay} 
+                        <svg onClick={onPlay}
                             role="img"
                             height="24"
                             width="24"
@@ -132,7 +132,7 @@ export function SongPreview({ song, idx }) {
                             <path d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
                         </svg>
                     ) : (
-                        <svg onClick={onPlay} 
+                        <svg onClick={onPlay}
                             role="img"
                             height="24"
                             width="24"
@@ -188,76 +188,40 @@ export function SongPreview({ song, idx }) {
                             aria-hidden="true"
                             viewBox="0 0 16 16"
                             data-encore-id="icon"
-                            className="Svg-sc-ytk21e-0 ldgdZj hidden">
+                            className="Svg-sc-ytk21e-0 ldgdZj empty-like ">    
                             <path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path>
                         </svg>
                     )}
                 </div>
-                <div
-                    onClick={() => onRemove(station, song)}
-                    className="right-section icon hidden">
-                    <svg
-                        role="img"
-                        height="16"
-                        width="16"
-                        aria-hidden="true"
-                        viewBox="0 0 16 16"
-                        data-encore-id="icon"
-                        className="Svg-sc-ytk21e-0 ldgdZj">
-                        <path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
-                    </svg>
-                </div>
                 <div className="time icon">{song.duration}</div>
                 <div
                     onClick={() => onRemove(station, song)}
-                    className="right-section icon display-none">
-                    <svg
-                        role="img"
-                        height="16"
-                        width="16"
-                        aria-hidden="true"
-                        viewBox="0 0 16 16"
-                        data-encore-id="icon"
-                        className="Svg-sc-ytk21e-0 ldgdZj">
-                        <path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
+                    className="delete icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M 10 2 L 9 3 L 4 3 L 4 5 L 5 5 L 5 20 C 5 20.522222 5.1913289 21.05461 5.5683594 21.431641 C 5.9453899 21.808671 6.4777778 22 7 22 L 17 22 C 17.522222 22 18.05461 21.808671 18.431641 21.431641 C 18.808671 21.05461 19 20.522222 19 20 L 19 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 7 5 L 17 5 L 17 20 L 7 20 L 7 5 z M 9 7 L 9 18 L 11 18 L 11 7 L 9 7 z M 13 7 L 13 18 L 15 18 L 15 7 L 13 7 z"></path>
                     </svg>
                 </div>
                 <button onClick={showStationsDropdownModal} className="add-btn">
                     Add
                 </button>
+                <div className="add-song-dropdown">
+                    {isDropdownShown ? (
+                        <div className="dropdown-modal" ref={dropdownRef}>
+                            <DropdownModal>
+                                {stations.map((station, idx) => (
+                                    <li
+                                        onClick={() => onAddToStation(station._id)}
+                                        key={idx}>
+                                        {station.name}
+                                    </li>
+                                ))}
+                            </DropdownModal>
+                        </div>
+                    ) : null}
+                </div>
             </td>
-            <div className="add-song-dropdown">
-                {isDropdownShown ? (
-                    <div className="dropdown-modal" ref={dropdownRef}>
-                        <DropdownModal>
-                            {stations.map((station, idx) => (
-                                <li
-                                    onClick={() => onAddToStation(station._id)}
-                                    key={idx}>
-                                    {station.name}
-                                </li>
-                            ))}
-                        </DropdownModal>
-                    </div>
-                ) : null}
-            </div>
-            {/* {isDropdownModalShown ? (
-                location.pathname === "/search" ? (
-                    <div className="dropdown-modal">
-                        <DropdownModal>
-                            <li>Add song to playlist</li>
-                        </DropdownModal>
-                    </div>
-                ) : (
-                    <div className="dropdown-modal">
-                        <DropdownModal>
-                            <li onClick={() => onRemove(station, song)}>
-                                Delete song from playlist
-                            </li>
-                        </DropdownModal>
-                    </div>
-                )
-            ) : null} */}
+
+
         </>
     )
 }

@@ -43,9 +43,10 @@
         }
     }
 
-    .right-options{
+    .right-options {
         display: grid;
-        grid-template-columns: 5fr 1fr 1fr;    }
+        grid-template-columns: 5fr 2fr 1fr;
+    }
 
     .delete-modal {
         top: 56%;
