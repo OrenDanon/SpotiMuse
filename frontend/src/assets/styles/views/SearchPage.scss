@@ -68,7 +68,7 @@
     .genre-list {
         grid-gap: 24px;
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(7, minmax(0, 1fr));
         padding: 0;
 
         .genre-preview {

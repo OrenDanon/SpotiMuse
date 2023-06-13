@@ -49,7 +49,7 @@
 
     .top-section {
         grid-area: 1/1/2/2;
-        background: rgb(75, 28, 28);
+        background: var(--bg-color);
         background-image: linear-gradient(transparent, rgba(0, 0, 0, .5));
         height: 340px;
         display: inline-flex;
@@ -91,6 +91,9 @@
 
                 span {
                     margin: 0px 4px;
+                }
+                .songs-duration{
+                   color:rgba(255, 255, 255, 0.698);
                 }
             }
         }
@@ -159,7 +162,7 @@
 
                     .time {
                         display: flex;
-                        justify-content: end;
+                        justify-content: center;
                     }
 
                     .right-section {
@@ -176,6 +179,10 @@
                         .play {
                             display: flex;
                         }
+
+                        .delete{
+                            display: grid;
+                        }
                     }
                 }
 
@@ -189,7 +196,7 @@
 
 .station-details::before {
     content: "";
-    background-color: rgb(75, 28, 28);
+    background-color: var(--bg-color);
     height: 232px;
     grid-area: 2/1/3/2;
     background-image: linear-gradient(rgba(0, 0, 0, .6), #121212);

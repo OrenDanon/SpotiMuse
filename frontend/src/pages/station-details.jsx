@@ -30,25 +30,27 @@ import { Link } from "react-router-dom"
 import { socketService } from "../services/socket.service.js"
 
 export function StationDetails() {
-    useEffect(
-        () => {
-            const topSection = document.querySelector('.top-section')
-            const header = document.querySelector('.header')
-            const btnPlay = document.querySelector('.btn-play-header')
+    // useEffect(
+    //     () => {
+    //         const topSection = document.querySelector('.top-section')
+    //         const header = document.querySelector('.header')
+    //         const btnPlay = document.querySelector('.btn-play-header')
 
-            // const headerObserver = new IntersectionObserver(onHeaderObserved, {
-            //     rootMargin: "-100px 0px 0px"
-            // })
-            // headerObserver.observe(topSection)
+    //         if (topSection && header && btnPlay) {
+    //         const headerObserver = new IntersectionObserver(onHeaderObserved, {
+    //             rootMargin: "-100px 0px 0px"
+    //         })
+    //         headerObserver.observe(topSection)
 
-            function onHeaderObserved(entries) {
-                entries.forEach((entry) => {
-                    header.style.backgroundImage = entry.isIntersecting ? 'inherit' : 'linear-gradient(rgb(75,28,28),rgb(18,18,18,1))'
-                    btnPlay.style.opacity = entry.isIntersecting ? '0' : '1'
-                })
-            }
-        }
-    )
+    //             function onHeaderObserved(entries) {
+    //                 entries.forEach((entry) => {
+    //                     header.style.backgroundImage = entry.isIntersecting ? 'inherit' : 'linear-gradient(rgb(75,28,28),rgb(18,18,18,1))'
+    //                     btnPlay.style.opacity = entry.isIntersecting ? '0' : '1'
+    //                 })
+    //             }
+    //         }
+    //     }
+    //     , [])
     const station = useSelector(
         (storeState) => storeState.stationModule.station
     )
@@ -69,6 +71,36 @@ export function StationDetails() {
     )
 
     const params = useParams()
+
+
+    const fac = new FastAverageColor();
+    const bgColor = useAverageColor(station.imgUrl);
+    console.log(bgColor);
+    changeBgColor(bgColor)
+
+    function useAverageColor(dom) {
+        const [color, setColor] = useState(null);
+        
+        useEffect(() => {
+            fac
+            .getColorAsync(dom)
+          .then(result => {
+              const color = result.rgb;
+            setColor(color);
+        })
+        .catch(error => {
+            console.log(error);
+          });
+        }, [dom]);
+    
+        return color;
+    }
+    
+    
+function changeBgColor(color){
+    let root =document.querySelector(':root')
+    root.style.setProperty("--bg-color",color)
+}
 
 
     useEffect(() => {
@@ -153,8 +185,10 @@ export function StationDetails() {
 
                                     {station.createdBy?.fullname}
                                     <span>{`${"\u2022"}`}</span>
-                                    {`${station.songs?.length} songs, 
-                                    ${stationService.totalSongsDuration(station)}`}
+                                    {`${station.songs?.length} songs,`}
+                                    <span className="songs-duration">
+                                    {`${stationService.totalSongsDuration(station)}`}
+                                    </span>
 
                                 </p>
                             </div>

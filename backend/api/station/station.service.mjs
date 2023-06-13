@@ -52,7 +52,7 @@ async function remove(stationId) {
 async function add(station) {
     try {
         const collection = await dbService.getCollection(COLLECTION)
-        await collection.insertOne(station)
+        await collection.insertOne(station,0)
         return station
     } catch (err) {
         logger.error('cannot insert station', err)
@@ -73,7 +73,7 @@ async function update(station) {
         const updatedStation = await collection.findOne({ _id: ObjectId(station._id) })
         return updatedStation
     } catch (err) {
-        logger.error(`cannot update station ${carId}`, err)
+        logger.error(`cannot update station ${station._id}`, err)
         throw err
     }
 }
