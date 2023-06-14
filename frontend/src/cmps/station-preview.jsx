@@ -41,7 +41,7 @@ export function StationPreview({ station }) {
                     }
                 </div>
                 <h4>{station.name}</h4>
-                <p>Lorem ipsum dotur adipis iusto nihil.</p>
+                <p>{station.description}</p>
 
             </div>
         </Link>
