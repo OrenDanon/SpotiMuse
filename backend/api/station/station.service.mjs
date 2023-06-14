@@ -64,6 +64,7 @@ async function update(station) {
     try {
         const stationToSave = {
             name: station.name,
+            description: station.description,
             songs: station.songs,
             imgUrl: station.imgUrl,
             tags: station.tags

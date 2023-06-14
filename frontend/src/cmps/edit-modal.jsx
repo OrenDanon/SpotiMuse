@@ -32,7 +32,7 @@ export function EditModal() {
     let user = useSelector(storeState => storeState.userModule.user)
 
     const [name, setName] = useState(station.name)
-    const [description, setDescription] = useState(station.description || "")
+    const [description, setDescription] = useState(station.description)
     const [uploadedImgUrl, setUploadedImgUrl] = useState()
     const dispatch = useDispatch()
 
@@ -62,22 +62,25 @@ export function EditModal() {
             imgUrl,
             tags
         }
+
         
         try {
             const savedStation = await stationService.save(updatedStation);
             const stationIdx = user.stations.findIndex(currStation => currStation._id === updatedStation._id)
             user.stations[stationIdx].imgUrl = updatedStation.imgUrl
             user.stations[stationIdx].name = updatedStation.name
+            user.stations[stationIdx].description = updatedStation.description
             if (!user.stations[stationIdx].tags) user.stations[stationIdx].tags = []
             user.stations[stationIdx].tags.push(...updatedStation.tags)
             user = await userService.save(user)
+            console.log(user.stations[stationIdx].description);
             dispatch(store.dispatch({ type: SET_USER, user }))
             dispatch(updateStations(savedStation))
             dispatch(updateCurrentStation(savedStation))
             dispatch(updateIsEditModalShown(!isEditModalShown))
             showSuccessMsg('Playlist edited')
         } catch (error) {
-            console.log("Error saving station", error);
+            console.log("Error saving station", error)
             showErrorMsg('Cannot edit playlist')
         }
     }

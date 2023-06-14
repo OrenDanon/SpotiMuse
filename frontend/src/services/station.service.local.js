@@ -109,7 +109,7 @@ function getNextSong(station, song, isRepeatOn, isShuffled, shuffledSongs) {
         return songs[0]
     } else {
         return songs[idx + 1]
-    }
+}
 }
 
 function getPrevSong(station, song, isShuffled, shuffledSongs) {
@@ -195,6 +195,26 @@ function getGenreList() {
             title: "K-pop",
             img: "https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
         },
+        {
+            title: "Workout",
+            img: "https://i.scdn.co/image/ab67706f000000029249b35f23fb596b6f006a15",
+        },
+        {
+            title: "Mood",
+            img: "https://i.scdn.co/image/ab67fb8200005caf271f9d895003c5f5561c1354",
+        },
+        {
+            title: "Gaming",
+            img: "https://i.scdn.co/image/ab67fb8200005caf26dd3719e8824756914ae61f",
+        },
+        {
+            title: "Focus",
+            img: "https://i.scdn.co/image/ab67706f00000002e4eadd417a05b2546e866934",
+        },
+        {
+            title: "Wellness",
+            img: "https://i.scdn.co/image/ab67fb8200005caf8dec632effd9735fa8aba06e",
+        },
     ]
 }
 
@@ -231,6 +251,7 @@ function getEmptyStation() {
     return {
         name: "My Playlist",
         imgUrl: "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-dimensions/2500?v=v2&px=-1",
+        description: "",
         tags: [],
         createdBy: {
             _id: userService.getLoggedinUser()._id,
