@@ -25,11 +25,11 @@ export function SideNavbar() {
     // )
     const user = useSelector((storeState) => storeState.userModule.user)
     const location = useLocation()
-    const navigate = useNavigate()    
+    const navigate = useNavigate()
 
-    useEffect(()=>{
+    useEffect(() => {
         loadUser()
-    },[])
+    }, [])
 
     async function onAddStation() {
         const newStation = stationService.getEmptyStation()
@@ -54,35 +54,35 @@ export function SideNavbar() {
             showErrorMsg("Cannot add station")
         }
     }
-   
+
     return (
         <div className="side-navbar flex column ">
             <section className="side-navbar-main flex column">
                 <div className="navigation">
                     <ul>
-                        <li>
+                        <li className="home-side-bar">
                             <NavLink
                                 to="/"
-                             >
-                                    {location.pathname === "/" ? (
-                                        <ActiveHomeIcon className="icon" />
-                                    ) : (
-                                        <HomeIcon className="icon" />
-                                    )}
+                            >
+                                {location.pathname === "/" ? (
+                                    <ActiveHomeIcon className="icon" />
+                                ) : (
+                                    <HomeIcon className="icon" />
+                                )}
                                 <span className="home">Home</span>
                             </NavLink>
                         </li>
-                        <li>
+                        <li className="search-side-bar" >
                             <NavLink
                                 to={`/search`}
-                               >
-                              
-                                    {location.pathname === "/search" ? (
-                                        <ActiveSearchIcon className="icon"/>
-                                    ) : (
-                                        <SearchIcon className="icon"/>
-                                    )}
-                                
+                            >
+
+                                {location.pathname === "/search" ? (
+                                    <ActiveSearchIcon className="icon" />
+                                ) : (
+                                    <SearchIcon className="icon" />
+                                )}
+
                                 <span className="search">Search</span>
                             </NavLink>
                         </li>
@@ -111,24 +111,25 @@ export function SideNavbar() {
                                             <span className="library flex">
                                                 Your Library
                                             </span>
+                                            <span className="library-mobile"> Library </span>
                                         </a>
                                     </li>
                                     <li
                                         onClick={onAddStation}
                                         className="add-library">
                                         {/* <NavLink to={`/station/${station._id}`}> */}
-                                            <span className="icon flex">
-                                                <svg
-                                                    role="img"
-                                                    height="16"
-                                                    width="16"
-                                                    aria-hidden="true"
-                                                    viewBox="0 0 16 16"
-                                                    data-encore-id="icon"
-                                                    className="Svg-sc-ytk21e-0 ldgdZj">
-                                                    <path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path>
-                                                </svg>
-                                            </span>
+                                        <span className="icon flex">
+                                            <svg
+                                                role="img"
+                                                height="16"
+                                                width="16"
+                                                aria-hidden="true"
+                                                viewBox="0 0 16 16"
+                                                data-encore-id="icon"
+                                                className="Svg-sc-ytk21e-0 ldgdZj">
+                                                <path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path>
+                                            </svg>
+                                        </span>
                                         {/* </NavLink> */}
                                     </li>
                                 </ul>

@@ -1,4 +1,10 @@
 /* Breakpoint mixins */
+@mixin for-mobile-layout {
+    @media (max-width: 500px) {
+        @content;
+      }
+}
+
 @mixin for-small-tablet-layout {
     @media (min-width:$small-tablet-breakpoint) {
         @content;
