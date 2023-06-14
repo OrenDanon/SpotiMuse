@@ -4,10 +4,13 @@ import { SongPreview } from "./song-preview";
 import { store } from "../store/store";
 import { updateCurrentSong, updateCurrentStation } from "../store/station.actions";
 import { stationService } from "../services/station.service.local";
+import { useSelector } from "react-redux";
 
 export function SongList({ station }) {
   const [songs, setSongs] = useState(station.songs);
-
+  const stationFromStore = useSelector(
+    (storeState) => storeState.stationModule.station
+)
   
 
   async function onDragEnd(result) {
@@ -15,7 +18,7 @@ export function SongList({ station }) {
       return;
     }
   
-    const updatedSongs = Array.from(songs);
+    const updatedSongs = Array.from(stationFromStore.songs);
     const [removed] = updatedSongs.splice(result.source.index, 1);
     updatedSongs.splice(result.destination.index, 0, removed);
   

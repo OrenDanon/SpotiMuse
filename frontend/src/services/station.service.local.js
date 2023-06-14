@@ -109,7 +109,7 @@ function getNextSong(station, song, isRepeatOn, isShuffled, shuffledSongs) {
         return songs[0]
     } else {
         return songs[idx + 1]
-}
+    }
 }
 
 function getPrevSong(station, song, isShuffled, shuffledSongs) {
@@ -120,7 +120,8 @@ function getPrevSong(station, song, isShuffled, shuffledSongs) {
 
 function totalSongsDuration(station) {
     const totalDuration = station.songs.reduce((acc, currSong) => {
-        const durationParts = currSong.duration.split(":")
+        const durationParts = currSong.duration?.split(":")
+        if (!durationParts[0] || !durationParts[1]) return acc
         const minutes = parseInt(durationParts[0])
         const seconds = parseInt(durationParts[1])
         const songDurationInSeconds = minutes * 60 + seconds
