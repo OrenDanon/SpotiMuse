@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.cfedced9.css",
+    "main.css": "/static/css/main.82f2d8ff.css",
     "main.js": "/static/js/main.44ab1dbf.js",
     "static/media/CircularSp-Bold-woff2": "/static/media/CircularSp-Bold-fe1cfc14b7498b187c78fa72fb72d148.8f862e2aafc540b1cca0.woff2",
     "static/media/CircularSpTitle-Bold-woff2": "/static/media/CircularSpTitle-Bold-2fbf72b606d7f0b0f771ea4956a8b4d6.4dc1949b07062bb011c9.woff2",
@@ -26,11 +26,11 @@
     "static/media/active-home.svg": "/static/media/active-home.07cfeb91d602ac171f2cacfa02269e55.svg",
     "static/media/queue.svg": "/static/media/queue.a710c6ae494313dade958b77db05160c.svg",
     "static/media/play.svg": "/static/media/play.6f8452bd704fbf7ff5eadb693cf59921.svg",
-    "main.cfedced9.css.map": "/static/css/main.cfedced9.css.map",
+    "main.82f2d8ff.css.map": "/static/css/main.82f2d8ff.css.map",
     "main.44ab1dbf.js.map": "/static/js/main.44ab1dbf.js.map"
   },
   "entrypoints": [
-    "static/css/main.cfedced9.css",
+    "static/css/main.82f2d8ff.css",
     "static/js/main.44ab1dbf.js"
   ]
 }

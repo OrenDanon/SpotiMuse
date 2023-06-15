@@ -55,7 +55,6 @@ async function remove(stationId) {
     // throw new Error('Nope')
     // await storageService.remove(STORAGE_KEY, stationId)
     return httpService.delete(`station/${stationId}`)
-
 }
 
 async function save(station) {
@@ -65,9 +64,9 @@ async function save(station) {
     } else {
         // Later, owner is set by the backend
         // station.owner = userService.getLoggedinUser()
-        savedStation = await httpService.post('station', station)
+        savedStation = await httpService.post("station", station)
     }
-    socketService.emit('update-station', savedStation)
+    socketService.emit("update-station", savedStation)
     return savedStation
 }
 async function addSong(station) {
@@ -169,23 +168,39 @@ function getGenreList() {
             img: "https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
         },
         {
-            title: "Rock",
-            img: "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+            title: "Party",
+            img: "https://i.scdn.co/image/ab67fb8200005cafcbf80f8ea695536eace4fd2c",
+        },
+        {
+            title: "Workout",
+            img: "https://i.scdn.co/image/ab67706f000000029249b35f23fb596b6f006a15",
         },
         {
             title: "Latin",
             img: "https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
         },
         {
-            title: "R&B",
-            img: "https://i.scdn.co/image/ab67fb8200005cafbe6a6e705e1a71117c2d0c2c",
+            title: "Rock",
+            img: "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+        },
+        {
+            title: "Electronic",
+            img: "https://i.scdn.co/image/ab67fb8200005cafdfdaac1cf9574a196ca25196",
+        },
+        {
+            title: "Gaming",
+            img: "https://i.scdn.co/image/ab67fb8200005caf26dd3719e8824756914ae61f",
+        },
+        {
+            title: "Soul",
+            img: "https://i.scdn.co/image/ab67fb8200005cafd82e2c83fe100a89e9cbb2a2",
         },
         {
             title: "Metal",
             img: "https://i.scdn.co/image/ab67fb8200005cafefa737b67ec51ec989f5a51d",
         },
         {
-            title: "Funk",
+            title: "Disco",
             img: "https://i.scdn.co/image/ab67fb8200005cafb2cdd7a95b0a5444aa15cfb5",
         },
         {
@@ -195,6 +210,38 @@ function getGenreList() {
         {
             title: "K-pop",
             img: "https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
+        },
+        {
+            title: "Mood",
+            img: "https://i.scdn.co/image/ab67fb8200005caf271f9d895003c5f5561c1354",
+        },
+        {
+            title: "Focus",
+            img: "https://i.scdn.co/image/ab67706f00000002e4eadd417a05b2546e866934",
+        },
+        {
+            title: "Wellness",
+            img: "https://i.scdn.co/image/ab67fb8200005caf8dec632effd9735fa8aba06e",
+        },
+        {
+            title: "Sleep",
+            img: "https://i.scdn.co/image/ab67706f00000002b70e0223f544b1faa2e95ed0",
+        },
+        {
+            title: "Classical",
+            img: "https://i.scdn.co/image/ab67fb8200005caf12809992dfc5b318892ea07b",
+        },
+        {
+            title: "Travel",
+            img: "https://i.scdn.co/image/ab67fb8200005caf4b36a2c31432ace68d90c4f2",
+        },
+        {
+            title: "Summer",
+            img: "https://i.scdn.co/image/ab67fb8200005caf097a46192e6bb67e52cdff60",
+        },
+        {
+            title: "Home",
+            img: "https://i.scdn.co/image/ab67fb8200005cafe914a07d20cec7a65e2e5dad",
         },
     ]
 }
@@ -325,7 +372,6 @@ if (!stations) {
                     title: "2Pac - Hit Em Up HD",
                     duration: "05:23",
                     url: "41qC3w3UUkU",
-
                 },
                 {
                     id: "NZ1HW2",
