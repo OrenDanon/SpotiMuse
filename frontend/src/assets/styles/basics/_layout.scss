@@ -121,13 +121,14 @@
             width: 100%;
 
             .side-navbar-main {
-                background-color: #121212;
+                background: linear-gradient(rgba(34, 34, 34, 0.9), rgba(34, 34, 34, 1), rgba(34, 34, 34, 1));
                 margin: 0;
                 display: grid;
                 grid-template-columns: 2fr 1fr;
 
                 .navigation {
                     height: 70px;
+                    background-color: inherit;
 
                     ul {
                         display: flex;
@@ -141,7 +142,7 @@
 
                         li {
                             display: flex;
-                            padding: 0px 0px 0px 10px;
+                            padding: 0px 0px 0px 36px;
                             align-items: end;
 
                             a {
@@ -175,7 +176,7 @@
 
                             ul {
                                 display: flex;
-                                padding: 0px 0px 0px 12px;
+                                padding: 0px 25px 0px 12px;
                                 align-items: end;
 
                                 li {
@@ -236,7 +237,8 @@
             height: 55px;
             position: fixed;
             bottom: 67px;
-            width: 100%;
+            width: 98%;
+            margin-left: 4px;
 
             .player {
                 height: 100%;
@@ -249,9 +251,11 @@
                 .progress-controller {
                     .progress-container {
                         position: absolute;
-                        bottom: -6px;
+                        bottom: -5px;
                         left: 0;
-                        width: 100%;
+                        width: 95%;
+                        margin-left: 10px;
+                        margin-bottom: 5px;
 
                         span {
                             display: none;
@@ -262,9 +266,18 @@
                         justify-content: end;
 
                         .play-pause-icon {
-                            margin-right: 10px;
+                            margin-right: 2px;
                             margin-top: 27px;
                             margin-bottom: 14px;
+                            background-color: inherit;
+                            width: 56px;
+                            height: 53px;
+
+                            svg {
+                                fill: white;
+                                width: 25px;
+                                height: 23px;
+                            }
                         }
 
                         .player-controls-left {
@@ -284,6 +297,11 @@
         }
 
         .station-details {
+
+            &::before {
+                height: 74px;
+            }
+
             .header {
                 display: none;
             }
@@ -291,10 +309,12 @@
             .list-section {
                 .search-section {
                     padding: 16px 16px;
+
                     input {
                         width: 100%;
                     }
-                    h2{
+
+                    h2 {
                         font-size: 20px;
                     }
                 }
@@ -350,6 +370,7 @@
                                 &:hover .delete {
                                     display: none;
                                 }
+
                                 &:hover .empty-like {
                                     display: none;
                                 }
@@ -370,11 +391,27 @@
                                     .like {
                                         margin-left: 20px;
                                     }
+
+                                    .delete {
+                                        display: grid;
+                                        :first-child{
+                                            display: none;
+                                        }
+                                        svg {
+
+                                            display: grid;
+
+                                        }
+                                    }
                                 }
 
                                 p {
                                     font-size: 14px;
                                 }
+                            }
+
+                            .song-title {
+                                width: 215px;
                             }
                         }
                     }
@@ -388,10 +425,14 @@
             }
         }
 
-        .search-section{
+        .search-section {
             opacity: 0;
         }
 
+        .app-footer {
+            background-color: var(--bg-color);
+        }
+
     }
-    
+
 }
