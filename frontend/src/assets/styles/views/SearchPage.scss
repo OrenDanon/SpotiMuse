@@ -2,9 +2,9 @@
     padding: 0px 24px;
     color: rgb(255, 255, 255);
 
-    .header{
+    .header {
         padding: 0;
-        .header-user{
+        .header-user {
             display: flex;
             align-items: center;
         }
@@ -30,7 +30,7 @@
         flex: 0 1 364px;
         margin-top: 6px;
 
-        .icon{
+        .icon {
             margin-left: -128px;
             margin-top: 10px;
         }
@@ -57,8 +57,7 @@
             top: 17px;
             left: 35px;
             font-size: 14px;
-          }
-          
+        }
     }
 
     .genres {
@@ -85,7 +84,7 @@
                 right: 0;
                 transform: rotate(25deg) translate(18%, -2%);
                 bottom: 0;
-                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
                 height: 100px;
                 position: absolute;
                 width: 100px;
@@ -113,7 +112,7 @@
         }
 
         .rock {
-            background-color: rgb(233, 20, 41)
+            background-color: rgb(233, 20, 41);
         }
 
         .latin {
@@ -132,5 +131,64 @@
             background-color: rgb(119, 119, 119);
         }
 
+        .gaming {
+            background-color: rgb(232, 17, 91);
+        }
+
+        .workout {
+            background-color: rgb(119, 119, 119);
+        }
+
+        .party {
+            background-color: rgb(83, 122, 161);
+        }
+
+        .soul {
+            background-color: rgb(220, 20, 140);
+        }
+
+        .disco {
+            background-color: rgb(230, 30, 50);
+        }
+
+        .k-pop {
+            background-color: rgb(20, 138, 8);
+        }
+
+        .mood {
+            background-color: rgb(225, 17, 140);
+        }
+
+        .focus {
+            background-color: rgb(80, 55, 80);
+        }
+
+        .electronic {
+            background-color: rgb(216, 64, 0);
+        }
+
+        .wellness {
+            background-color: rgb(165, 103, 82);
+        }
+
+        .sleep {
+            background-color: rgb(30, 50, 100);
+        }
+
+        .classical {
+            background-color: rgb(125, 75, 50);
+        }
+
+        .travel {
+            background-color: rgb(13, 114, 237);
+        }
+
+        .summer {
+            background-color: rgb(39, 133, 106);
+        }
+
+        .home {
+            background-color: rgb(81, 121, 161);
+        }
     }
 }
