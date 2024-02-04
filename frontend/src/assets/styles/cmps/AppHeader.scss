@@ -1,0 +1,100 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 25px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    align-items: center;
+
+    // transition: 0.4s;
+    .btn-play-header {
+        flex-grow: 1;
+        gap: 8px;
+        margin-left: 7px;
+        transition: 0.4s;
+        opacity: 0;
+
+        button {
+            position: relative;
+            background-color: #1ed760;
+            color: #000000;
+            display: flex;
+            border-radius: 500px;
+            font-size: inherit;
+            min-block-size: 48px;
+            align-items: center;
+            justify-content: center;
+            inline-size: 48px;
+            block-size: 48px;
+
+            svg {
+                display: flex;
+                position: absolute;
+                width: 24px;
+            }
+        }
+    }
+
+    .section-name {
+        margin-block: 0px;
+        font-size: 1.5rem;
+        padding-top: 2px;
+        font-family: 'CircularStd-Bold';
+        color: white;
+    }
+
+    .header-butoons {
+        align-items: center;
+
+        button {
+            fill: #7a7a7a;
+            cursor: not-allowed;
+            width: 32px;
+            height: 32px;
+            border-radius: 100%;
+            background-color: #090909;
+        }
+
+        .back {
+            margin-right: $layout-padding;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .next {
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .header-user {
+        margin-right: 7px;
+        margin-top: 2px;
+
+        button {
+            fill: #fff;
+            cursor: not-allowed;
+            width: 32px;
+            height: 32px;
+            border-radius: 100%;
+            border: 0px;
+            background-color: #090909;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                margin-left: 2px;
+                margin-bottom: 1px;
+            }
+
+            .user-btn {
+                padding: 0px 0px 2px;
+            }
+        }
+
+
+
+    }
+}

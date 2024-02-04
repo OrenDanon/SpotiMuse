@@ -1,0 +1,128 @@
+.song-list {
+    fill: rgb(255, 255, 255);
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: CircularStd-Book;
+
+        tbody {
+            .add-btn {
+                box-sizing: border-box;
+                font-weight: 700;
+                background-color: transparent;
+                border-radius: 500px;
+                cursor: pointer;
+                text-align: center;
+                touch-action: manipulation;
+                transition-duration: 33ms;
+                transform: translate3d(0px, 0px, 0px);
+                padding-block: 3px;
+                padding-inline: 15px;
+                border: 1px solid var(--essential-subdued, #878787);
+                min-block-size: 32px;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.875rem;
+                color: white;
+
+            }
+
+            tr {
+                padding: 0px 16px;
+                align-items: center;
+                justify-content: start;
+                gap: 16px;
+                text-overflow: ellipsis;
+
+                .album {
+                    opacity: 0;
+                }
+
+                .added-at {
+                    opacity: 0;
+                }
+
+                &:first-child {
+                    margin-top: 18px;
+                }
+
+                &:hover {
+                    background-color: hsla(0, 0%, 100%, 0.1);
+                    border-radius: 6px;
+
+                    .empty-like {
+                        opacity: 1;
+                    }
+
+                    .song-idx {
+                        display: none;
+                    }
+
+                    .equaliser-animated {
+                        display: none;
+                    }
+
+                    .play {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        .green-like {
+            fill: rgb(30, 215, 96);
+            margin-left: -18px;
+            opacity: 1;
+        }
+
+        .like {
+            width: 100%;
+            justify-content: end;
+            align-self: center;
+            margin-left: -38%;
+        }
+
+        .empty-like {
+            opacity: 0;
+        }
+
+        // .time {}
+
+        .delete {
+            display: none;
+            justify-content: end;
+
+            svg {
+
+                width: 21px;
+
+            }
+        }
+
+        .column {
+            font-size: 16px;
+        }
+    }
+
+    thead {
+        tr:first-child {
+            display: none;
+            font-size: 14px;
+            height: 36px;
+            border-bottom: 1px solid hsla(0deg, 0%, 100%, 0.1);
+            padding: 0px 16px;
+            align-items: center;
+            justify-content: start;
+            gap: 16px;
+            text-overflow: ellipsis;
+        }
+
+        .icon {
+            justify-content: end;
+            margin-right: 20%;
+        }
+    }
+}

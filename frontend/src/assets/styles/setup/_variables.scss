@@ -1,0 +1,24 @@
+// Colors
+$clr1: #ce2e6c;
+$clr2: #4f3a65;
+$clr3: hsla(0,0%,100%,.7);
+$clr4: #95adbe;
+$clr5: #dff0ea;
+$clr6: #fff;
+$clr7: #222;
+$clr8: #121212;
+
+:root {
+    --bg-color: gray;
+  }
+$layout-padding: 8px;
+
+// Breakpoints
+
+$mobile-breakpoint: 500px;
+$small-tablet-breakpoint: 600px;
+$tablet-breakpoint: 830px;
+$small-breakpoint: 1050px;
+$narrow-breakpoint: 1340px;
+$normal-breakpoint: 1550px;
+$wide-breakpoint:1750px;
