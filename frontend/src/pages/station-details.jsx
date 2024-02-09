@@ -72,7 +72,7 @@ export function StationDetails() {
 
     const params = useParams()
     const fac = new FastAverageColor()
-    const bgColor = useAverageColor(station.imgUrl)
+    const bgColor = useAverageColor((station ? station.imgUrl : null))
     console.log(bgColor);
     changeBgColor(bgColor)
 
