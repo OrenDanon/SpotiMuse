@@ -43,6 +43,7 @@ export function Search() {
                         maxResults: 8
                     }
                 });
+                console.log('Response', response)
                 const videoIds = response.data.items.map(item => item.id.videoId);
                 const videosResponse = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
                     params: {

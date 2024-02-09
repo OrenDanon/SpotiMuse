@@ -22,7 +22,7 @@ export function UserStationPreview({ userStation }) {
         <li onClick={()=>onStationPreview(userStation)} className="">
             <Link to={`/station/${userStation._id}`}>
                 <div className="user-station-list flex">
-                    <img src={`${userStation.imgUrl}`} alt="" srcset="" />
+                    <img src={`${userStation.imgUrl}`} alt="" srcSet="" />
                     <span>
                         {userStation.name}
                     </span>

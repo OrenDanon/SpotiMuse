@@ -14,7 +14,7 @@ export const authService = {
 }
 
 async function login(username, password) {
-    logger.debug(`auth.service - login with username: ${username}`)
+    logger.debug(`auth.service - login with username: ${username} ${password}`)
 
     const user = await userService.getByUsername(username)
     if (!user) return Promise.reject('Invalid username or password')
@@ -29,7 +29,7 @@ async function login(username, password) {
 
 async function signup({ username, password, imgUrl,stations }) {
     const saltRounds = 10
-
+    logger.info(`auth.service - signup with username: ${username} ${password}`)
     logger.debug(`auth.service - signup with username: ${username}`)
     if (!username || !password) return Promise.reject('Missing required signup information')
 

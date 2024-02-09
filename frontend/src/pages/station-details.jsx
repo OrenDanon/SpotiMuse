@@ -71,29 +71,28 @@ export function StationDetails() {
     )
 
     const params = useParams()
-
-
-    const fac = new FastAverageColor();
-    const bgColor = useAverageColor(station.imgUrl);
+    const fac = new FastAverageColor()
+    const bgColor = useAverageColor(station.imgUrl)
     console.log(bgColor);
     changeBgColor(bgColor)
 
     function useAverageColor(dom) {
-        const [color, setColor] = useState(null);
+        const [color, setColor] = useState(null)
         
+
         useEffect(() => {
             fac
             .getColorAsync(dom)
           .then(result => {
-              const color = result.rgb;
+              const color = result.rgb
             setColor(color);
         })
         .catch(error => {
-            console.log(error);
+            console.log(error)
           });
-        }, [dom]);
+        }, [dom])
     
-        return color;
+        return color
     }
     
     
@@ -106,7 +105,7 @@ function changeBgColor(color){
     useEffect(() => {
         loadStation(params.id)
         setStationSocket(params.id)
-        // loadUser()
+        loadUser()
         store.dispatch(updateIsDropdownModalShown(false))
     }, [])
 

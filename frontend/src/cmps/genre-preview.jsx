@@ -5,7 +5,7 @@ export function GenrePreview({genre}){
             <Link to = {`/genre/${genre.title}`}>
         <div className={`${genre.title.toLowerCase()} genre-preview`}>
             <span>{genre.title}</span>
-            <img src={`${genre.img}`} alt="" srcset="" />
+            <img src={`${genre.img}`} alt="" srcSet="" />
         </div>
          </Link> 
     )

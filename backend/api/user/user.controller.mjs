@@ -4,6 +4,7 @@ import { socketService } from '../../services/socket.service.mjs'
 
 export async function getUsers(req, res) {
     try {
+        logger.info('Trying to get USERS')
         const filterBy = {
             // txt: req.query?.txt || '',
         }
@@ -17,6 +18,7 @@ export async function getUsers(req, res) {
 
 export async function getUser(req, res) {
     try {
+        logger.info('id:', req.params.id)
         const user = await userService.getById(req.params.id)
         res.send(user)
     } catch (err) {
