@@ -1,0 +1,26 @@
+.sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+
+    .sign-up-container {
+        max-width: 400px;
+        width: 100%;
+        padding: 2em;
+        border-radius: 4px;
+        background-color: #0e0e0e;
+        box-shadow: 0 4px 8px rgba(1, 86, 9, 0.5);
+    }
+
+    h2 {
+        color: #1db954;
+        text-align: center;
+    }
+
+    .logo {
+        width: 5%;
+    }
+}

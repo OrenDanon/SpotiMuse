@@ -50,7 +50,7 @@
 
         button {
             fill: #7a7a7a;
-            cursor: not-allowed;
+            cursor: pointer;
             width: 32px;
             height: 32px;
             border-radius: 100%;
@@ -75,7 +75,7 @@
 
         button {
             fill: #fff;
-            cursor: not-allowed;
+            cursor: pointer;
             width: 32px;
             height: 32px;
             border-radius: 100%;
@@ -83,6 +83,10 @@
             background-color: #090909;
             justify-content: center;
             align-items: center;
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
 
             svg {
                 margin-left: 2px;
@@ -93,8 +97,5 @@
                 padding: 0px 0px 2px;
             }
         }
-
-
-
     }
 }
