@@ -15,12 +15,14 @@ export function SignUp() {
         <div className="sign-up-container">
         <h2>Sign Up</h2>
         <form className="sign-up-form">
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <input type="password" placeholder="Confirm Password" />
-          <label className="terms">
-            <input type="checkbox" /> I agree to the terms and conditions
-          </label>
+        <label for="email">Email</label>
+          <input type="email" placeholder="name@domain.com" id='name'/>
+          <label for="username">Username</label>
+          <input type="text" placeholder='Username'id='username'/>
+          <label for="password">Password</label>
+          <input type="password" placeholder="Password" id='password'/>
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" placeholder="Confirm Password" id='confirm-password'/>
           <button type="submit">Sign Up</button>
         </form>
         </div>

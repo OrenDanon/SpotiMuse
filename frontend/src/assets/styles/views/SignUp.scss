@@ -3,24 +3,73 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #000;
+    background-color: #121212;
     color: #fff;
 
     .sign-up-container {
-        max-width: 400px;
+        max-width: 350px;
         width: 100%;
         padding: 2em;
         border-radius: 4px;
-        background-color: #0e0e0e;
-        box-shadow: 0 4px 8px rgba(1, 86, 9, 0.5);
+        background-color: #121212;
     }
 
     h2 {
-        color: #1db954;
+        color: #fff;
         text-align: center;
+        font-size: 3em;
     }
 
     .logo {
         width: 5%;
+        position: absolute;
+        left: 10px;
+        top: 0;
+    }
+
+    .sign-up-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input[type='email'],
+        input[type='text'],
+        input[type='password'] {
+            inline-size: 100%;
+            padding: 1em;
+            margin-top: 30px;
+            margin-block-end: 10px;
+            border-style: solid;
+            border-color: #757474;
+            border-radius: 5px;
+            background-color: #121212;
+            color: #ffff;
+            &::placeholder {
+                color: #d1d1d1;
+            }
+        }
+        label {
+            display: block; /* Makes the label display on its own line above the input */
+            color: #ffffff; /* White text color */
+            font-size: 16px; /* Larger font size for visibility */
+            font-weight: bold; /* Makes the label text bold */
+            margin-inline-end: 5em;
+            margin-block-end: -30px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #1fdf64;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: darken(#169c46, 10%);
+            }
+        }
     }
 }
